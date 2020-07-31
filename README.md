@@ -3,7 +3,7 @@
 # Group 00
 
 ## Members
-* SURNAME, GivenName (sXXXX)
+* LAM, John (s3681915)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
