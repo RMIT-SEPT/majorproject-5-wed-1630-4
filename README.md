@@ -4,7 +4,7 @@
 
 ## Members
 * LAM, John (s3681915)
-* SURNAME, GivenName (sXXXX)
+* MANKS, Brenton (s3078901)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
