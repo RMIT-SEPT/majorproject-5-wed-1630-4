@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+// TODO add validations
+
 @Entity
 public class UserEntity implements UserDetails {
     @Id
@@ -31,8 +33,12 @@ public class UserEntity implements UserDetails {
     @OneToMany(mappedBy = "customer")
     private List<Booking> bookings_customers;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    @OneToMany( mappedBy = "employee")
     private List<Booking> bookings_employees;
+
+    @ManyToOne
+    @JoinColumn(name="service_id")
+    private Service service;
 
     public UserEntity(String name, String username, String password) {
         this.name = name;
@@ -108,6 +114,7 @@ public class UserEntity implements UserDetails {
         return bookings_customers;
     }
 
+    // TODO add to array
     public void setBookings_customers(List<Booking> bookings_customers) {
         if (this.role != UserRole.CUSTOMER) return ;
         this.bookings_customers = bookings_customers;
@@ -117,9 +124,19 @@ public class UserEntity implements UserDetails {
         return bookings_employees;
     }
 
+    // TODO add to array
     public void setBookings_employees(List<Booking> bookings_employees) {
         if (this.role != UserRole.WORKER) return ;
         this.bookings_employees = bookings_employees;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        if (this.role != UserRole.WORKER||this.role != UserRole.ADMIN) return ;
+        this.service = service;
     }
 
     @Override

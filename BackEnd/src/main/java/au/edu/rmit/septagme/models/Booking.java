@@ -4,6 +4,8 @@ import au.edu.rmit.septagme.models.helpers.BookingStatus;
 
 import javax.persistence.*;
 
+// TODO add validations
+
 @Entity
 public class Booking {
     @Id
