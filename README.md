@@ -5,7 +5,7 @@
 ## Members
 * LAM, John (s3681915)
 * MANKS, Brenton (s3078901)
-* SURNAME, GivenName (sXXXX)
+* ALMAHDAWI, Mohammed Abdullah H (s3761295)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 
