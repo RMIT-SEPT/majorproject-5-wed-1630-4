@@ -6,8 +6,7 @@
 * LAM, John (s3681915)
 * MANKS, Brenton (s3078901)
 * ALMAHDAWI, Mohammed Abdullah H (s3761295)
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
+* LEONG, Si Long (s3785099)
 
 ## Records
 
