@@ -13,7 +13,7 @@ import java.util.List;
 // TODO add validations
 
 @Entity
-public class UserEntity implements UserDetails {
+public class UserEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -62,6 +62,10 @@ public class UserEntity implements UserDetails {
     public UserEntity() {
     }
 
+//    public UserEntity(UserEntity userEntity) {
+//
+//    }
+
     public Long getId() {
         return id;
     }
@@ -86,8 +90,8 @@ public class UserEntity implements UserDetails {
         this.password = password;
     }
 
-    public UserRole getRole() {
-        return role;
+    public String getRole() {
+        return role.toString();
     }
 
     public void setRole(UserRole role) {
@@ -139,38 +143,16 @@ public class UserEntity implements UserDetails {
         this.service = service;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
 
-    @Override
     public String getPassword() {
-        return null;
+        return "null";
     }
 
-    @Override
     public String getUsername() {
-        return null;
+        return "null";
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
+    public boolean isActive() {
         return true;
     }
 }
