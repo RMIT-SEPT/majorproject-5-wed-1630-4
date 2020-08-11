@@ -2,14 +2,11 @@ package au.edu.rmit.septagme.services;
 
 import au.edu.rmit.septagme.models.UserEntity;
 import au.edu.rmit.septagme.repositories.UserRepository;
-import au.edu.rmit.septagme.models.UserModelDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserEntityDetailsService implements UserDetailsService {
@@ -18,15 +15,9 @@ public class UserEntityDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        UserEntity user = userRepository.findByUsername(s);
+        if(user == null) new UsernameNotFoundException("Not found: " + s);
 
-        Optional<UserEntity> user = userRepository.findByUsername(s);
-
-
-
-        user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + s));
-
-
-        System.out.println(user.map(UserModelDetails::new).get().getAuthorities());
-        return user.map(UserModelDetails::new).get();
+        return user;
     }
 }
