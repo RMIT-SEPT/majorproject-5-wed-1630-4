@@ -62,6 +62,9 @@ public class UserEntity implements UserDetails {
     public UserEntity() {
     }
 
+//    public UserEntity(UserEntity userEntity) {
+//    }
+
     public Long getId() {
         return id;
     }
@@ -146,12 +149,12 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return "null";
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return "null";
     }
 
     @Override
