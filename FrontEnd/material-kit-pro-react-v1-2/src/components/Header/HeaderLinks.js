@@ -12,22 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
-import Apps from "@material-ui/icons/Apps";
-import ShoppingCart from "@material-ui/icons/ShoppingCart";
-import ViewDay from "@material-ui/icons/ViewDay";
-import Dns from "@material-ui/icons/Dns";
-import Build from "@material-ui/icons/Build";
-import ListIcon from "@material-ui/icons/List";
-import People from "@material-ui/icons/People";
-import Assignment from "@material-ui/icons/Assignment";
-import MonetizationOn from "@material-ui/icons/MonetizationOn";
-import Chat from "@material-ui/icons/Chat";
-import Call from "@material-ui/icons/Call";
-import ViewCarousel from "@material-ui/icons/ViewCarousel";
-import AccountBalance from "@material-ui/icons/AccountBalance";
-import ArtTrack from "@material-ui/icons/ArtTrack";
-import ViewQuilt from "@material-ui/icons/ViewQuilt";
-import LocationOn from "@material-ui/icons/LocationOn";
+
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import AttachMoney from "@material-ui/icons/AttachMoney";
 import Store from "@material-ui/icons/Store";
@@ -37,7 +22,7 @@ import Layers from "@material-ui/icons/Layers";
 import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import LineStyle from "@material-ui/icons/LineStyle";
 import Error from "@material-ui/icons/Error";
-
+import HomeIcon from '@material-ui/icons/Home';
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
@@ -91,6 +76,15 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list + " " + classes.mlAuto}>
       <ListItem className={classes.listItem}>
+      <Button
+          href="/home"
+          color={window.innerWidth < 960 ? "info" : "white"}
+          //target="_blank"
+          className={classes.navButton}
+          round
+        >
+          <HomeIcon className={classes.icons} /> home
+        </Button>
         <Button
           href="/signup-page"
           color={window.innerWidth < 960 ? "info" : "white"}
