@@ -30,24 +30,24 @@ const signupPageStyle = {
     "&:before": {
       background: "rgba(" + hexToRgb(blackColor) + ", 0.5)"
     },
-    "&:after": {
-      background:
-        "linear-gradient(60deg,rgba(" +
-        hexToRgb(primaryColor[4]) +
-        ",.56),rgba(" +
-        hexToRgb(primaryColor[5]) +
-        ",.95))"
-    },
-    "&:before,&:after": {
-      position: "absolute",
-      zIndex: "1",
-      width: "100%",
-      height: "100%",
-      display: "block",
-      left: "0",
-      top: "0",
-      content: '""'
-    }
+    // "&:after": {
+    //   background:
+    //     "linear-gradient(60deg,rgba(" +
+    //     hexToRgb(primaryColor[4]) +
+    //     ",.56),rgba(" +
+    //     hexToRgb(primaryColor[5]) +
+    //     ",.95))"
+    // },
+    // "&:before,&:after": {
+    //   position: "absolute",
+    //   zIndex: "1",
+    //   width: "100%",
+    //   height: "100%",
+    //   display: "block",
+    //   left: "0",
+    //   top: "0",
+    //   content: '""'
+    // }
   },
   cardSignup: {
     borderRadius: "6px",

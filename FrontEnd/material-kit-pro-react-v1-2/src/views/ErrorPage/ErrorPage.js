@@ -30,7 +30,6 @@ export default function ErrorPage({ ...rest }) {
       <Header
         absolute
         color="transparent"
-        brand="Material Kit PRO React"
         links={<HeaderLinks dropdownHoverColor="dark" />}
         {...rest}
       />

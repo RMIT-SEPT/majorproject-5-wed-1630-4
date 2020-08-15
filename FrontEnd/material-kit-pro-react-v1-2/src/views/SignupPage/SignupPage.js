@@ -16,6 +16,8 @@ import Face from "@material-ui/icons/Face";
 import Email from "@material-ui/icons/Email";
 import Check from "@material-ui/icons/Check";
 import Favorite from "@material-ui/icons/Favorite";
+import PhoneIcon from '@material-ui/icons/Phone';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -28,6 +30,10 @@ import CardBody from "components/Card/CardBody.js";
 import InfoArea from "components/InfoArea/InfoArea.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
+//validation
+import { isEmail } from "validator";
+
+
 import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.js";
 
 import image from "assets/img/bg7.jpg";
@@ -39,6 +45,7 @@ export default function SignUpPage({ ...rest }) {
   const handleToggle = value => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
+
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
