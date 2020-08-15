@@ -14,8 +14,7 @@ import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 
 import Fingerprint from "@material-ui/icons/Fingerprint";
-import AttachMoney from "@material-ui/icons/AttachMoney";
-import Store from "@material-ui/icons/Store";
+import GroupIcon from '@material-ui/icons/Group';
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import Layers from "@material-ui/icons/Layers";
@@ -84,6 +83,15 @@ export default function HeaderLinks(props) {
           round
         >
           <HomeIcon className={classes.icons} /> home
+        </Button>
+        <Button
+          href="/about-us"
+          color={window.innerWidth < 960 ? "info" : "white"}
+          //target="_blank"
+          className={classes.navButton}
+          round
+        >
+          <GroupIcon className={classes.icons} /> about us
         </Button>
         <Button
           href="/signup-page"
