@@ -23,13 +23,12 @@ public class UserController {
     @PostMapping(
             value = "/signup", consumes = "application/json", produces = "application/json")
     public ResponseEntity<UserSerializer> createUser(@Valid @RequestBody UserEntity user) {
-        System.out.println(user.getUsername());
+
+        // encode password
         final String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-//                .path("/{id}")
-//                .buildAndExpand(user.getId())
-//                .toUri();
+
+        // return user & res code 201
         return new ResponseEntity(new UserSerializer(userRepository.save(user)), HttpStatus.CREATED);
     }
 }
