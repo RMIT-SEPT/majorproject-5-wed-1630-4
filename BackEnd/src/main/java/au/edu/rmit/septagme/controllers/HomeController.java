@@ -1,15 +1,20 @@
 package au.edu.rmit.septagme.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
 
-    @GetMapping("/")
-    public String home(){
-        return "home";
-    }
+	@RequestMapping("/")
+	public String index() {
+		return "index";
+	}
+//    @GetMapping("/")
+//    public String home(){
+//        return "home";
+//    }
 
     @GetMapping("/customer_dashboard")
     public String customer_dashboard(){
