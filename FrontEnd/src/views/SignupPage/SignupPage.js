@@ -40,7 +40,7 @@ import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(signupPageStyle);
 
-export default function SignUpPage({ ...rest }) {
+export default function SignUpPage(props, { ...rest }) {
   const [checked, setChecked] = React.useState([1]);
   const handleToggle = value => {
     const currentIndex = checked.indexOf(value);
@@ -84,11 +84,14 @@ export default function SignUpPage({ ...rest }) {
                   <GridContainer justify="center">
                       <form className={classes.form}>
                         <CustomInput
+                          id="name"
                           formControlProps={{
                             fullWidth: true,
                             className: classes.customFormControlClasses
                           }}
                           inputProps={{
+                            onChange: e=>props.handleChange(e),
+                            type: "name",
                             startAdornment: (
                               <InputAdornment
                                 position="start"
@@ -97,16 +100,19 @@ export default function SignUpPage({ ...rest }) {
                                 <Face className={classes.inputAdornmentIcon} />
                               </InputAdornment>
                             ),
-                            placeholder: "First Name..."
+                            placeholder: "Name..."
                           }}
                         />
 
                         <CustomInput
+                          id="username"
                           formControlProps={{
                             fullWidth: true,
                             className: classes.customFormControlClasses
                           }}
                           inputProps={{
+                            onChange: e=>props.handleChange(e),
+                            type: "username",
                             startAdornment: (
                               <InputAdornment
                                 position="start"
@@ -119,13 +125,35 @@ export default function SignUpPage({ ...rest }) {
                             placeholder: "Username..."
                           }}
                         />
-
                         <CustomInput
+                          id="password"
                           formControlProps={{
                             fullWidth: true,
                             className: classes.customFormControlClasses
                           }}
                           inputProps={{
+                            onChange: e=>props.handleChange(e),
+                            placeholder: "Password...",
+                            type: "password",
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                <Icon className={classes.inputIconsColor}>
+                                    lock_utline
+                                </Icon>
+                                </InputAdornment>
+                            ),
+                            autoComplete: "off"
+                        }}
+                        />
+                        <CustomInput
+                          id="phone"
+                          formControlProps={{
+                            fullWidth: true,
+                            className: classes.customFormControlClasses
+                          }}
+                          inputProps={{
+                            onChange: e=>props.handleChange(e),
+                            type: "phone",
                             startAdornment: (
                               <InputAdornment
                                 position="start"
@@ -138,11 +166,14 @@ export default function SignUpPage({ ...rest }) {
                           }}
                         />
                         <CustomInput
+                          id="address"
                           formControlProps={{
                             fullWidth: true,
                             className: classes.customFormControlClasses
                           }}
                           inputProps={{
+                            onChange: e=>props.handleChange(e),
+                            type: "address",
                             startAdornment: (
                               <InputAdornment
                                 position="start"
@@ -154,51 +185,15 @@ export default function SignUpPage({ ...rest }) {
                             placeholder: "Address..."
                           }}
                         />
-
-                        <CustomInput
-                          formControlProps={{
-                            fullWidth: true,
-                            className: classes.customFormControlClasses
-                          }}
-                          inputProps={{
-                            startAdornment: (
-                              <InputAdornment
-                                position="start"
-                                className={classes.inputAdornment}
-                              >
-                                <Email className={classes.inputAdornmentIcon} />
-                              </InputAdornment>
-                            ),
-                            placeholder: "Email..."
-                          }}
-                        />
-                        <CustomInput
-                          formControlProps={{
-                            fullWidth: true,
-                            className: classes.customFormControlClasses
-                          }}
-                          inputProps={{
-                            startAdornment: (
-                              <InputAdornment
-                                position="start"
-                                className={classes.inputAdornment}
-                              >
-                                <Icon className={classes.inputAdornmentIcon}>
-                                  lock_outline
-                                </Icon>
-                              </InputAdornment>
-                            ),
-                            placeholder: "Password..."
-                          }}
-                        />
                             <span>
                               <a href="/admin-signup-page">Create admin account?</a>.
                             </span>
                           
                         <div className={classes.textCenter}>
-                          <Button round color="primary">
+                          <Button round color="primary" size="lg" onClick={props.handleSubmit}>
                             Create Customer Account
                           </Button>
+
                         </div>
                       </form>
                   </GridContainer>
