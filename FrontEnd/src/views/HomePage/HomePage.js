@@ -53,7 +53,7 @@ export default function ErrorPage({ ...rest }) {
           color={window.innerWidth < 960 ? "info" : "white"}
           //target="_blank"
           className={classes.navButton}
-          round
+          
         >
           Sign in
         </Button>

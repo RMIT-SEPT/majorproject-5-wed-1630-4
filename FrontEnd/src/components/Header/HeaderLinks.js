@@ -80,7 +80,7 @@ export default function HeaderLinks(props) {
           color={window.innerWidth < 960 ? "info" : "white"}
           //target="_blank"
           className={classes.navButton}
-          round
+          simple
         >
           <HomeIcon className={classes.icons} /> home
         </Button>
@@ -89,7 +89,7 @@ export default function HeaderLinks(props) {
           color={window.innerWidth < 960 ? "info" : "white"}
           //target="_blank"
           className={classes.navButton}
-          round
+          simple
         >
           <GroupIcon className={classes.icons} /> about us
         </Button>
@@ -98,8 +98,8 @@ export default function HeaderLinks(props) {
           color={window.innerWidth < 960 ? "info" : "white"}
           //target="_blank"
           className={classes.navButton}
-          round
-        >
+          simple
+          >
           <PersonAdd className={classes.icons} /> create account
         </Button>
       </ListItem>
@@ -109,7 +109,7 @@ export default function HeaderLinks(props) {
           color={window.innerWidth < 960 ? "info" : "white"}
           //target="_blank"
           className={classes.navButton}
-          round
+          simple
         >
           <Fingerprint className={classes.icons} /> login page
         </Button>
