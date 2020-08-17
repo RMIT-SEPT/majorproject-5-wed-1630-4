@@ -23,11 +23,8 @@ import "assets/scss/material-kit-pro-react.scss?v=1.9.0";
 
 // pages for this product
 import AboutUsPage from "views/AboutUsPage/AboutUsPage.js";
-import ContactUsPage from "views/ContactUsPage/ContactUsPage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
-import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import SignupPage from "views/SignupPage/SignupParent.js";
-import ErrorPage from "views/ErrorPage/ErrorPage.js";
 import AdminSignupPage from "views/SignupPage/AdminSignupPage.js";
 import HomePage from "views/HomePage/HomePage.js";
 
@@ -43,7 +40,7 @@ ReactDOM.render(
       <Route path="/signup-page" component={SignupPage} />
       <Route path="/home" component={HomePage} />
       <Route path="/admin-signup-page" component={AdminSignupPage} />
-      <Route path="/error-page" component={ErrorPage} />
+      {/* <Route path="/error-page" component={ErrorPage} /> */}
       <Route path="/" component={HomePage} />
     </Switch>
   </Router>,
