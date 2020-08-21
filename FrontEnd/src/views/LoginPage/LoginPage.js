@@ -39,7 +39,7 @@ export default function LoginPage() {
       <Header
         absolute
         color="transparent"
-        brand="Material Kit PRO React"
+        brand="AGME"
         links={<HeaderLinks dropdownHoverColor="info" />}
       />
       <div
@@ -52,16 +52,17 @@ export default function LoginPage() {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={10} md={10}>
               <Card>
                 <form className={classes.form}>
-                  <CardHeader
+                <h2 className={classes.cardTitle}>Login</h2>
+                  {/* <CardHeader
                     color="primary"
                     signup
                     className={classes.cardHeader}
-                  >
-                    <h4 className={classes.cardTitle}>Login</h4>
-                    <div className={classes.socialLine}>
+                  > */}
+                    {/* <h2 className={classes.cardTitle}>Login</h2> */}
+                    {/* <div className={classes.socialLine}>
                       <Button
                         justIcon
                         color="transparent"
@@ -86,19 +87,19 @@ export default function LoginPage() {
                       >
                         <i className="fab fa-google-plus-g" />
                       </Button>
-                    </div>
-                  </CardHeader>
-                  <p className={classes.description + " " + classes.textCenter}>
+                    </div> */}
+                  {/* </CardHeader> */}
+                  {/* <p className={classes.description + " " + classes.textCenter}>
                     Or Be Classical
-                  </p>
+                  </p> */}
                   <CardBody signup>
                     <CustomInput
-                      id="first"
+                      id="username"
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        placeholder: "First Name...",
+                        placeholder: "Username",
                         type: "text",
                         startAdornment: (
                           <InputAdornment position="start">
@@ -107,7 +108,7 @@ export default function LoginPage() {
                         )
                       }}
                     />
-                    <CustomInput
+                    {/* <CustomInput
                       id="email"
                       formControlProps={{
                         fullWidth: true
@@ -121,7 +122,7 @@ export default function LoginPage() {
                           </InputAdornment>
                         )
                       }}
-                    />
+                    /> */}
                     <CustomInput
                       id="pass"
                       formControlProps={{
@@ -142,8 +143,8 @@ export default function LoginPage() {
                     />
                   </CardBody>
                   <div className={classes.textCenter}>
-                    <Button simple color="primary" size="lg">
-                      Get started
+                    <Button round color="primary">
+                      Login
                     </Button>
                   </div>
                 </form>
@@ -151,7 +152,7 @@ export default function LoginPage() {
             </GridItem>
           </GridContainer>
         </div>
-        <Footer
+        {/* <Footer
           className={classes.footer}
           content={
             <div>
@@ -207,7 +208,7 @@ export default function LoginPage() {
               </div>
             </div>
           }
-        />
+        /> */}
       </div>
     </div>
   );
