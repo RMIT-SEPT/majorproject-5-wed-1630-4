@@ -39,7 +39,7 @@ export default function LoginPage() {
       <Header
         absolute
         color="transparent"
-        brand="AGME"
+        brand="AGME BOOKING SYSTEM"
         links={<HeaderLinks dropdownHoverColor="info" />}
       />
       <div
