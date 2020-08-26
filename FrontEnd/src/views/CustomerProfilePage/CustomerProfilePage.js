@@ -183,6 +183,10 @@ export default function SignUpPage({ ...rest }) {
                           <Button round color="info">
                             update
                           </Button>
+                          <Button href="/index" round color="info">
+                          
+                          cancel
+                        </Button>
                         </div>
                       </form>
                     </GridItem>
