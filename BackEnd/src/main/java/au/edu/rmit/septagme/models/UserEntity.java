@@ -37,7 +37,7 @@ public class UserEntity implements UserDetails {
 
     private String phone;
 
-    private UserRole role;
+    private UserRole role = UserRole.CUSTOMER;
 
     @OneToMany(mappedBy = "customer")
     private List<Booking> bookings_customers;
