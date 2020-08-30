@@ -43,7 +43,10 @@ export default class BookingHistoryParent extends Component {
     this.setState({ isLoading: true });
     console.log(booking_id);
     // eslint-disable-next-line no-unused-vars
+    // api call
     // api.cancelBooking();
+    // update state of that booking id
+    // this.setState({});
     this.setState({ isLoading: false });
   };
 

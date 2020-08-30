@@ -9,22 +9,15 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
 
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import GroupIcon from '@material-ui/icons/Group';
 import HistoryIcon from '@material-ui/icons/History';
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import PersonAdd from "@material-ui/icons/PersonAdd";
-import Layers from "@material-ui/icons/Layers";
-import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
-import LineStyle from "@material-ui/icons/LineStyle";
-import Error from "@material-ui/icons/Error";
 import HomeIcon from '@material-ui/icons/Home';
 // core components
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-pro-react/components/headerLinksStyle.js";
@@ -95,6 +88,17 @@ export default function HeaderLinks(props) {
           simple
         >
           <GroupIcon className={classes.icons} /> about us
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/bookings"
+          color={window.innerWidth < 960 ? "info" : "white"}
+          //target="_blank"
+          className={classes.navButton}
+          simple
+          >
+          <HistoryIcon className={classes.icons} /> Bookings
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>

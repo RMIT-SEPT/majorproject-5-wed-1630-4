@@ -16,8 +16,6 @@ import BusinessIcon from '@material-ui/icons/Business';
 import Check from "@material-ui/icons/Check";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -52,13 +50,6 @@ export default function AdminSignUpPage({ ...rest }) {
   const classes = useStyles();
   return (
     <div>
-      <Header
-        absolute
-        color="transparent"
-        brand="AGME BOOKING SYSTEM"
-        links={<HeaderLinks dropdownHoverColor="rose" />}
-        {...rest}
-      />
       <div
         className={classes.pageHeader}
         style={{
