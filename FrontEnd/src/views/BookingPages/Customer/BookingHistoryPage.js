@@ -24,7 +24,7 @@ export default function BookingHistoryPage(props, { ...rest }) {
   const classes = useStyles();
   const cancelButton = (key, isActive) => {
     return (
-      <Button disabled={isActive} justIcon color="danger" size="sm"  key={key} onClick={()=>props.handleCancel(key)}>
+      <Button disabled={isActive} justIcon color={isActive?"gray":"danger"} size="sm"  key={key} onClick={()=>props.handleCancel(key)}>
         <Close />
       </Button>
     );
