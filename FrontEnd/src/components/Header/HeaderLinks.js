@@ -15,6 +15,7 @@ import Icon from "@material-ui/core/Icon";
 
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import GroupIcon from '@material-ui/icons/Group';
+import HistoryIcon from '@material-ui/icons/History';
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import Layers from "@material-ui/icons/Layers";
@@ -75,15 +76,17 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list + " " + classes.mlAuto}>
       <ListItem className={classes.listItem}>
-      <Button
-          href="/home"
-          color={window.innerWidth < 960 ? "info" : "white"}
-          //target="_blank"
-          className={classes.navButton}
-          simple
-        >
+        <Button
+            href="/home"
+            color={window.innerWidth < 960 ? "info" : "white"}
+            //target="_blank"
+            className={classes.navButton}
+            simple
+          >
           <HomeIcon className={classes.icons} /> home
         </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <Button
           href="/about-us"
           color={window.innerWidth < 960 ? "info" : "white"}
@@ -93,12 +96,25 @@ export default function HeaderLinks(props) {
         >
           <GroupIcon className={classes.icons} /> about us
         </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/booking-history"
+          color={window.innerWidth < 960 ? "info" : "white"}
+          //target="_blank"
+          className={classes.navButton}
+          simple
+          >
+          <HistoryIcon className={classes.icons} /> Booking History
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <Button
           href="/signup-page"
           color={window.innerWidth < 960 ? "info" : "white"}
           //target="_blank"
           className={classes.navButton}
-          simple
+          
           >
           <PersonAdd className={classes.icons} /> create account
         </Button>
