@@ -27,6 +27,7 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import SignupPage from "views/SignupPage/SignupParent.js";
 import AdminSignupPage from "views/SignupPage/AdminSignupPage.js";
 import HomePage from "views/HomePage/HomePage.js";
+import BookingHistoryPage from "views/BookingPages/Customer/BookingHistoryPage.js";
 
 var hist = createBrowserHistory();
 
@@ -40,6 +41,7 @@ ReactDOM.render(
       <Route path="/signup-page" component={SignupPage} />
       <Route path="/home" component={HomePage} />
       <Route path="/admin-signup-page" component={AdminSignupPage} />
+      <Route path="/booking-history-page" component={BookingHistoryPage} />
       {/* <Route path="/error-page" component={ErrorPage} /> */}
       <Route path="/" component={HomePage} />
     </Switch>
