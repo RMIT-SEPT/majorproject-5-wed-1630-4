@@ -37,6 +37,7 @@ import { isEmail } from "validator";
 import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.js";
 
 import image from "assets/img/bg7.jpg";
+import { isNullishCoalesce } from "typescript";
 
 const useStyles = makeStyles(signupPageStyle);
 
@@ -58,6 +59,28 @@ export default function SignUpPage(props, { ...rest }) {
     document.body.scrollTop = 0;
   });
   const classes = useStyles();
+
+    let errorMessgage = '';
+
+    if (props.errors){
+      errorMessgage = ( 
+        <div className="alert alter-danger" role = "alert">
+          {props.errors}
+        </div>
+      )
+    }
+  // render(){
+
+  //   let errorMessgage = '';
+
+  //   if (this.state.errors){
+  //     errorMessgage = ( 
+  //       <div className="alert alter-danger" role = "alert">
+  //         {this.state.error}
+  //       </div>
+  //     )
+  //   }
+  // }
   return (
     <div>
       <Header
@@ -82,6 +105,7 @@ export default function SignUpPage(props, { ...rest }) {
                 <h2 className={classes.cardTitle}>Create Customer Account</h2>
                 <CardBody>
                   <GridContainer justify="center">
+                    {errorMessgage}
                       <form className={classes.form}>
                         <CustomInput
                           id="name"

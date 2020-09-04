@@ -29,6 +29,8 @@ export default function SectionBooking() {
         })
   },[])
 
+  // 'http://localhost:8080/bookings'
+
   return (
     <div className={classNames(classes.aboutDescription, classes.textCenter)}>
       <GridContainer>
@@ -40,12 +42,10 @@ export default function SectionBooking() {
           <h4 className={classes.description}>
            Welcome To the Booking Page
           </h4>
+
           {
             bookings.map(booking=> <li key={booking.id}>
               <label>{booking.title}</label>
-              {/* <button type="button" onClick={() => handleClick(booking.id)}>
-                  BOOK
-              </button> */}
               <Button round color="primary" size="sm" onClick={() => handleClick(booking.id)}>
                 BOOK
               </Button>

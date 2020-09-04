@@ -56,9 +56,10 @@ export default class SignupParent extends Component {
           this.setState({ isLoading: false });
         }, 1500);
         console.log(e);
-        // if (e.response.data.errors) {
-        //   this.setState({ errors: e.response.data.errors });
-        // }
+        // this.setState({ errors: e.response.data.errors });
+        if (e.errors) {
+          this.setState({ errors: e.errors });
+        }
       });
   };
   render() {
