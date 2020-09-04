@@ -131,6 +131,15 @@ export default function HeaderLinks(props) {
     >
       <AccountCircle className={classes.icons} /> admin profile
     </Button>
+    <Button
+    href="/employee-profile-page"
+    color={window.innerWidth < 960 ? "info" : "white"}
+    //target="_blank"
+    className={classes.navButton}
+    simple
+  >
+    <AccountCircle className={classes.icons} /> employee profile
+  </Button>
       </ListItem>
     </List>
   );
