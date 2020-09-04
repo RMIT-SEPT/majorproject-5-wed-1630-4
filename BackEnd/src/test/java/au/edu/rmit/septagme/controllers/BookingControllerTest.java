@@ -36,10 +36,10 @@ public class BookingControllerTest {
         this.mvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
-    @BeforeEach
-    public void setupBeforeEachTest(){
-        this.user = new UserEntity("user"+i, "customer"+i, "123123");
-        ++i;
-    }
+//    @BeforeEach
+//    public void setupBeforeEachTest(){
+//        this.user = new UserEntity("user"+i, "customer"+i, "123123");
+//        ++i;
+//    }
 
 }
