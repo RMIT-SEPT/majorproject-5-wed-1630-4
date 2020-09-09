@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SignupPage from "./SignupPage";
-import Axios from "axios";
+import Api from "utils/api.js";
 
 export default class SignupParent extends Component {
   state = {
@@ -27,12 +27,7 @@ export default class SignupParent extends Component {
 
   handleSubmit = () => {
     this.setState({ isLoading: true });
-    // eslint-disable-next-line no-unused-vars
-    var config = {
-      headers: { "Access-Control-Allow-Origin": "*" },
-    };
-    Axios.post(
-      `http://localhost:8080/signup`,
+    Api.signup(
       {
         name: this.state.user.name,
         username: this.state.user.username,
@@ -61,6 +56,10 @@ export default class SignupParent extends Component {
           this.setState({ errors: e.errors });
         }
       });
+      (res) => {
+        console.log(res);
+      }
+    );
   };
   render() {
     return (
