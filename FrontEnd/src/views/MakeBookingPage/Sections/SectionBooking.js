@@ -23,6 +23,7 @@ export default function SectionBooking() {
 
   useEffect(()=> {
     axios.get('https://jsonplaceholder.typicode.com/users/1/posts')
+    // axios.get('http://localhost:8080/bookings')
         .then(res=>{
             console.log(res)
             setBooking(res.data)
@@ -44,8 +45,9 @@ export default function SectionBooking() {
           </h4>
 
           {
+            // {booking.time_slot} {booking.service_id} {booking.employee_id} 
             bookings.map(booking=> <li key={booking.id}>
-              <label>{booking.title}</label>
+              <label>{booking.id} {booking.time_slot} {booking.service_id} {booking.employee_id}</label>
               <Button round color="primary" size="sm" onClick={() => handleClick(booking.id)}>
                 BOOK
               </Button>
