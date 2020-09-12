@@ -6,7 +6,7 @@ export default class SignupParent extends Component {
   state = {
     user: { username: "", name: "", password: "", phone: "", address: "" },
     role_id: 0,
-    errors: [],
+    errors: "",
     isLoading: false,
   };
 
@@ -35,29 +35,16 @@ export default class SignupParent extends Component {
         phone: this.state.user.phone,
         address: this.state.user.address,
       },
-      config
-    )
-      // eslint-disable-next-line no-unused-vars
-      .then((r) => {
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 1500);
-
-        console.log(r);
-        // history.push("/");
-      })
-      .catch((e) => {
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 1500);
-        console.log(e);
-        // this.setState({ errors: e.response.data.errors });
-        if (e.errors) {
-          this.setState({ errors: e.errors });
-        }
-      });
       (res) => {
         console.log(res);
+        this.setState({errors: res.errors})
+        if(res.errors){
+          this.setState({errors: res.errors})
+        }else if (res.message=="validation error"){
+          this.setState({errors: "all fields are required*"})
+        }else{
+          this.setState({errors: res.message})
+        }
       }
     );
   };

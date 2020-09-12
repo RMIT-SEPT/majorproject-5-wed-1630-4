@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import React from "react";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -65,22 +66,13 @@ export default function SignUpPage(props, { ...rest }) {
     if (props.errors){
       errorMessgage = ( 
         <div className="alert alter-danger" role = "alert">
+          <h3 style={{color: 'red'}}>
           {props.errors}
+          </h3>
         </div>
       )
     }
-  // render(){
 
-  //   let errorMessgage = '';
-
-  //   if (this.state.errors){
-  //     errorMessgage = ( 
-  //       <div className="alert alter-danger" role = "alert">
-  //         {this.state.error}
-  //       </div>
-  //     )
-  //   }
-  // }
   return (
     <div>
       <Header
