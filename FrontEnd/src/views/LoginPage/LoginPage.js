@@ -56,42 +56,6 @@ export default function LoginPage() {
               <Card>
                 <form className={classes.form}>
                 <h2 className={classes.cardTitle}>Login</h2>
-                  {/* <CardHeader
-                    color="primary"
-                    signup
-                    className={classes.cardHeader}
-                  > */}
-                    {/* <h2 className={classes.cardTitle}>Login</h2> */}
-                    {/* <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-facebook" />
-                      </Button>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-google-plus-g" />
-                      </Button>
-                    </div> */}
-                  {/* </CardHeader> */}
-                  {/* <p className={classes.description + " " + classes.textCenter}>
-                    Or Be Classical
-                  </p> */}
                   <CardBody signup>
                     <CustomInput
                       id="username"
@@ -108,21 +72,6 @@ export default function LoginPage() {
                         )
                       }}
                     />
-                    {/* <CustomInput
-                      id="email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        placeholder: "Email...",
-                        type: "email",
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    /> */}
                     <CustomInput
                       id="pass"
                       formControlProps={{
@@ -152,63 +101,6 @@ export default function LoginPage() {
             </GridItem>
           </GridContainer>
         </div>
-        {/* <Footer
-          className={classes.footer}
-          content={
-            <div>
-              <div className={classes.left}>
-                <List className={classes.list}>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      Creative Tim
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/presentation?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      About us
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="//blog.creative-tim.com/"
-                      className={classes.block}
-                    >
-                      Blog
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/license?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      Licenses
-                    </a>
-                  </ListItem>
-                </List>
-              </div>
-              <div className={classes.right}>
-                &copy; {1900 + new Date().getYear()} , made with{" "}
-                <Favorite className={classes.icon} /> by{" "}
-                <a
-                  href="https://www.creative-tim.com?ref=mkpr-login"
-                  target="_blank"
-                >
-                  Creative Tim
-                </a>{" "}
-                for a better web
-              </div>
-            </div>
-          }
-        /> */}
       </div>
     </div>
   );
