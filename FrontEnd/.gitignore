@@ -4,6 +4,3 @@ creds2.sh
 terraform.tfstate
 terraform.tfstate.backup
 tmp/
-
-/node_modules
-node_modules/
