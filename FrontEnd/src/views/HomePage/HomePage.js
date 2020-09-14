@@ -31,6 +31,7 @@ export default function ErrorPage({ ...rest }) {
       <Header
         absolute
         color="transparent"
+        brand="AGME"
         links={<HeaderLinks dropdownHoverColor="dark" />}
         {...rest}
       />
@@ -42,7 +43,6 @@ export default function ErrorPage({ ...rest }) {
           backgroundPosition: "top center"
         }}
       >
-        {/* <div className={classes.container}> */}
         <div className={classes.contentCenter}>
           <GridContainer>
             <GridItem md={12}>
@@ -51,7 +51,6 @@ export default function ErrorPage({ ...rest }) {
                 <Button
             href="/signup-page"
           color={window.innerWidth < 960 ? "info" : "white"}
-          //target="_blank"
           className={classes.navButton}
           
         >
@@ -60,9 +59,7 @@ export default function ErrorPage({ ...rest }) {
             </GridItem>
           </GridContainer>
         </div>
-        {/* </div> */}
       </div>
-      
     </div>
   );
 }

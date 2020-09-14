@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import React from "react";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -37,6 +38,7 @@ import { isEmail } from "validator";
 import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.js";
 
 import image from "assets/img/bg7.jpg";
+import { isNullishCoalesce } from "typescript";
 
 const useStyles = makeStyles(signupPageStyle);
 
@@ -58,6 +60,27 @@ export default function SignUpPage(props, { ...rest }) {
     document.body.scrollTop = 0;
   });
   const classes = useStyles();
+     let errorMessgage = '';
+
+    if (props.errors){
+      if (props.errors==="Successful Sign in"){
+        errorMessgage = ( 
+          <div className="alert alter-danger" role = "alert">
+            <h3 style={{color: 'green'}}>
+            {props.errors}
+            </h3>
+          </div>
+        )
+      } else {
+      errorMessgage = ( 
+        <div className="alert alter-danger" role = "alert">
+          <h3 style={{color: 'red'}}>
+          {props.errors}
+          </h3>
+        </div>
+      )
+      }
+    } 
   return (
     <div>
       <Header
@@ -82,6 +105,7 @@ export default function SignUpPage(props, { ...rest }) {
                 <h2 className={classes.cardTitle}>Create Customer Account</h2>
                 <CardBody>
                   <GridContainer justify="center">
+                    {errorMessage}
                       <form className={classes.form}>
                         <CustomInput
                           id="name"

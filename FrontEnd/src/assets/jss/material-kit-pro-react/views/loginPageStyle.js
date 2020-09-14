@@ -72,7 +72,6 @@ const signupPageStyle = theme => ({
   inputIconsColor: {
     color: grayColor[13]
   },
-
   //ADDED FROM SIGNUPPAGESTYLE.JS
   cardTitle: {
     ...cardTitle,
@@ -80,7 +79,6 @@ const signupPageStyle = theme => ({
     textAlign: "center !important",
     marginBottom: "0.75rem"
   },
-
   textCenter: {
     textAlign: "center"
   },
