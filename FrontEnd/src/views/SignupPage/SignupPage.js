@@ -64,6 +64,15 @@ export default function SignUpPage(props, { ...rest }) {
     let errorMessgage = '';
 
     if (props.errors){
+      if (props.errors==="Successful Sign in"){
+        errorMessgage = ( 
+          <div className="alert alter-danger" role = "alert">
+            <h3 style={{color: 'green'}}>
+            {props.errors}
+            </h3>
+          </div>
+        )
+      } else {
       errorMessgage = ( 
         <div className="alert alter-danger" role = "alert">
           <h3 style={{color: 'red'}}>
@@ -71,7 +80,8 @@ export default function SignUpPage(props, { ...rest }) {
           </h3>
         </div>
       )
-    }
+      }
+    } 
 
   return (
     <div>
