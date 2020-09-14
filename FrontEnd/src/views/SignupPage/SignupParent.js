@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import SignupPage from "./SignupPage";
-import Axios from "axios";
+
+import Api from "utils/api.js";
 
 export default class SignupParent extends Component {
   state = {
     user: { username: "", name: "", password: "", phone: "", address: "" },
     role_id: 0,
-    errors: [],
+    errors: "",
     isLoading: false,
   };
 
@@ -27,12 +28,10 @@ export default class SignupParent extends Component {
 
   handleSubmit = () => {
     this.setState({ isLoading: true });
-    // eslint-disable-next-line no-unused-vars
-    var config = {
-      headers: { "Access-Control-Allow-Origin": "*" },
-    };
-    Axios.post(
-      `http://localhost:8080/signup`,
+    if(!this.state.user.name || !this.state.user.username|| !this.state.user.password || !this.state.user.phone || !this.state.user.address){
+      this.setState({errors: "all fields are required*"})
+    }else{
+    Api.signup(
       {
         name: this.state.user.name,
         username: this.state.user.username,
@@ -40,26 +39,29 @@ export default class SignupParent extends Component {
         phone: this.state.user.phone,
         address: this.state.user.address,
       },
-      config
-    )
-      // eslint-disable-next-line no-unused-vars
-      .then((r) => {
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 1500);
+      (res) => {
+        console.log(res);
+        this.setState({errors: res.errors})
 
-        console.log(r);
-        // history.push("/");
-      })
-      .catch((e) => {
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 1500);
-        console.log(e);
-        // if (e.response.data.errors) {
-        //   this.setState({ errors: e.response.data.errors });
-        // }
-      });
+        //retrieve major error message
+        if(res.errors){
+          this.setState({errors: res.errors})
+
+        //display specific validation error one at a time
+        }else if (res.fieldErrors){
+          this.setState({errors: res.fieldErrors[0].defaultMessage})
+
+        //when the id is updated, account registration successful
+        }else if(res.id!==0){
+          this.setState({errors: "Successful Sign in"})
+
+        //else display any remaining message
+        }else{
+          this.setState({errors: res.message})
+        }
+      }
+    );
+    }
   };
   render() {
     return (

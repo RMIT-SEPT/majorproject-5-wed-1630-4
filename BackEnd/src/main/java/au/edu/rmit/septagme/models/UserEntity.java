@@ -6,6 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,10 +21,16 @@ public class UserEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "Please provide a name")
     private String name;
 
+    @NotNull
+    @Size(min=4, max = 20, message="Username should have at least 4 characters")
+    @Column(unique=true)//, message="Username already exists")
     private String username;
 
+    @NotNull
+    @Size(min=6 , message="Password should have at least 6 characters")
     private String password;
 
     private String address;
@@ -55,12 +64,16 @@ public class UserEntity implements UserDetails {
         this.password = password;
         this.address = address;
         this.phone = phone;
+        this.role = UserRole.CUSTOMER;
         this.bookings_employees = null;
         this.bookings_customers = new ArrayList<Booking>();
     }
 
     public UserEntity() {
     }
+
+//    public UserEntity(UserEntity userEntity) {
+//    }
 
     public Long getId() {
         return id;
@@ -146,12 +159,12 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override
