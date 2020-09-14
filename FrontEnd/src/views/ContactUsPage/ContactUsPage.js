@@ -39,7 +39,7 @@ export default function LoginPage() {
       <Header
         absolute
         color="transparent"
-        brand="AGME BOOKING SYSTEM"
+        brand="AGME Booking System"
         links={<HeaderLinks dropdownHoverColor="info" />}
       />
       <div
@@ -55,51 +55,54 @@ export default function LoginPage() {
           <GridItem xs={12} sm={10} md={10}>
               <Card>
                 <form className={classes.form}>
-                <h2 className={classes.cardTitle}>Login</h2>
+                <h2 className={classes.cardTitle}>Send us a message</h2>
                   <CardBody signup>
-                    <CustomInput
-                      id="username"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        placeholder: "Username",
-                        type: "text",
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Face className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        placeholder: "Password",
-                        type: "password",
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_utline
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off"
-                      }}
-                    />
-                  </CardBody>
+                  <form>
+                  <CustomInput
+                    labelText="Your Name"
+                    id="float"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Email address"
+                    id="float"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Phone"
+                    id="float"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Your message"
+                    id="float"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      multiline: true,
+                      rows: 6
+                    }}
+                  />
                   <div className={classes.textCenter}>
-                    <Button round color="primary">
-                      Login
-
+                    <Button color="primary" round>
+                      Contact us
                     </Button>
                   </div>
                 </form>
+                
+                </CardBody>
+
+                </form>
               </Card>
             </GridItem>
+            
           </GridContainer>
         </div>
       </div>

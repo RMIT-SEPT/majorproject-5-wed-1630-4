@@ -23,9 +23,13 @@ import "assets/scss/material-kit-pro-react.scss?v=1.9.0";
 
 // pages for this product
 import AboutUsPage from "views/AboutUsPage/AboutUsPage.js";
+import ContactUsPage from "views/ContactUsPage/ContactUsPage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import SignupPage from "views/SignupPage/SignupParent.js";
 import AdminSignupPage from "views/SignupPage/AdminSignupPage.js";
+import CustomerProfilePage from "views/CustomerProfilePage/CustomerProfilePage.js";
+import AdminProfilePage from "views/AdminProfilePage/AdminProfilePage.js";
+import EmployeeProfilePage from "views/EmployeeProfilePage/EmployeeProfilePage.js";
 import HomePage from "views/HomePage/HomePage.js";
 import BookingPage from "views/MakeBookingPage/MakeBookingPage.js";
 // import BookingHistoryPage from "views/BookingPages/Customer/BookingHistoryPage.js";
@@ -36,13 +40,16 @@ ReactDOM.render(
   <Router history={hist}>
     <Switch>
       <Route path="/about-us" component={AboutUsPage} />
-      {/* <Route path="/contact-us" component={ContactUsPage} /> */}
+      <Route path="/contact-us" component={ContactUsPage} />
       <Route path="/login-page" component={LoginPage} />
       {/* <Route path="/profile-page" component={ProfilePage} /> */}
       <Route path="/signup-page" component={SignupPage} />
       <Route path="/booking" component={BookingPage} />
       <Route path="/home" component={HomePage} />
       <Route path="/admin-signup-page" component={AdminSignupPage} />
+      <Route path="/customer-profile-page" component={CustomerProfilePage} />
+      <Route path="/admin-profile-page" component={AdminProfilePage} />
+      <Route path="/employee-profile-page" component={EmployeeProfilePage} />
       {/* <Route path="/booking-history-page" component={BookingHistoryPage} /> */}
       {/* <Route path="/error-page" component={ErrorPage} /> */}
       <Route path="/" component={HomePage} />
