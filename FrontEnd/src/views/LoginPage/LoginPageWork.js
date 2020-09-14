@@ -56,9 +56,56 @@ export default function LoginPage() {
               <Card>
                 <form className={classes.form}>
                 <h2 className={classes.cardTitle}>Login</h2>
-                 
                   <CardBody signup>
                     <CustomInput
+                    id="username"
+                    formControlProps={{
+                        fullWidth: true,
+                        className: classes.customFormControlClasses
+                    }}
+                    inputProps={{
+                        onChange: e=>props.handleChange(e),
+                        type: "username",
+                        startAdornment: (
+                        <InputAdornment
+                            position="start"
+                            className={classes.inputAdornment}
+                        >
+                        <AccountCircleIcon className={classes.inputAdornmentIcon} />
+
+                        </InputAdornment>
+                        ),
+                        placeholder: "Username..."
+                    }}
+                    />
+                    <CustomInput
+                    id="password"
+                    formControlProps={{
+                        fullWidth: true,
+                        className: classes.customFormControlClasses
+                    }}
+                    inputProps={{
+                        onChange: e=>props.handleChange(e),
+                        placeholder: "Password...",
+                        type: "password",
+                        startAdornment: (
+                            <InputAdornment position="start">
+                            <Icon className={classes.inputIconsColor}>
+                                lock_utline
+                            </Icon>
+                            </InputAdornment>
+                        ),
+                        autoComplete: "off"
+                    }}
+                    />
+                    </CardBody>
+                        <div className={classes.textCenter}>
+                          <Button round color="primary" size="lg" onClick={props.handleSubmit}>
+                          Login
+                          </Button>
+                        </div>
+                      
+                    {/* <CustomInput
                       id="username"
                       formControlProps={{
                         fullWidth: true
@@ -96,7 +143,7 @@ export default function LoginPage() {
                     <Button round color="primary">
                       Login
                     </Button>
-                  </div>
+                  </div> */}
                 </form>
               </Card>
             </GridItem>
@@ -106,3 +153,4 @@ export default function LoginPage() {
     </div>
   );
 }
+
