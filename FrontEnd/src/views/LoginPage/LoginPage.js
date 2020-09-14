@@ -39,7 +39,7 @@ export default function LoginPage() {
       <Header
         absolute
         color="transparent"
-        brand="Material Kit PRO React"
+        brand="AGME"
         links={<HeaderLinks dropdownHoverColor="info" />}
       />
       <div
@@ -52,72 +52,22 @@ export default function LoginPage() {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={10} md={10}>
               <Card>
                 <form className={classes.form}>
-                  <CardHeader
-                    color="primary"
-                    signup
-                    className={classes.cardHeader}
-                  >
-                    <h4 className={classes.cardTitle}>Login</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-facebook" />
-                      </Button>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-google-plus-g" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <p className={classes.description + " " + classes.textCenter}>
-                    Or Be Classical
-                  </p>
+                <h2 className={classes.cardTitle}>Login</h2>
                   <CardBody signup>
                     <CustomInput
-                      id="first"
+                      id="username"
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        placeholder: "First Name...",
+                        placeholder: "Username",
                         type: "text",
                         startAdornment: (
                           <InputAdornment position="start">
                             <Face className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      id="email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        placeholder: "Email...",
-                        type: "email",
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Email className={classes.inputIconsColor} />
                           </InputAdornment>
                         )
                       }}
@@ -142,8 +92,9 @@ export default function LoginPage() {
                     />
                   </CardBody>
                   <div className={classes.textCenter}>
-                    <Button simple color="primary" size="lg">
-                      Get started
+                    <Button round color="primary">
+                      Login
+
                     </Button>
                   </div>
                 </form>
@@ -151,63 +102,6 @@ export default function LoginPage() {
             </GridItem>
           </GridContainer>
         </div>
-        <Footer
-          className={classes.footer}
-          content={
-            <div>
-              <div className={classes.left}>
-                <List className={classes.list}>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      Creative Tim
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/presentation?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      About us
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="//blog.creative-tim.com/"
-                      className={classes.block}
-                    >
-                      Blog
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/license?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      Licenses
-                    </a>
-                  </ListItem>
-                </List>
-              </div>
-              <div className={classes.right}>
-                &copy; {1900 + new Date().getYear()} , made with{" "}
-                <Favorite className={classes.icon} /> by{" "}
-                <a
-                  href="https://www.creative-tim.com?ref=mkpr-login"
-                  target="_blank"
-                >
-                  Creative Tim
-                </a>{" "}
-                for a better web
-              </div>
-            </div>
-          }
-        />
       </div>
     </div>
   );

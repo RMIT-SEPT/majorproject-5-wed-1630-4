@@ -20,7 +20,7 @@ import image from "assets/img/clint-mckoy.jpg";
 
 const useStyles = makeStyles(errorPageStyle);
 
-export default function HomePage({ ...rest }) {
+export default function ErrorPage({ ...rest }) {
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;

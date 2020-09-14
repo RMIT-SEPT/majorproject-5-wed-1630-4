@@ -60,8 +60,7 @@ export default function SignUpPage(props, { ...rest }) {
     document.body.scrollTop = 0;
   });
   const classes = useStyles();
-
-    let errorMessgage = '';
+     let errorMessgage = '';
 
     if (props.errors){
       if (props.errors==="Successful Sign in"){
@@ -82,7 +81,6 @@ export default function SignUpPage(props, { ...rest }) {
       )
       }
     } 
-
   return (
     <div>
       <Header
@@ -107,7 +105,7 @@ export default function SignUpPage(props, { ...rest }) {
                 <h2 className={classes.cardTitle}>Create Customer Account</h2>
                 <CardBody>
                   <GridContainer justify="center">
-                    {errorMessgage}
+                    {errorMessage}
                       <form className={classes.form}>
                         <CustomInput
                           id="name"

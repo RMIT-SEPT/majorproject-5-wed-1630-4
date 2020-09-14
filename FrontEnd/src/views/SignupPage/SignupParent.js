@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SignupPage from "./SignupPage";
+
 import Api from "utils/api.js";
 
 export default class SignupParent extends Component {
@@ -27,7 +28,6 @@ export default class SignupParent extends Component {
 
   handleSubmit = () => {
     this.setState({ isLoading: true });
-    
     if(!this.state.user.name || !this.state.user.username|| !this.state.user.password || !this.state.user.phone || !this.state.user.address){
       this.setState({errors: "all fields are required*"})
     }else{
