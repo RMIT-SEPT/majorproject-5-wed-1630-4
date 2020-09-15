@@ -28,7 +28,19 @@ import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(loginPageStyle);
 
-export default function LoginPage() {
+export default function LoginPage(props, { ...rest }) {
+  const [checked, setChecked] = React.useState([1]);
+  const handleToggle = value => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    setChecked(newChecked);
+  };
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -41,6 +53,7 @@ export default function LoginPage() {
         color="transparent"
         brand="AGME BOOKING SYSTEM"
         links={<HeaderLinks dropdownHoverColor="info" />}
+        {...rest}
       />
       <div
         className={classes.pageHeader}
@@ -60,25 +73,28 @@ export default function LoginPage() {
                     <CustomInput
                       id="username"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
+                        className: classes.customFormControlClasses
                       }}
                       inputProps={{
-                        placeholder: "Username",
-                        type: "text",
+                        //onChange: e=>props.handleChange(e),
+                        type: "username",
                         startAdornment: (
                           <InputAdornment position="start">
                             <Face className={classes.inputIconsColor} />
                           </InputAdornment>
-                        )
+                        ),
+                        placeholder: "Username..."
                       }}
                     />
                     <CustomInput
-                      id="pass"
+                      id="password"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
+                        className: classes.customFormControlClasses
                       }}
                       inputProps={{
-                        placeholder: "Password",
+                        //onChange: e=>props.handleChange(e),
                         type: "password",
                         startAdornment: (
                           <InputAdornment position="start">
@@ -87,6 +103,7 @@ export default function LoginPage() {
                             </Icon>
                           </InputAdornment>
                         ),
+                        placeholder: "Password...",
                         autoComplete: "off"
                       }}
                     />

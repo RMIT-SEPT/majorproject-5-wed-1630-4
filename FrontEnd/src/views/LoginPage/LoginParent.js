@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import LoginPage from "./LoginPage";
-import Axios from "axios";
+import Api from "utils/api.js";
 
 export default class LoginParent extends Component {
   state = {
     user: { username: "", password: "" },
     role_id: 0,
-    errors: [],
+    errors: "",
     isLoading: false,
   };
 
@@ -28,16 +28,50 @@ export default class LoginParent extends Component {
   handleSubmit = () => {
     this.setState({ isLoading: true });
     // eslint-disable-next-line no-unused-vars
-    var config = {
-      headers: { "Access-Control-Allow-Origin": "*" },
-    };
-    Axios.get(
-      `http://localhost:8080/login`,
+    
+    this.setState({ isLoading: true });
+    if(!this.state.user.username|| !this.state.user.password){
+      this.setState({errors: "all fields are required*"})
+    }else{
+    
+    // var config = {
+    //   headers: { "Access-Control-Allow-Origin": "*" },
+    // };
+    Api.login(
+     // `http://localhost:8080/login`,
       {
         username: this.state.user.username,
         password: this.state.user.password,
       },
-      config
+
+
+      (res) => {
+        console.log(res);
+        this.setState({errors: res.errors})
+
+        //retrieve major error message
+        if(res.errors){
+          this.setState({errors: res.errors})
+
+        //display specific validation error one at a time
+        }else if (res.fieldErrors){
+          this.setState({errors: res.fieldErrors[0].defaultMessage})
+
+        //when the id is updated, account registration successful
+        }else if(res.id!==0){
+          this.setState({errors: "Successful Sign in"})
+
+        //else display any remaining message
+        }else{
+          this.setState({errors: res.message})
+        }
+      }
+    );
+    }
+  };
+
+
+/*       config
     )
       // eslint-disable-next-line no-unused-vars
       .then((r) => {
@@ -57,7 +91,7 @@ export default class LoginParent extends Component {
         //   this.setState({ errors: e.response.data.errors });
         // }
       });
-  };
+  }; */
   render() {
     return (
       <div>
