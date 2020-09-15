@@ -67,7 +67,7 @@ export default function LoginPage(props, { ...rest }) {
           <GridContainer justify="center">
           <GridItem xs={12} sm={10} md={10}>
               <Card>
-                <form className={classes.form}>
+                <form className={classes.form} onSubmit={props.handleSubmit}>
                 <h2 className={classes.cardTitle}>Login</h2>
                   <CardBody signup>
                     <CustomInput
@@ -109,7 +109,7 @@ export default function LoginPage(props, { ...rest }) {
                     />
                   </CardBody>
                   <div className={classes.textCenter}>
-                    <Button round color="primary">
+                    <Button round color="primary" type="submit" >
                       Login
 
                     </Button>

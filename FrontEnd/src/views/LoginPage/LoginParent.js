@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LoginPage from "./LoginPage";
 import Api from "utils/api.js";
+import Axios from "axios";
 
 export default class LoginParent extends Component {
   state = {
@@ -8,6 +9,16 @@ export default class LoginParent extends Component {
     role_id: 0,
     errors: "",
     isLoading: false,
+  };
+
+  handleHome() {
+    Axios.get("http://localhost:8080/Home").then(res => {
+      if (res.data === "success") {
+        this.props.history.push("/Home");
+      } else {
+        alert("Authentication failure");
+      }
+    })
   };
 
   handleChange = (e) => {
@@ -37,14 +48,16 @@ export default class LoginParent extends Component {
     // var config = {
     //   headers: { "Access-Control-Allow-Origin": "*" },
     // };
-    Api.login(
-     // `http://localhost:8080/login`,
+    Api.post(
+     `http://localhost:8080/login`,
       {
         username: this.state.user.username,
         password: this.state.user.password,
+        localStorage.setItem("Authorization", res.data.token);
+        return this.handleHome();
       },
 
-
+/* 
       (res) => {
         console.log(res);
         this.setState({errors: res.errors})
@@ -65,7 +78,7 @@ export default class LoginParent extends Component {
         }else{
           this.setState({errors: res.message})
         }
-      }
+      } */
     );
     }
   };
