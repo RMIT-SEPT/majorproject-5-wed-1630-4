@@ -12,18 +12,18 @@ import java.io.Serializable;
 public class BookingSerializer implements Serializable {
     private UserEntity customer;
     private long id;
-//    private String time_slot;
-//    private UserEntity employee;
-//    private Service service;
+    private String time_slot;
+    private String employee_name;
+    private String service;
 //    private BookingStatus status;
 
 
     public BookingSerializer(Booking booking){
-        this.customer= booking.getCustomer();
-        this.id = booking.getCustomer().getId();
-//        this.time_slot = booking.getTime_slot();
-//        this.employee = booking.getEmployee();
-//        this.service = booking.getService();
+        //this.customer= booking.getCustomer();
+        this.id = booking.getId();
+        this.time_slot = booking.getTime_slot();
+//        this.employee_name = booking.getEmployee().getName();
+        this.service = booking.getService().getName();
 //        this.status = booking.getStatus();
     }
 
@@ -43,26 +43,26 @@ public class BookingSerializer implements Serializable {
         this.customer = customer;
     }
 
-//    public String getTime_slot() {
-//        return time_slot;
-//    }
+    public String getTime_slot() {
+        return time_slot;
+    }
 //
 //    public void setTime_slot(String time_slot) {
 //        this.time_slot = time_slot;
 //    }
 //
-//    public UserEntity getEmployee() {
-//        return employee;
-//    }
+    public String getEmployee_name() {
+        return employee_name;
+    }
 //
 //    public void setEmployee(UserEntity employee) {
 //        this.employee = employee;
 //    }
-//
-//    public Service getService() {
-//        return service;
-//    }
-//
+
+    public String getService() {
+        return service;
+    }
+
 //    public void setService(Service service) {
 //        this.service = service;
 //    }

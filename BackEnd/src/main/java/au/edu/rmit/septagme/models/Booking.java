@@ -1,12 +1,18 @@
 package au.edu.rmit.septagme.models;
 
 import au.edu.rmit.septagme.models.helpers.BookingStatus;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
 // TODO add validations
 
 @Entity
+//@Table(name = "booking")
+@EntityListeners(AuditingEntityListener.class)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,4 +84,7 @@ public class Booking {
     public void setStatus(BookingStatus status) {
         this.status = status;
     }
+
+    public Long getId() {
+        return id; }
 }
