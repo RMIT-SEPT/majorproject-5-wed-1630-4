@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CustomerProfilePage from "./CustomerProfilePage";
+import CustomerEditProfile from "./CustomerEditProfile";
 import Axios from "axios";
 
 export default class CustomerProfileParent extends Component {
@@ -25,13 +25,13 @@ export default class CustomerProfileParent extends Component {
     console.log(this.state);
   };
 
-  handleSubmit = () => {
+  handleUpdate = () => {
     this.setState({ isLoading: true });
     // eslint-disable-next-line no-unused-vars
     var config = {
       headers: { "Access-Control-Allow-Origin": "*" },
     };
-    Axios.post(
+    Axios.patch(
       `http://localhost:8080/customerprofile`,
       {
         name: this.state.user.name,
@@ -56,15 +56,12 @@ export default class CustomerProfileParent extends Component {
           this.setState({ isLoading: false });
         }, 1500);
         console.log(e);
-        // if (e.response.data.errors) {
-        //   this.setState({ errors: e.response.data.errors });
-        // }
       });
   };
   render() {
     return (
       <div>
-        <CustomerProfilePage
+        <CustomerEditProfile
           isLoading={this.state.isLoading}
           errors={this.state.errors}
           handleChange={this.handleChange}

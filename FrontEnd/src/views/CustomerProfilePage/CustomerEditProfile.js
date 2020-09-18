@@ -76,15 +76,6 @@ export default function SignUpPage({ ...rest }) {
                 <CardBody>
                   <GridContainer justify="center">
                     <GridItem xs={12} sm={5} md={5}>
-                      <InfoArea
-                        className={classes.infoArea}
-                        title="Bookings"
-                        description="Placeholder"
-                        icon={Group}
-                        iconColor="info"
-                      />
-                    </GridItem>
-                    <GridItem xs={12} sm={5} md={5}>
                       <div className={classes.textCenter}>
 
                       </div>
@@ -188,9 +179,6 @@ export default function SignUpPage({ ...rest }) {
                           cancel
                         </Button>
                         </div>
-                        <span>
-                              <a href="/customer-profile-edit">Edit</a>.
-                        </span>
                       </form>
                     </GridItem>
                   </GridContainer>

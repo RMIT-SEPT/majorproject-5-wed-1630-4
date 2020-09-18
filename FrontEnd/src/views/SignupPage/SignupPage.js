@@ -58,6 +58,24 @@ export default function SignUpPage(props, { ...rest }) {
     document.body.scrollTop = 0;
   });
   const classes = useStyles();
+
+  let errorMessgage = '';
+
+  if (props.errors){
+    if (props.errors==="Successful Sign in"){
+      errorMessgage = ( 
+          <h3 style={{color: 'green'}}>
+          {props.errors}
+          </h3>
+      )
+    } else {
+    errorMessgage = ( 
+        <h3 style={{color: 'red'}}>
+        {props.errors}
+        </h3>
+    )
+    }
+  }
   return (
     <div>
       <Header
@@ -82,6 +100,10 @@ export default function SignUpPage(props, { ...rest }) {
                 <h2 className={classes.cardTitle}>Create Customer Account</h2>
                 <CardBody>
                   <GridContainer justify="center">
+                  <h3 style={{color: 'red'}}>
+                    {errorMessgage}
+                  </h3>
+                    {/* {errorMessgage} */}
                       <form className={classes.form}>
                         <CustomInput
                           id="name"
