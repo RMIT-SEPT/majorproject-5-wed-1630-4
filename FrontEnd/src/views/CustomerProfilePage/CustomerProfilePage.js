@@ -34,7 +34,7 @@ import image from "assets/img/bg8.jpg";
 
 const useStyles = makeStyles(signupPageStyle);
 
-export default function SignUpPage({ ...rest }) {
+export default function CustomerProfilePage({ ...rest }) {
   const [checked, setChecked] = React.useState([1]);
   const handleToggle = value => {
     const currentIndex = checked.indexOf(value);
@@ -88,13 +88,15 @@ export default function SignUpPage({ ...rest }) {
                       <div className={classes.textCenter}>
 
                       </div>
-                      <form className={classes.form}>
+                      <form className={classes.form} /* onSubmit={props.handleSubmit} */>
                         <CustomInput
+                          id="name"
                           formControlProps={{
                             fullWidth: true,
                             className: classes.customFormControlClasses
                           }}
                           inputProps={{
+                            type: "name",
                             startAdornment: (
                               <InputAdornment
                                 position="start"
@@ -103,15 +105,17 @@ export default function SignUpPage({ ...rest }) {
                                 <Face className={classes.inputAdornmentIcon} />
                               </InputAdornment>
                             ),
-                            placeholder: "Name"
+                            placeholder: "Name..."
                           }}
                         />
                         <CustomInput
+                        id="username"
                         formControlProps={{
                           fullWidth: true,
                           className: classes.customFormControlClasses
                         }}
                         inputProps={{
+                          type: "username",
                           startAdornment: (
                             <InputAdornment
                               position="start"
@@ -120,15 +124,17 @@ export default function SignUpPage({ ...rest }) {
                               <Face className={classes.inputAdornmentIcon} />
                             </InputAdornment>
                           ),
-                          placeholder: "Username"
+                          placeholder: "Username..."
                         }}
                       />
                         <CustomInput
+                          id="email"
                           formControlProps={{
                             fullWidth: true,
                             className: classes.customFormControlClasses
                           }}
                           inputProps={{
+                            type: "email",
                             startAdornment: (
                               <InputAdornment
                                 position="start"
@@ -137,15 +143,17 @@ export default function SignUpPage({ ...rest }) {
                                 <Email className={classes.inputAdornmentIcon} />
                               </InputAdornment>
                             ),
-                            placeholder: "Email"
+                            placeholder: "Email..."
                           }}
                         />
                         <CustomInput
+                          id="address"
                           formControlProps={{
                             fullWidth: true,
                             className: classes.customFormControlClasses
                           }}
                           inputProps={{
+                            type: "address",
                             startAdornment: (
                               <InputAdornment
                                 position="start"
@@ -156,15 +164,17 @@ export default function SignUpPage({ ...rest }) {
                                 </Icon>
                               </InputAdornment>
                             ),
-                            placeholder: "Address"
+                            placeholder: "Address..."
                           }}
                         />
                         <CustomInput
+                        id="phone"
                         formControlProps={{
                           fullWidth: true,
                           className: classes.customFormControlClasses
                         }}
                         inputProps={{
+                          type: "phone",
                           startAdornment: (
                             <InputAdornment
                               position="start"
@@ -175,12 +185,12 @@ export default function SignUpPage({ ...rest }) {
                               </Icon>
                             </InputAdornment>
                           ),
-                          placeholder: "Phone Number"
+                          placeholder: "Phone Number..."
                         }}
                       />
 
                         <div className={classes.textCenter}>
-                          <Button round color="info">
+                          <Button round color="info" type="submit">
                             update
                           </Button>
                           <Button href="/index" round color="info">

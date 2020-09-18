@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import CustomerProfilePage from "./CustomerProfilePage";
+import AdminProfilePage from "./AdminProfilePage";
 import Api from "utils/api.js";
 import Axios from "axios";
 
-export default class CustomerProfileParent extends Component {
+export default class AdminProfileParent extends Component {
   state = {
-    user: { name: "", username: "", email: "", address: "", phone: "" },
+    user: { companyname: "", description: "", email: "", address: "", phone: "" },
     role_id: 0,
     errors: "",
     isLoading: false,
@@ -32,11 +32,11 @@ export default class CustomerProfileParent extends Component {
     var config = {
       headers: { "Access-Control-Allow-Origin": "*" },
     };
-    Axios.post(
-      `http://localhost:8080/customerprofile`,
+    Axios.get(
+      `http://localhost:8080/adminprofile`,
       {
-        name: this.state.user.name,
-        username: this.state.user.username,
+        companyname: this.state.user.companyname,
+        description: this.state.user.description,
         email: this.state.user.email,
         address: this.state.user.address,
         phone: this.state.user.phone,
@@ -65,7 +65,7 @@ export default class CustomerProfileParent extends Component {
   render() {
     return (
       <div>
-        <CustomerProfilePage
+        <AdminProfilePage
           isLoading={this.state.isLoading}
           errors={this.state.errors}
           handleChange={this.handleChange}

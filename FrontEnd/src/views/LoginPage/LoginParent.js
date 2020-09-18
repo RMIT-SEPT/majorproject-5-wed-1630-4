@@ -12,9 +12,10 @@ export default class LoginParent extends Component {
   };
 
   handleHome() {
-    Axios.get("http://localhost:8080/Home").then(res => {
-      if (res.data === "success") {
-        this.props.history.push("/Home");
+    Axios.get("http://localhost:8080/home").then(res => {
+      if (res.data.token != null) {
+        //if (res.data === "success") {
+        this.props.history.push("/home");
       } else {
         alert("Authentication failure");
       }
@@ -38,9 +39,6 @@ export default class LoginParent extends Component {
 
   handleSubmit = () => {
     this.setState({ isLoading: true });
-    // eslint-disable-next-line no-unused-vars
-    
-    this.setState({ isLoading: true });
     if(!this.state.user.username|| !this.state.user.password){
       this.setState({errors: "all fields are required*"})
     }else{
@@ -48,13 +46,13 @@ export default class LoginParent extends Component {
     // var config = {
     //   headers: { "Access-Control-Allow-Origin": "*" },
     // };
-    Api.post(
-     `http://localhost:8080/login`,
+    Api.login(
+     //"http://localhost:8080/login",
       {
         username: this.state.user.username,
         password: this.state.user.password,
-        localStorage.setItem("Authorization", res.data.token);
-        return this.handleHome();
+        localStorage.setItem("authorization", res.data.token),
+        return this.handleHome(),
       },
 
 /* 
@@ -83,28 +81,6 @@ export default class LoginParent extends Component {
     }
   };
 
-
-/*       config
-    )
-      // eslint-disable-next-line no-unused-vars
-      .then((r) => {
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 1500);
-
-        console.log(r);
-        // history.push("/");
-      })
-      .catch((e) => {
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 1500);
-        console.log(e);
-        // if (e.response.data.errors) {
-        //   this.setState({ errors: e.response.data.errors });
-        // }
-      });
-  }; */
   render() {
     return (
       <div>
