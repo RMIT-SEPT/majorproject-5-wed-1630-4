@@ -45,12 +45,24 @@ public class BookingControllerTest {
     @Autowired
     private WebApplicationContext wac;
 
-    private Booking booking = new Booking();
-    private BookingController bc = new BookingController();
-;
-    @Autowired
-    private BookingRepository bookingRepository;
+    private Booking booking;
 
+    @Autowired
+    private BookingController bookingrepo;
+
+
+    private int i = 0;
+
+    @BeforeClass
+    public void setup() {
+        this.mvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
+
+//    @BeforeEach
+//    public void setupBeforeEachTest(){
+//        this.booking = new Booking("user"+i, ""+i);
+//        ++i;
+//    }
 
     @Test
     public  void contextLoads(){
@@ -69,6 +81,15 @@ public class BookingControllerTest {
                 .andExpect(status().isOk());
 
     }
+
+//    @Test
+//    public void testCreateBooking(){
+//        this.booking.setCustomer(1);
+//        booking.setEmployee(2);
+//        booking.setService(2);
+//        booking.setTime_slot("1000");
+//
+//    }
 
 //    testing to see if create booking method works. returns null pointer exception.
 //    @Test

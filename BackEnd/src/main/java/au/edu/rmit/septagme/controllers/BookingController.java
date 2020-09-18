@@ -22,13 +22,13 @@ public class BookingController {
     @Autowired
     BookingRepository bookings;
 
-    //booking arraylist reveal all
-//    @GetMapping("/bookings")
-//    @RequestMapping(method = RequestMethod.GET)
-//    public Iterable<Booking> index() {
-//        Iterable<Booking> booking = bookings.findAll();
-//        return booking;
-//    }
+//    booking arraylist reveal all
+    @GetMapping("/bookings")
+    @RequestMapping(method = RequestMethod.GET)
+    public Iterable<Booking> index() {
+        Iterable<Booking> booking = bookings.findAll();
+        return booking;
+    }
 
     //Getting booking by id
     //throws exception if id cannot be found
@@ -45,11 +45,17 @@ public class BookingController {
         }
 
     //attempt 1 at booking to see if we can just save current bookings
-    @PostMapping("/bookings")
-    public Booking createBooking(@Valid @RequestBody Booking booking){
-        return  bookings.save(booking);
- //       return  new ResponseEntity(b, HttpStatus.OK);
-
+    @PostMapping("/bookings/add")
+    public ResponseEntity createBooking(@RequestBody Booking booking){
+        Booking b = new Booking();
+        b.setCustomer(booking.getCustomer());
+        b.setTime_slot(booking.getTime_slot());
+        b.setService(booking.getService());
+        b.setEmployee(booking.getEmployee());
+        bookings.save(b);
+//        return bookings.save(booking);
+//        return new bookings(HttpStatus.OK);
+        return new ResponseEntity(b, HttpStatus.OK);
     }
 
     //attempt 2 at booking method trying to add booking
