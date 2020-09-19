@@ -28,7 +28,19 @@ import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(loginPageStyle);
 
-export default function LoginPage() {
+export default function LoginPage(props, { ...rest }) {
+  const [checked, setChecked] = React.useState([1]);
+  const handleToggle = value => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    setChecked(newChecked);
+  };
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -39,8 +51,9 @@ export default function LoginPage() {
       <Header
         absolute
         color="transparent"
-        brand="Material Kit PRO React"
+        brand="AGME BOOKING SYSTEM"
         links={<HeaderLinks dropdownHoverColor="info" />}
+        {...rest}
       />
       <div
         className={classes.pageHeader}
@@ -52,83 +65,36 @@ export default function LoginPage() {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={10} md={10}>
               <Card>
-                <form className={classes.form}>
-                  <CardHeader
-                    color="primary"
-                    signup
-                    className={classes.cardHeader}
-                  >
-                    <h4 className={classes.cardTitle}>Login</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-facebook" />
-                      </Button>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-google-plus-g" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <p className={classes.description + " " + classes.textCenter}>
-                    Or Be Classical
-                  </p>
+                <form className={classes.form} onSubmit={props.handleSubmit}>
+                <h2 className={classes.cardTitle}>Login</h2>
                   <CardBody signup>
                     <CustomInput
-                      id="first"
+                      id="username"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
+                        className: classes.customFormControlClasses
                       }}
                       inputProps={{
-                        placeholder: "First Name...",
-                        type: "text",
+                        //onChange: e=>props.handleChange(e),
+                        type: "username",
                         startAdornment: (
                           <InputAdornment position="start">
                             <Face className={classes.inputIconsColor} />
                           </InputAdornment>
-                        )
+                        ),
+                        placeholder: "Username..."
                       }}
                     />
                     <CustomInput
-                      id="email"
+                      id="password"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
+                        className: classes.customFormControlClasses
                       }}
                       inputProps={{
-                        placeholder: "Email...",
-                        type: "email",
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        placeholder: "Password",
+                        //onChange: e=>props.handleChange(e),
                         type: "password",
                         startAdornment: (
                           <InputAdornment position="start">
@@ -137,13 +103,15 @@ export default function LoginPage() {
                             </Icon>
                           </InputAdornment>
                         ),
+                        placeholder: "Password...",
                         autoComplete: "off"
                       }}
                     />
                   </CardBody>
                   <div className={classes.textCenter}>
-                    <Button simple color="primary" size="lg">
-                      Get started
+                    <Button round color="primary" type="submit" >
+                      Login
+
                     </Button>
                   </div>
                 </form>
@@ -151,63 +119,6 @@ export default function LoginPage() {
             </GridItem>
           </GridContainer>
         </div>
-        <Footer
-          className={classes.footer}
-          content={
-            <div>
-              <div className={classes.left}>
-                <List className={classes.list}>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      Creative Tim
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/presentation?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      About us
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="//blog.creative-tim.com/"
-                      className={classes.block}
-                    >
-                      Blog
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/license?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      Licenses
-                    </a>
-                  </ListItem>
-                </List>
-              </div>
-              <div className={classes.right}>
-                &copy; {1900 + new Date().getYear()} , made with{" "}
-                <Favorite className={classes.icon} /> by{" "}
-                <a
-                  href="https://www.creative-tim.com?ref=mkpr-login"
-                  target="_blank"
-                >
-                  Creative Tim
-                </a>{" "}
-                for a better web
-              </div>
-            </div>
-          }
-        />
       </div>
     </div>
   );
