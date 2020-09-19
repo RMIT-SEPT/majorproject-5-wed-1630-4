@@ -5,39 +5,52 @@ import au.edu.rmit.septagme.repositories.BookingRepository;
 
 
 import au.edu.rmit.septagme.serializers.BookingSerializer;
-import com.sun.xml.bind.v2.model.core.ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
-//@RequestMapping(value = "/bookings")
 public class BookingController {
     @Autowired
     BookingRepository bookings;
 
 //    booking arraylist reveal all
-    @GetMapping("/bookings")
-    @RequestMapping(method = RequestMethod.GET)
+//    @GetMapping("/bookings/index")
+//    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping(value = "/bookings/index")
     public Iterable<Booking> index() {
         Iterable<Booking> booking = bookings.findAll();
         return booking;
     }
 
+//    @GetMapping("/bookings/index")
+//    public ResponseEntity getAllBookings() {
+//        Iterable<Booking> booking = bookings.findAll();
+//        return ResponseEntity(booking, HttpStatus.OK);
+//    }
+
+//
+//    @RequestMapping(value = "/bookings/display", method = RequestMethod.GET)
+//    public ResponseEntity<BookingSerializer> displayBooking(){
+//        Iterable<Booking> allBookings = bookings.findAll();
+//        if (allBookings==null){
+//            return new ResponseEntity("No Bookings Exists", HttpStatus.NOT_FOUND);
+//        }
+//
+//        return ResponseEntity.ok().body(new BookingSerializer((Booking) allBookings.iterator()));
+//    }
+
     //Getting booking by id
     //throws exception if id cannot be found
 //    @GetMapping("/bookings/{id}")
-    @RequestMapping(path = "/bookings/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/bookings/{id}", method = RequestMethod.GET)
     public ResponseEntity<BookingSerializer> getBookingById(@PathVariable("id") Long id)
         throws Exception {
         Optional<Booking> booking = bookings.findById(id);
-        //System.out.println(booking.get().getEmployee().getName());
+   //     System.out.println(booking.get().getEmployee().getName());
         if (booking.isPresent()) {
             return ResponseEntity.ok().body(new BookingSerializer(booking.get()));
         }
@@ -45,7 +58,7 @@ public class BookingController {
         }
 
     //attempt 1 at booking to see if we can just save current bookings
-    @PostMapping("/bookings/add")
+    @PostMapping(value = "/bookings/create")
     public ResponseEntity createBooking(@RequestBody Booking booking){
         Booking b = new Booking();
         b.setCustomer(booking.getCustomer());
@@ -53,9 +66,21 @@ public class BookingController {
         b.setService(booking.getService());
         b.setEmployee(booking.getEmployee());
         bookings.save(b);
-//        return bookings.save(booking);
-//        return new bookings(HttpStatus.OK);
         return new ResponseEntity(b, HttpStatus.OK);
+    }
+
+    //deleting code without 48 hour parameter
+    @DeleteMapping(value = "/booking/delete/{id}")
+    public Object deleteBooking(@PathVariable("id") Long id) throws Exception{
+        Optional<Booking> booking = bookings.findById(id);
+
+        if (booking.isPresent()) {
+            bookings.delete(booking.get());
+            Map<String, Boolean> response = new HashMap<>();
+            response.put("deleted",Boolean.TRUE);
+            return response;
+        }
+        return "No booking found";
     }
 
     //attempt 2 at booking method trying to add booking

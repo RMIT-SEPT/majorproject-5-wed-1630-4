@@ -4,6 +4,7 @@ import au.edu.rmit.septagme.models.Booking;
 import au.edu.rmit.septagme.models.UserEntity;
 import au.edu.rmit.septagme.repositories.BookingRepository;
 import au.edu.rmit.septagme.repositories.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,13 +51,10 @@ public class BookingControllerTest {
     @Autowired
     private BookingController bookingrepo;
 
-
-    private int i = 0;
-
-    @BeforeClass
-    public void setup() {
-        this.mvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-    }
+//    @BeforeClass
+//    public void setup() {
+//        this.mvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+//    }
 
 //    @BeforeEach
 //    public void setupBeforeEachTest(){
@@ -69,12 +67,9 @@ public class BookingControllerTest {
 
     }
 
-//    @Test
-//    public
-
-    //test of booking to see if all bookings in data returns
+    //Test of booking id 7
     @Test
-    public void testReturnAllBookings() throws Exception {
+    public void testReturnBookings() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/bookings/7")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -82,11 +77,44 @@ public class BookingControllerTest {
 
     }
 
+    //testing booking 4
+    @Test
+    public void testReturnBookings1() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/bookings/4" +
+                "")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }
+
+
+    @Test
+    public void testReturnAllBookings2() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/bookings/display" +
+                "")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void testDeleteBooking1() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/bookings/delete/4" +
+                "")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }
+
+
 //    @Test
 //    public void testCreateBooking(){
 //        this.booking.setCustomer(1);
-//        booking.setEmployee(2);
-//        booking.setService(2);
+//        booking.setEmployee();
+//        booking.setService(1);
 //        booking.setTime_slot("1000");
 //
 //    }
@@ -110,5 +138,11 @@ public class BookingControllerTest {
 //        b.setService(booking.getService());
 //        b.setEmployee(booking.getEmployee());
 
-
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

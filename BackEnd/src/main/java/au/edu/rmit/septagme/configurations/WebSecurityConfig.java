@@ -53,6 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/bookings/{id}").permitAll()
                 .antMatchers("/bookings").permitAll()
+                .antMatchers("/bookings/index").permitAll()
+                .antMatchers("/bookings/create").permitAll()
+
 
 // all other requests need to be authenticated
         .anyRequest().authenticated().and()
