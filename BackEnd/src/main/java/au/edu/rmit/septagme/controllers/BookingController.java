@@ -17,44 +17,24 @@ public class BookingController {
     @Autowired
     BookingRepository bookings;
 
-//    booking arraylist reveal all
-//    @GetMapping("/bookings/index")
-//    @RequestMapping(method = RequestMethod.GET)
+    //get all created bookings in the database
     @GetMapping(value = "/bookings/index")
-    public Iterable<Booking> index() {
+    public ResponseEntity getAllBookings() {
         Iterable<Booking> booking = bookings.findAll();
-        return booking;
+
+        return new ResponseEntity(booking, HttpStatus.OK);
     }
 
-//    @GetMapping("/bookings/index")
-//    public ResponseEntity getAllBookings() {
-//        Iterable<Booking> booking = bookings.findAll();
-//        return ResponseEntity(booking, HttpStatus.OK);
-//    }
-
-//
-//    @RequestMapping(value = "/bookings/display", method = RequestMethod.GET)
-//    public ResponseEntity<BookingSerializer> displayBooking(){
-//        Iterable<Booking> allBookings = bookings.findAll();
-//        if (allBookings==null){
-//            return new ResponseEntity("No Bookings Exists", HttpStatus.NOT_FOUND);
-//        }
-//
-//        return ResponseEntity.ok().body(new BookingSerializer((Booking) allBookings.iterator()));
-//    }
-
     //Getting booking by id
-    //throws exception if id cannot be found
-//    @GetMapping("/bookings/{id}")
     @RequestMapping(value = "/bookings/{id}", method = RequestMethod.GET)
     public ResponseEntity<BookingSerializer> getBookingById(@PathVariable("id") Long id)
         throws Exception {
         Optional<Booking> booking = bookings.findById(id);
-   //     System.out.println(booking.get().getEmployee().getName());
+
         if (booking.isPresent()) {
             return ResponseEntity.ok().body(new BookingSerializer(booking.get()));
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity("This Booking does not exist.", HttpStatus.NOT_FOUND);
         }
 
     //attempt 1 at booking to see if we can just save current bookings
@@ -66,34 +46,19 @@ public class BookingController {
         b.setService(booking.getService());
         b.setEmployee(booking.getEmployee());
         bookings.save(b);
-        return new ResponseEntity(b, HttpStatus.OK);
+        return new ResponseEntity(b, HttpStatus.CREATED);
     }
 
     //deleting code without 48 hour parameter
-    @DeleteMapping(value = "/booking/delete/{id}")
-    public Object deleteBooking(@PathVariable("id") Long id) throws Exception{
+    @DeleteMapping(value = "/bookings/delete/{id}")
+    public ResponseEntity deleteBooking(@PathVariable("id") Long id) {
         Optional<Booking> booking = bookings.findById(id);
 
-        if (booking.isPresent()) {
-            bookings.delete(booking.get());
-            Map<String, Boolean> response = new HashMap<>();
-            response.put("deleted",Boolean.TRUE);
-            return response;
+        if (booking == null) {
+            return new ResponseEntity(" Booking ID does not exist", HttpStatus.NOT_FOUND);
         }
-        return "No booking found";
+        bookings.deleteById(id);
+        return new ResponseEntity("Booking deleted successfully.", HttpStatus.OK);
     }
-
-    //attempt 2 at booking method trying to add booking
-//    @PostMapping(path="/booking")
-//    public ResponseEntity addBooking(@RequestBody Booking booking){
-////        Booking b = new Booking();
-////
-////        b.setCustomer(booking.getCustomer());
-////        b.setTime_slot(booking.getTime_slot());
-////        b.setService(booking.getService());
-////        b.setEmployee(booking.getEmployee());
-//        //need to save to user repsoityory, who ever is logged in
-//        return  new ResponseEntity(b, HttpStatus.OK);
-//    }
 
 }

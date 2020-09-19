@@ -55,6 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/bookings").permitAll()
                 .antMatchers("/bookings/index").permitAll()
                 .antMatchers("/bookings/create").permitAll()
+                .antMatchers("/bookings/delete/{id}").permitAll()
+
 
 
 // all other requests need to be authenticated

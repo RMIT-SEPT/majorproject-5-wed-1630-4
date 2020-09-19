@@ -13,7 +13,7 @@ public class BookingSerializer implements Serializable {
     private UserEntity customer;
     private long id;
     private String time_slot;
-    private String employee_name;
+    private String employee;
     private String service;
 //    private BookingStatus status;
 
@@ -24,6 +24,7 @@ public class BookingSerializer implements Serializable {
         this.time_slot = booking.getTime_slot();
 //        this.employee_name = booking.getEmployee().getName();
         this.service = booking.getService().getName();
+        this.employee = booking.getEmployee().getName();
 //        this.status = booking.getStatus();
     }
 
@@ -51,8 +52,8 @@ public class BookingSerializer implements Serializable {
 //        this.time_slot = time_slot;
 //    }
 //
-    public String getEmployee_name() {
-        return employee_name;
+    public String getEmployee() {
+        return employee;
     }
 //
 //    public void setEmployee(UserEntity employee) {
