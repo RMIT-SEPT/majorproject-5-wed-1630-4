@@ -9,21 +9,15 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
 
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import GroupIcon from '@material-ui/icons/Group';
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import HistoryIcon from '@material-ui/icons/History';
 import PersonAdd from "@material-ui/icons/PersonAdd";
-import Layers from "@material-ui/icons/Layers";
-import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
-import LineStyle from "@material-ui/icons/LineStyle";
-import Error from "@material-ui/icons/Error";
 import HomeIcon from '@material-ui/icons/Home';
 // core components
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-pro-react/components/headerLinksStyle.js";
@@ -75,15 +69,17 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list + " " + classes.mlAuto}>
       <ListItem className={classes.listItem}>
-      <Button
-          href="/home"
-          color={window.innerWidth < 960 ? "info" : "white"}
-          //target="_blank"
-          className={classes.navButton}
-          simple
-        >
+        <Button
+            href="/home"
+            color={window.innerWidth < 960 ? "info" : "white"}
+            //target="_blank"
+            className={classes.navButton}
+            simple
+          >
           <HomeIcon className={classes.icons} /> home
         </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <Button
           href="/about-us"
           color={window.innerWidth < 960 ? "info" : "white"}
@@ -93,12 +89,36 @@ export default function HeaderLinks(props) {
         >
           <GroupIcon className={classes.icons} /> about us
         </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/bookings"
+          color={window.innerWidth < 960 ? "info" : "white"}
+          //target="_blank"
+          className={classes.navButton}
+          simple
+          >
+          <HistoryIcon className={classes.icons} /> Bookings
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/booking-history"
+          color={window.innerWidth < 960 ? "info" : "white"}
+          //target="_blank"
+          className={classes.navButton}
+          simple
+          >
+          <HistoryIcon className={classes.icons} /> Booking History
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <Button
           href="/signup-page"
           color={window.innerWidth < 960 ? "info" : "white"}
           //target="_blank"
           className={classes.navButton}
-          simple
+          
           >
           <PersonAdd className={classes.icons} /> create account
         </Button>

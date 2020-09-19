@@ -29,6 +29,7 @@ import AdminSignupPage from "views/SignupPage/AdminSignupPage.js";
 import HomePage from "views/HomePage/HomePage.js";
 import BookingHistoryPage from "views/BookingPages/Customer/BookingHistoryPage.js";
 
+
 var hist = createBrowserHistory();
 
 ReactDOM.render(
