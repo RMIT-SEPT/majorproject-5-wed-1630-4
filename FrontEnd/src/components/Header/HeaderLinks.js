@@ -134,6 +134,17 @@ export default function HeaderLinks(props) {
           <Fingerprint className={classes.icons} /> login page
         </Button>
       </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/booking-history-page"
+          color={window.innerWidth < 960 ? "info" : "white"}
+          //target="_blank"
+          className={classes.navButton}
+          simple
+        >
+          <Fingerprint className={classes.icons} /> Your Bookings
+        </Button>
+      </ListItem>
     </List>
   );
 }

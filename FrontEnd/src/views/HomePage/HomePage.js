@@ -26,6 +26,13 @@ export default function HomePage({ ...rest }) {
   const classes = useStyles();
   return (
     <div>
+      <Header
+        absolute
+        color="transparent"
+        brand="AGME"
+        links={<HeaderLinks dropdownHoverColor="dark" />}
+        {...rest}
+      />
       <div
         className={classes.pageHeader}
         style={{
@@ -51,7 +58,6 @@ export default function HomePage({ ...rest }) {
           </GridContainer>
         </div>
       </div>
-      
     </div>
   );
 }
