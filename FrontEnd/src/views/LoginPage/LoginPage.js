@@ -11,8 +11,6 @@ import Email from "@material-ui/icons/Email";
 import Favorite from "@material-ui/icons/Favorite";
 import Face from "@material-ui/icons/Face";
 // core components
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -36,12 +34,6 @@ export default function LoginPage() {
   const classes = useStyles();
   return (
     <div>
-      <Header
-        absolute
-        color="transparent"
-        brand="Material Kit PRO React"
-        links={<HeaderLinks dropdownHoverColor="info" />}
-      />
       <div
         className={classes.pageHeader}
         style={{

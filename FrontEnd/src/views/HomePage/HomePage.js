@@ -7,8 +7,6 @@ import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
 // core components
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -20,7 +18,7 @@ import image from "assets/img/clint-mckoy.jpg";
 
 const useStyles = makeStyles(errorPageStyle);
 
-export default function ErrorPage({ ...rest }) {
+export default function HomePage({ ...rest }) {
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -28,12 +26,6 @@ export default function ErrorPage({ ...rest }) {
   const classes = useStyles();
   return (
     <div>
-      <Header
-        absolute
-        color="transparent"
-        links={<HeaderLinks dropdownHoverColor="dark" />}
-        {...rest}
-      />
       <div
         className={classes.pageHeader}
         style={{
@@ -42,7 +34,6 @@ export default function ErrorPage({ ...rest }) {
           backgroundPosition: "top center"
         }}
       >
-        {/* <div className={classes.container}> */}
         <div className={classes.contentCenter}>
           <GridContainer>
             <GridItem md={12}>
@@ -51,7 +42,6 @@ export default function ErrorPage({ ...rest }) {
                 <Button
             href="/signup-page"
           color={window.innerWidth < 960 ? "info" : "white"}
-          //target="_blank"
           className={classes.navButton}
           
         >
@@ -60,7 +50,6 @@ export default function ErrorPage({ ...rest }) {
             </GridItem>
           </GridContainer>
         </div>
-        {/* </div> */}
       </div>
       
     </div>
