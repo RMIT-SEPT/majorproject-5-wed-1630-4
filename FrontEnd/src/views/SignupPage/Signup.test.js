@@ -3,12 +3,12 @@ import Signup from "./SignupPage";
 import {shallow, mount} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import CustomInput from "components/CustomInput/CustomInput";
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("Siginup Page Unit Test", () => {
-    // const summitClicked = jest.fn();
+    const mockFn = jest.fn();
+
     let wrapper;
     beforeEach(() => {
         wrapper = shallow(<Signup />)
@@ -24,6 +24,10 @@ describe("Siginup Page Unit Test", () => {
         wrapper.find('ForwardRef').simulate('click')
         const alertText = wrapper.find('h3')
         expect(alertText.text()).toBe('all fields are required*');
+    });
+
+    it("should display Password should have at least 6 characters",()=>{
+
     });
 
     //test successful sign in
@@ -113,6 +117,8 @@ describe("Siginup Page Unit Test", () => {
         nameInput.simulate('change',{
             target: {value: 'BlueBrickWall'},
         }),
+
+        //username length less than 3
         userNameInput.simulate('change',{
             target: {value: 'em'},
         }),
@@ -134,6 +140,8 @@ describe("Siginup Page Unit Test", () => {
 
         wrapper.find('ForwardRef').simulate('click')
         const alertText = wrapper.find('h3')
+
+        //should display this error message
         expect(alertText.text()).toBe('username size no less than 3*');
 
     });

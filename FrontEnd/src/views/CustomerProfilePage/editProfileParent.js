@@ -4,7 +4,7 @@ import Axios from "axios";
 
 export default class CustomerProfileParent extends Component {
   state = {
-    user: { name: "", username: "", email: "", address: "", phone: "" },
+    user: { name: "", username: "",  address: "", phone: "" },
     role_id: 0,
     errors: [],
     isLoading: false,
@@ -31,12 +31,11 @@ export default class CustomerProfileParent extends Component {
     var config = {
       headers: { "Access-Control-Allow-Origin": "*" },
     };
-    Axios.patch(
-      `http://localhost:8080/customerprofile`,
+    Axios.put(
+      `http://localhost:8080/profileEdit`,
       {
-        name: this.state.user.name,
+        // name: this.state.user.name,
         username: this.state.user.username,
-        email: this.state.user.email,
         address: this.state.user.address,
         phone: this.state.user.phone,
       },
@@ -65,7 +64,7 @@ export default class CustomerProfileParent extends Component {
           isLoading={this.state.isLoading}
           errors={this.state.errors}
           handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
+          handleUpdate={this.handleUpdate}
           handleRole={this.handleRole}
         />
       </div>

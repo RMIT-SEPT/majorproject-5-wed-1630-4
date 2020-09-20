@@ -68,6 +68,76 @@ public class JwtAuthenticationController {
         map.put("status", "not logged in");
         return map;
     }
+    
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public Map<String, String> getProfile(@RequestHeader(required = false, value = "Authorization") String jwt) throws Exception {
+        HashMap<String, String> map = new HashMap<>();
+
+        // no jwt provided
+        if (jwt == null){
+            map.put("status", "not logged in");
+            return map;
+        }
+        // delete Bearer part
+        jwt = jwt.substring(7);
+
+        String username = jwtTokenUtil.getUsernameFromToken(jwt);
+        UserEntity user = this.userDetailsService.loadUserByUsername(username);
+
+        // validate jwt
+        Boolean isLoggedIn = jwtTokenUtil.validateToken(jwt, user);
+
+        if (isLoggedIn){
+            map.put("status", "logged in");
+            map.put("role", user.getRole().name());
+            map.put("username", user.getUsername());
+            map.put("phone", user.getPhone());
+            map.put("address", user.getAddress());
+            return map;
+        }
+
+        // expired jwt
+        map.put("status", "not logged in");
+        return map;
+    }
+
+    //update user profile
+    @PutMapping(value = "/profileEdit")
+    public Map<String, String> updateProfile(@RequestBody UserEntity userUpdates, @RequestHeader(required = false, value = "Authorization") String jwt) throws Exception {
+        HashMap<String, String> map = new HashMap<>();
+
+        // no jwt provided
+        if (jwt == null){
+            map.put("status", "not logged in");
+            return map;
+        }
+        // delete Bearer part
+        jwt = jwt.substring(7);
+
+        String username = jwtTokenUtil.getUsernameFromToken(jwt);
+        UserEntity user = this.userDetailsService.loadUserByUsername(username);
+
+        // validate jwt
+        Boolean isLoggedIn = jwtTokenUtil.validateToken(jwt, user);
+
+        if (isLoggedIn){
+        	user.setUsername(userUpdates.getUsername());
+        	user.setPhone(userUpdates.getPhone());
+        	user.setAddress(userUpdates.getAddress());
+        	
+            map.put("status", "logged in");
+            map.put("role", user.getRole().name());
+            map.put("username", user.getUsername());
+            map.put("phone", user.getPhone());
+            map.put("address", user.getAddress());
+            return map;
+        }
+
+        // expired jwt
+        map.put("status", "not logged in");
+        return map;
+    }
+
 
     private void authenticate(String username, String password) throws Exception {
         try {

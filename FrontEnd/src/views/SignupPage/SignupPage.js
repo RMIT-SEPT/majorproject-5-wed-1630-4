@@ -100,10 +100,9 @@ export default function SignUpPage(props, { ...rest }) {
                 <h2 className={classes.cardTitle}>Create Customer Account</h2>
                 <CardBody>
                   <GridContainer justify="center">
-                  <h3 style={{color: 'red'}}>
+                  <div id="alert">
                     {errorMessgage}
-                  </h3>
-                    {/* {errorMessgage} */}
+                  </div>
                       <form className={classes.form}>
                         <CustomInput
                           id="name"

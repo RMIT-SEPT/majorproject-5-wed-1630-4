@@ -36,4 +36,10 @@ export default {
       .then((res) => callback(res))
       .catch((err) => callback(err.response.data));
   },
+  editProfile: (credintials, callback)=>{
+    axios
+    .put("/profileEdit", credintials)
+    .then((res) => callback(res))
+    .catch((err) => callback(err.response.data));
+},
 };

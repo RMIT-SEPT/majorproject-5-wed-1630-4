@@ -32,7 +32,7 @@ import AdminProfilePage from "views/AdminProfilePage/AdminProfilePage.js";
 import EmployeeProfilePage from "views/EmployeeProfilePage/EmployeeProfilePage.js";
 import HomePage from "views/HomePage/HomePage.js";
 import BookingPage from "views/MakeBookingPage/MakeBookingPage.js";
-import CustomerEditProfile from "views/CustomerProfilePage/CustomerEditProfile.js";
+import CustomerEditProfile from "views/CustomerProfilePage/EditProfileParent.js";
 // import BookingHistoryPage from "views/BookingPages/Customer/BookingHistoryPage.js";
 
 var hist = createBrowserHistory();
