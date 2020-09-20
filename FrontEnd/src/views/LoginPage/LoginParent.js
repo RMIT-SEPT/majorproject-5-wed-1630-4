@@ -12,7 +12,7 @@ export default class LoginParent extends Component {
   };
 
   handleHome() {
-    Axios.get("http://localhost:8080/home").then(res => {
+    Api.post("http://localhost:8080/login").then(res => {
       if (res.data.token != null) {
         //if (res.data === "success") {
         this.props.history.push("/home");
@@ -46,8 +46,8 @@ export default class LoginParent extends Component {
     // var config = {
     //   headers: { "Access-Control-Allow-Origin": "*" },
     // };
-    Api.login(
-     //"http://localhost:8080/login",
+    Api.post(
+     "http://localhost:8080/login",
       {
         username: this.state.user.username,
         password: this.state.user.password,
