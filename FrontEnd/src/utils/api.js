@@ -12,21 +12,25 @@ export default {
     axios
       .post("/login", credintials)
       .then((res) => {
-        if (res.jwt != null) {
-          axios.defaults.headers.common["Authorization"] = res.jwt;
+        if (res.data.token != null) {
+          axios.defaults.headers.common["Authorization"] = "Bearer ".concat(
+            res.data.token
+          );
+          localStorage.setItem("token", res.data.token);
         }
         callback(res);
       })
       .catch((err) => callback(err.response.data));
   },
-  isLoggedIn: () => {
+  isLoggedIn: (callback) => {
     axios
       .get("/isLoggedIn")
       .then((res) => {
-        if (res.status === "logged in") {
+        console.log(res.data);
+        if (res.data.status === "logged in") {
           localStorage.setItem("role", res.role);
         }
-        return res;
+        callback(res);
       })
       .catch((err) => err);
   },
