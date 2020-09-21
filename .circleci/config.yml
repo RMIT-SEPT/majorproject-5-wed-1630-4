@@ -33,28 +33,35 @@ jobs:
     working_directory: ~/repo/BackEnd
 
     docker:
-      - image: circleci/postgres:9.6.3-alpine
-      - image: circleci/openjdk:11-jdk-stretch
-
+      - image: circleci/openjdk:11-jdk-stretc
       environment:
-        ports: '5432'
+        POSTGRES_PORT: '5432'
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
         POSTGRES_DB: sept_project
+        DATABASE_URL: jdbc:postgresql://localhost:5432/sept_project
+        
+      - image: circleci/postgres:9.6.3-alpine
     
     steps:
       - checkout:
         path: ~/repo
 
+      - run: apt-get update -qq && apt-get install -y postgresql
+      - run:
+          command: |
+            psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sept_project;"
+            psql -h 127.0.0.1 -U postgres -c "CREATE USER username WITH PASSWORD 'postgres'; GRANT ALL PRIVILEGES ON DATABASE databasename TO username;"
+
       - replaceCache:
-        key: circleci-backend-java-spring-{{checksum "pom.xml"}}
+        key: buildingTheBackEnd-{{checksum "pom.xml"}}
       
       - run: mvn dependency:go-offline
 
       - saveCache:
           paths:
             - ~/.m2
-          key: circleci-backend-java-spring-{{checksum "pom.xml"}}
+          key: buildingTheBackEnd-{{checksum "pom.xml"}}
 
       - run: mvn test
       - run: mvn package
