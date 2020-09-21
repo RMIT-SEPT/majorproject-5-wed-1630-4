@@ -47,14 +47,14 @@ jobs:
         path: ~/repo
 
       - replaceCache:
-        key: circleci-backend-java-spring-{{checksum "./repo/BackEnd/pom.xml"}}
+        key: buildingTheBackEnd-{{checksum "pom.xml"}}
       
       - run: mvn dependency:go-offline
 
       - saveCache:
           paths:
             - ~/.m2
-          key: circleci-backend-java-spring-{{checksum "./repo/BackEnd/pom.xml"}}
+          key: buildingTheBackEnd-{{checksum "pom.xml"}}
 
       - run: mvn test
       - run: mvn package
