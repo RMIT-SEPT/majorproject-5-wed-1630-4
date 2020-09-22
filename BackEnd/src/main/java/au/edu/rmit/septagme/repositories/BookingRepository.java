@@ -9,6 +9,6 @@ import au.edu.rmit.septagme.models.Service;
 import au.edu.rmit.septagme.models.UserEntity;
 
 @Repository
-public interface BookingRepository extends CrudRepository<Booking, Integer> {
+public interface BookingRepository extends CrudRepository<Booking, Long> {
 
 }

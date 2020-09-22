@@ -8,23 +8,23 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.ALWAYS)
 public class BookingSerializer implements Serializable {
     private UserEntity customer;
     private long id;
-//    private String time_slot;
-//    private UserEntity employee;
-//    private Service service;
-//    private BookingStatus status;
+    private String time_slot;
+    private UserEntity employee;
+    private Service service;
+    private BookingStatus status;
 
 
-    public BookingSerializer(Booking booking){
-        this.customer= booking.getCustomer();
-        this.id = booking.getCustomer().getId();
-//        this.time_slot = booking.getTime_slot();
-//        this.employee = booking.getEmployee();
-//        this.service = booking.getService();
-//        this.status = booking.getStatus();
+    public BookingSerializer(Booking booking) {
+        this.customer = booking.getCustomer();
+        this.id = booking.getId();
+        this.time_slot = booking.getTime_slot();
+        this.employee = booking.getEmployee();
+        this.service = booking.getService();
+        this.status = booking.getStatus();
     }
 
     public long getId() {
@@ -43,36 +43,36 @@ public class BookingSerializer implements Serializable {
         this.customer = customer;
     }
 
-//    public String getTime_slot() {
-//        return time_slot;
-//    }
-//
-//    public void setTime_slot(String time_slot) {
-//        this.time_slot = time_slot;
-//    }
-//
-//    public UserEntity getEmployee() {
-//        return employee;
-//    }
-//
-//    public void setEmployee(UserEntity employee) {
-//        this.employee = employee;
-//    }
-//
-//    public Service getService() {
-//        return service;
-//    }
-//
-//    public void setService(Service service) {
-//        this.service = service;
-//    }
-//
-//    public BookingStatus getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(BookingStatus status) {
-//        this.status = status;
-//    }
-//
+
+    public UserEntity getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(UserEntity employee) {
+        this.employee = employee;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public BookingStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BookingStatus status) {
+        this.status = status;
+    }
+
+    public String getTime_slot() {
+        return time_slot;
+    }
+
+    public void setTime_slot(String time_slot) {
+        this.time_slot = time_slot;
+    }
 }
