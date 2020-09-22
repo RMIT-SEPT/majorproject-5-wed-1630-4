@@ -7,21 +7,36 @@ import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
 // core components
-import Footer from "components/Footer/Footer.js";
+import Header from "components/Header/Header.js";
+import HeaderLinks from "components/Header/HeaderLinks.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 
 import errorPageStyle from "assets/jss/material-kit-pro-react/views/errorPageStyles.js";
+import api from "utils/api"
 
 import image from "assets/img/clint-mckoy.jpg";
 
 const useStyles = makeStyles(errorPageStyle);
 
 export default function HomePage({ ...rest }) {
+  const [user, setUser] = React.useState("visitor");
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
+  
+    api.isLoggedIn(res=>{ 
+      if(res.data.status == "not logged in"){
+        setUser("admin")
+      }else if (res.data.status == "logged in"){
+        if(res.data.tole == "ADMIN"){
+          setUser("admin")
+        }else if(res.data.role == " CUSTOMER"){
+          setUser("customer")
+        }
+      }
+    })
   });
   const classes = useStyles();
   return (
@@ -30,7 +45,7 @@ export default function HomePage({ ...rest }) {
         absolute
         color="transparent"
         brand="AGME"
-        links={<HeaderLinks dropdownHoverColor="dark" />}
+        links={<HeaderLinks user={user} dropdownHoverColor="dark" />}
         {...rest}
       />
       <div

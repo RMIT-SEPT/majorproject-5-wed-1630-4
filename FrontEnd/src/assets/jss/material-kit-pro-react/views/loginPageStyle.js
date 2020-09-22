@@ -4,6 +4,8 @@ import {
   cardTitle,
   blackColor,
   whiteColor,
+  main,
+  mainRaised,
   grayColor,
   hexToRgb
 } from "assets/jss/material-kit-pro-react.js";

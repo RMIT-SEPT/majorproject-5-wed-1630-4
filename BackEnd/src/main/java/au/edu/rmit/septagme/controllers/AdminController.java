@@ -72,9 +72,28 @@ public class AdminController {
 
         // save working times
         for (EmployeeShift employeeShift: employeeShifts) {
-            employeeShift.setUser(emp);
-            if (employeeShiftRepository.save(employeeShift) != null){
-                employeeShiftsList.add(new EmployeeShiftSerializer(employeeShift));
+            List<EmployeeShift> currShifts = emp.getEmployeeShifts();
+            EmployeeShift temp = null;
+            boolean isShiftExists = false;
+            for (EmployeeShift empShift:
+                    currShifts) {
+                if (employeeShift.getDay().equals(empShift.getDay())) {
+                    isShiftExists = true;
+                    temp = empShift;
+                    break;
+                }
+            }
+            if (isShiftExists) {
+                temp.setFromTime(employeeShift.getFromTime());
+                temp.setToTime(employeeShift.getToTime());
+                employeeShiftRepository.save(temp);
+                employeeShiftsList.add(new EmployeeShiftSerializer(temp));
+                System.out.println(employeeShift.getDay());
+            }else{
+                employeeShift.setUser(emp);
+                if (employeeShiftRepository.save(employeeShift) != null) {
+                    employeeShiftsList.add(new EmployeeShiftSerializer(employeeShift));
+                }
             }
         }
         return new ResponseEntity(map, HttpStatus.CREATED);
@@ -82,7 +101,7 @@ public class AdminController {
 
     // assign work times to workers
     @GetMapping(
-            value = "/employees", consumes = "application/json", produces = "application/json")
+            value = "/employees",  produces = "application/json")
     public ResponseEntity<UserSerializer> getEmployees(@RequestHeader(required = true, value = "Authorization") String jwt){
 
         // checking for is current user an admin
