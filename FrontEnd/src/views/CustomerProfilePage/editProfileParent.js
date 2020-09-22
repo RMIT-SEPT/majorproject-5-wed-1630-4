@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import SignupPage from "./SignupPage";
-
+import CustomerEditProfile from "./CustomerEditProfile";
 import Api from "utils/api.js";
 
-export default class SignupParent extends Component {
+export default class CustomerProfileParent extends Component {
   state = {
-    user: { username: "", name: "", password: "", phone: "", address: "" },
+    user: { name: "", username: "",  address: "", phone: "" },
     role_id: 0,
-    errors: "",
+    errors: [],
     isLoading: false,
   };
 
@@ -26,18 +25,13 @@ export default class SignupParent extends Component {
     console.log(this.state);
   };
 
-  handleSubmit = () => {
+  handleUpdate = () => {
     this.setState({ isLoading: true });
-    if(!this.state.user.name || !this.state.user.username|| !this.state.user.password || !this.state.user.phone || !this.state.user.address){
-      this.setState({errors: "all fields are required*"})
-    }else{
-    Api.signup(
+    Api.editProfile(
       {
-        name: this.state.user.name,
         username: this.state.user.username,
-        password: this.state.user.password,
-        phone: this.state.user.phone,
         address: this.state.user.address,
+        phone: this.state.user.phone,
       },
       (res) => {
         console.log(res);
@@ -52,25 +46,24 @@ export default class SignupParent extends Component {
           this.setState({errors: res.fieldErrors[0].defaultMessage})
 
         //when the id is updated, account registration successful
-        }else if(res.id!==0){
-          this.setState({errors: "Successful Sign in"})
+        }else if(res.status==='Updated'){
+          this.props.history.push("/customer-profile-edit");
 
         //else display any remaining message
         }else{
           this.setState({errors: res.message})
         }
-      }
-    );
+      },
+      );
     }
-  };
   render() {
     return (
       <div>
-        <SignupPage
+        <CustomerEditProfile
           isLoading={this.state.isLoading}
           errors={this.state.errors}
           handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
+          handleUpdate={this.handleUpdate}
           handleRole={this.handleRole}
         />
       </div>

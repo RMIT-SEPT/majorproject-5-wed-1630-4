@@ -20,4 +20,12 @@ public class UserEntityDetailsService implements UserDetailsService {
 
         return user;
     }
+    
+    public void updateUserDetails(String username, UserEntity userUpdates) {
+    	UserEntity user = userRepository.findByUsername(username); 
+    	user.setUsername(userUpdates.getUsername());
+    	user.setPhone(userUpdates.getPhone());
+    	user.setAddress(userUpdates.getAddress());
+    	userRepository.save(user);
+    }
 }

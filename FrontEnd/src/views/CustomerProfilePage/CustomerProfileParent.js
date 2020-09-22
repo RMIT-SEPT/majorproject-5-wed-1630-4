@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import CustomerProfilePage from "./CustomerProfilePage";
-import Api from "utils/api.js";
 import Axios from "axios";
 
 export default class CustomerProfileParent extends Component {
   state = {
     user: { name: "", username: "", email: "", address: "", phone: "" },
     role_id: 0,
-    errors: "",
+    errors: [],
     isLoading: false,
   };
 

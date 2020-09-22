@@ -1,5 +1,4 @@
 import axios from "axios";
-
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
@@ -14,12 +13,16 @@ export default {
     axios
       .post("/login", credintials)
       .then((res) => {
-        if (res.data.token != null) {
-          axios.defaults.headers.common["Authorization"] = "Bearer ".concat(
-            res.data.token
-          );
-          localStorage.setItem("token", res.data.token);
+        if(res.status===200){
+          if(res.data.token!=null){
+            axios.defaults.headers.common["Authorization"] = "Bearer ".concat(res.data.token);
+            localStorage.setItem("token", res.data.token);
+          }
+        }else {
+          if(res.error==="Unauthorized"){
+          axios.defaults.headers.common.Authorization = null;
         }
+      }
         callback(res);
       })
       .catch((err) => callback(err.response.data));
@@ -29,7 +32,7 @@ export default {
       localStorage.getItem("token")
     );
     axios
-      .get("/isLoggedIn")
+      .get("/isLoggedIn", { headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
       .then((res) => {
         console.log(res.data);
         if (res.data.status === "logged in") {
@@ -44,6 +47,18 @@ export default {
       .post("/signup", credintials)
       .then((res) => callback(res))
       .catch((err) => callback(err.response.data));
+  },
+  editProfile: (credintials, callback)=>{
+    axios
+    .post("/profileEdit", credintials, { headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+    .then((res) => callback(res))
+    .catch((err) => callback(err.response.data));
+  },
+  getProfile: ()=>{
+    axios
+    .get("/profile")
+    .then((res) => res)
+    .catch((err) => err);
   },
   getEmployees: (callback) => {
     // axios.defaults.headers.common["Authorization"] =

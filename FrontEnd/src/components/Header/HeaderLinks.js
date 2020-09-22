@@ -164,9 +164,25 @@ export default function HeaderLinks(props) {
 
   const { dropdownHoverColor } = props;
   const classes = useStyles();
+  let profile ='';
+  
+  if(localStorage.getItem("token")!==null){
+  profile='you are logged in'
+  }else{
+    profile='logged out'
+  }
   return (
     <List className={classes.list + " " + classes.mlAuto}>
       <ListItem className={classes.listItem}>
+      <Button
+          href="/home"
+          color={window.innerWidth < 960 ? "info" : "white"}
+          //target="_blank"
+          className={classes.navButton}
+          simple
+        >
+          <HomeIcon className={classes.icons} /> home
+        </Button>
         <Button
             href="/home"
             color={window.innerWidth < 960 ? "info" : "white"}
@@ -176,6 +192,33 @@ export default function HeaderLinks(props) {
           >
           <HomeIcon className={classes.icons} /> home
         </Button>
+        <Button
+        href="/customer-profile-page"
+        color={window.innerWidth < 960 ? "info" : "white"}
+        //target="_blank"
+        className={classes.navButton}
+        simple
+      >
+        <AccountCircle className={classes.icons} /> customer profile
+      </Button>
+      <Button
+      href="/admin-profile-page"
+      color={window.innerWidth < 960 ? "info" : "white"}
+      //target="_blank"
+      className={classes.navButton}
+      simple
+    >
+      <AccountCircle className={classes.icons} /> admin profile
+    </Button>
+    <Button
+    href="/employee-profile-page"
+    color={window.innerWidth < 960 ? "info" : "white"}
+    //target="_blank"
+    className={classes.navButton}
+    simple
+  >
+    <AccountCircle className={classes.icons} /> employee profile
+  </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
