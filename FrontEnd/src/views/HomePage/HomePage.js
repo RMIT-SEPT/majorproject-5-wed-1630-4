@@ -9,21 +9,34 @@ import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
-import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 
 import errorPageStyle from "assets/jss/material-kit-pro-react/views/errorPageStyles.js";
+import api from "utils/api"
 
 import image from "assets/img/clint-mckoy.jpg";
 
 const useStyles = makeStyles(errorPageStyle);
 
-export default function ErrorPage({ ...rest }) {
+export default function HomePage({ ...rest }) {
+  const [user, setUser] = React.useState("visitor");
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
+  
+    api.isLoggedIn(res=>{ 
+      if(res.data.status == "not logged in"){
+        setUser("admin")
+      }else if (res.data.status == "logged in"){
+        if(res.data.tole == "ADMIN"){
+          setUser("admin")
+        }else if(res.data.role == " CUSTOMER"){
+          setUser("customer")
+        }
+      }
+    })
   });
   const classes = useStyles();
   return (
@@ -31,7 +44,8 @@ export default function ErrorPage({ ...rest }) {
       <Header
         absolute
         color="transparent"
-        links={<HeaderLinks dropdownHoverColor="dark" />}
+        brand="AGME"
+        links={<HeaderLinks user={user} dropdownHoverColor="dark" />}
         {...rest}
       />
       <div
@@ -42,7 +56,6 @@ export default function ErrorPage({ ...rest }) {
           backgroundPosition: "top center"
         }}
       >
-        {/* <div className={classes.container}> */}
         <div className={classes.contentCenter}>
           <GridContainer>
             <GridItem md={12}>
@@ -51,7 +64,6 @@ export default function ErrorPage({ ...rest }) {
                 <Button
             href="/signup-page"
           color={window.innerWidth < 960 ? "info" : "white"}
-          //target="_blank"
           className={classes.navButton}
           
         >
@@ -60,9 +72,7 @@ export default function ErrorPage({ ...rest }) {
             </GridItem>
           </GridContainer>
         </div>
-        {/* </div> */}
       </div>
-      
     </div>
   );
 }

@@ -3,6 +3,8 @@ import {
   title,
   main,
   mainRaised,
+  mainMiddle,
+  pageHeader,
   mrAuto,
   whiteColor,
   mlAuto
@@ -15,7 +17,7 @@ const aboutUsStyle = {
   mlAuto,
   container: {
     ...container,
-    zIndex: 1
+    zIndex: "4",
   },
   title: {
     ...title,

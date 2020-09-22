@@ -31,7 +31,7 @@ export default function CustomTable(props) {
   } = props;
   const classes = useStyles();
   return (
-    <div className={classes.tableResponsive}>
+    <div className={classes.tableResponsive} style={{ width: "70%" }}>
       <Table className={classes.table}>
         {tableHead !== undefined ? (
           <TableHead className={classes[tableHeaderColor]}>

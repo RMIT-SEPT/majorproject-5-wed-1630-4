@@ -29,10 +29,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import InfoArea from "components/InfoArea/InfoArea.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-
-//validation
-import { isEmail } from "validator";
-
+import Warning from "components/Typography/Warning.js"
 
 import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.js";
 
@@ -58,15 +55,23 @@ export default function SignUpPage(props, { ...rest }) {
     document.body.scrollTop = 0;
   });
   const classes = useStyles();
+
+  let errorMessgage = '';
+
+  if (props.errors){
+    if (props.errors==="Successful Sign in"){
+      errorMessgage = ( 
+          <h3 style={{color: 'green'}}>
+          {props.errors}
+          </h3>
+      )
+    } else {
+      errorMessgage = props.errors
+    }
+  }
   return (
     <div>
-      <Header
-        absolute
-        color="transparent"
-        brand="AGME BOOKING SYSTEM"
-        links={<HeaderLinks dropdownHoverColor="rose" />}
-        {...rest}
-      />
+
       <div
         className={classes.pageHeader}
         style={{
@@ -79,9 +84,12 @@ export default function SignUpPage(props, { ...rest }) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={10} md={10}>
               <Card className={classes.cardSignup}>
-                <h2 className={classes.cardTitle}>Create Customer Account</h2>
+                <h2 className={classes.cardTitle}>Create Account</h2>
                 <CardBody>
                   <GridContainer justify="center">
+                  <p>
+                    {errorMessgage}
+                  </p>
                       <form className={classes.form}>
                         <CustomInput
                           id="name"
