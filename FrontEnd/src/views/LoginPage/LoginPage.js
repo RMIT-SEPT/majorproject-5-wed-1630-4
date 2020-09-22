@@ -56,13 +56,6 @@ export default function LoginPage(props, { ...rest }) {
   const classes = useStyles();
   return (
     <div>
-      <Header
-        absolute
-        color="transparent"
-        brand="AGME BOOKING SYSTEM"
-        links={<HeaderLinks dropdownHoverColor="info" />}
-        {...rest}
-      />
       <div
         className={classes.pageHeader}
         style={{

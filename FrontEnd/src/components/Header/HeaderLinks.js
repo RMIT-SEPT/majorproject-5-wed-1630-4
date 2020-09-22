@@ -17,6 +17,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import HistoryIcon from '@material-ui/icons/History';
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import HomeIcon from '@material-ui/icons/Home';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 // core components
 import Button from "components/CustomButtons/Button.js";
 
@@ -173,16 +174,9 @@ export default function HeaderLinks(props) {
   }
   return (
     <List className={classes.list + " " + classes.mlAuto}>
-      <ListItem className={classes.listItem}>
-      <Button
-          href="/home"
-          color={window.innerWidth < 960 ? "info" : "white"}
-          //target="_blank"
-          className={classes.navButton}
-          simple
-        >
-          <HomeIcon className={classes.icons} /> home
-        </Button>
+
+        <ListItem className={classes.listItem}>
+
         <Button
             href="/home"
             color={window.innerWidth < 960 ? "info" : "white"}
@@ -192,6 +186,9 @@ export default function HeaderLinks(props) {
           >
           <HomeIcon className={classes.icons} /> home
         </Button>
+        </ListItem>
+      <ListItem className={classes.listItem}>
+
         <Button
         href="/customer-profile-page"
         color={window.innerWidth < 960 ? "info" : "white"}
@@ -201,6 +198,9 @@ export default function HeaderLinks(props) {
       >
         <AccountCircle className={classes.icons} /> customer profile
       </Button>
+            </ListItem>
+            <ListItem className={classes.listItem}>
+
       <Button
       href="/admin-profile-page"
       color={window.innerWidth < 960 ? "info" : "white"}
@@ -210,6 +210,9 @@ export default function HeaderLinks(props) {
     >
       <AccountCircle className={classes.icons} /> admin profile
     </Button>
+          </ListItem>
+          <ListItem className={classes.listItem}>
+
     <Button
     href="/employee-profile-page"
     color={window.innerWidth < 960 ? "info" : "white"}
@@ -219,6 +222,7 @@ export default function HeaderLinks(props) {
   >
     <AccountCircle className={classes.icons} /> employee profile
   </Button>
+  
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
@@ -231,7 +235,6 @@ export default function HeaderLinks(props) {
           <GroupIcon className={classes.icons} /> about us
         </Button>
       </ListItem>
-      {/* {buttonsForSpecificRole()} */}
       {
         state()
       }
