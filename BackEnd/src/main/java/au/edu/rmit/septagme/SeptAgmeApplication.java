@@ -20,10 +20,6 @@ import javax.sql.DataSource;
                 "au.edu.rmit.septagme.controllers", "au.edu.rmit.septagme.repositories",
                 "au.edu.rmit.septagme.configurations"})
 @EnableJpaRepositories("au.edu.rmit.septagme.repositories")
-//@EnableJpaAuditing
-//@EnableAutoConfiguration
-//@EntityScan("au.edu.rmit.septagme.models")
-//@EnableJpaRepositories
 
 public class SeptAgmeApplication {
 
@@ -31,15 +27,5 @@ public class SeptAgmeApplication {
     public static void main(final String[] args) {
         SpringApplication.run(SeptAgmeApplication.class, args);
     }
-
-//    @Bean
-//    public DataSource dataSource(){
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName("org.postgresql.Driver");
-//        dataSource.setUrl("jdbc:postgresql://localhost:5432/sept_project");
-//        dataSource.setUsername("postges");
-//        dataSource.setPassword("postges");
-//        return dataSource;
-//    }
 
 }

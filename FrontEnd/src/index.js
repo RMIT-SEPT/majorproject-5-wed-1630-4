@@ -1,19 +1,3 @@
-/*!
-
-=========================================================
-* Material Kit PRO React - v1.9.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
@@ -23,12 +7,15 @@ import "assets/scss/material-kit-pro-react.scss?v=1.9.0";
 
 // pages for this product
 import AboutUsPage from "views/AboutUsPage/AboutUsPage.js";
+import AdminPage from "views/AdminPage/AdminPage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import SignupPage from "views/SignupPage/SignupParent.js";
 import AdminSignupPage from "views/SignupPage/AdminSignupPage.js";
 import HomePage from "views/HomePage/HomePage.js";
 import BookingPage from "views/MakeBookingPage/MakeBookingPage.js";
 // import BookingHistoryPage from "views/BookingPages/Customer/BookingHistoryPage.js";
+import Header from "components/Header/Header.js";
+import HeaderLinks from "components/Header/HeaderLinks.js";
 
 var hist = createBrowserHistory();
 

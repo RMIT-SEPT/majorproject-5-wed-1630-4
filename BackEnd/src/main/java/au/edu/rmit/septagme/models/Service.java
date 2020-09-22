@@ -19,6 +19,9 @@ public class Service {
     @OneToMany(mappedBy = "service")
     private List<UserEntity> employees;
 
+    @OneToOne(mappedBy = "service_owned")
+    private UserEntity owner;
+
     @OneToMany(mappedBy = "service")
     private List<WorkingTime> working_times;
 
@@ -35,6 +38,18 @@ public class Service {
         this.description = description;
         this.employees = employees;
         this.working_times = working_times;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UserEntity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(UserEntity owner) {
+        this.owner = owner;
     }
 
     public String getName() {

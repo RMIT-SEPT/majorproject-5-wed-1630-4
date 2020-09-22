@@ -14,7 +14,7 @@ import Grow from "@material-ui/core/Grow";
 import Divider from "@material-ui/core/Divider";
 import Popper from "@material-ui/core/Popper";
 // core components
-import Button from "components/CustomButtons/Button.js";
+import Button from "views/AdminPage/Admin/node_modules/components/CustomButtons/Button.js.js";
 
 import styles from "assets/jss/material-kit-pro-react/components/customDropdownStyle.js";
 

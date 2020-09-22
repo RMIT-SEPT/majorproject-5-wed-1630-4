@@ -1,0 +1,71 @@
+version: 2
+jobs:
+    buildingTheFrontEnd:
+        docker:
+          - image: circleci/node:12.9.1-browsers
+
+        working_directory: ~/majorproject-5-wed-1630-4
+
+        steps:
+          - checkout
+
+          - restore_cache:
+                keys:
+                  - v1-dependencies-{{ checksum "./FrontEnd/package.json" }}
+                  - v1-dependencies-
+
+          - run: cd ./FrontEnd && npm install
+
+          - save_cache:
+                paths:
+                  - node_modules
+                  - ~/.npm 
+                  - ~/.cache
+                key: v1-dependencies-{{ checksum "package.json" }}
+
+          - run: cd ./FrontEnd && npm test
+
+    buildingTheBackEnd:
+
+        working_directory: ~/majorproject-5-wed-1630-4
+
+        docker:
+          - image: circleci/openjdk:8-jdk-stretch
+            environment:
+              POSTGRES_USER: postgres
+              POSTGRES_PASSWORD: postgres
+              POSTGRES_DB: sept_project
+              DATABASE_URL: jdbc:postgresql://localhost:5432/sept_project
+              
+          - image: circleci/postgres:9.6.3-alpine
+            
+
+        steps:
+          - checkout
+
+          - run: sudo apt-get update -qq && sudo apt-get install -y postgresql-client-9.6
+          - run:
+              command: |
+                psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE sept_project;"
+                psql -h 127.0.0.1 -U postgres -c "ALTER USER postgres WITH PASSWORD 'postgres'; GRANT ALL PRIVILEGES ON DATABASE sept_project TO postgres;"
+          - restore_cache:
+              key: buildingTheBackEnd-{{checksum "./BackEnd/pom.xml"}}
+
+          - run: cd ./BackEnd && mvn dependency:go-offline
+
+          - save_cache:
+              paths:
+                - ~/.m2
+              key: buildingTheBackEnd-{{checksum "./BackEnd/pom.xml"}}
+              
+          - run: cd ./BackEnd && mvn dependency::tree
+          - run: cd ./BackEnd && mvn test
+          - run: cd ./BackEnd && mvn package
+
+
+workflows:
+    version: 2
+    buildBack_and_FrontEnd:
+        jobs: 
+          - buildingTheFrontEnd
+          - buildingTheBackEnd
