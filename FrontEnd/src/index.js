@@ -12,40 +12,28 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import SignupPage from "views/SignupPage/SignupParent.js";
 import AdminSignupPage from "views/SignupPage/AdminSignupPage.js";
 import HomePage from "views/HomePage/HomePage.js";
-import BookingHistoryPage from "views/BookingPages/Customer/BookingHistoryParent.js";
+import BookingPage from "views/MakeBookingPage/MakeBookingPage.js";
+// import BookingHistoryPage from "views/BookingPages/Customer/BookingHistoryPage.js";
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 
 var hist = createBrowserHistory();
 
 ReactDOM.render(
-  <>
-    <Router history={hist}>
-      <Header
-        fixed
-        color="transparent"
-        brand="AGME"
-        links={<HeaderLinks dropdownHoverColor="rose" />}
-        changeColorOnScroll={{
-          height: 10,
-          color: "primary",
-        }}
-      />
-      <Switch>
-        <Route path="/about-us" component={AboutUsPage} />
-        {/* <Route path="/contact-us" component={ContactUsPage} /> */}
-        <Route path="/login-page" component={LoginPage} />
-        {/* <Route path="/profile-page" component={ProfilePage} /> */}
-        <Route path="/signup-page" component={SignupPage} />
-        <Route path="/home" component={HomePage} />
-        <Route path="/booking-history" component={BookingHistoryPage} />
-        <Route path="/admin-signup-page" component={AdminSignupPage} />
-        <Route path="/admin-dashboard" component={AdminPage} />
-
-        {/* <Route path="/error-page" component={ErrorPage} /> */}
-        <Route path="/" component={HomePage} />
-      </Switch>
-    </Router>
-  </>,
+  <Router history={hist}>
+    <Switch>
+      <Route path="/about-us" component={AboutUsPage} />
+      {/* <Route path="/contact-us" component={ContactUsPage} /> */}
+      <Route path="/login-page" component={LoginPage} />
+      {/* <Route path="/profile-page" component={ProfilePage} /> */}
+      <Route path="/signup-page" component={SignupPage} />
+      <Route path="/booking" component={BookingPage} />
+      <Route path="/home" component={HomePage} />
+      <Route path="/admin-signup-page" component={AdminSignupPage} />
+      {/* <Route path="/booking-history-page" component={BookingHistoryPage} /> */}
+      {/* <Route path="/error-page" component={ErrorPage} /> */}
+      <Route path="/" component={HomePage} />
+    </Switch>
+  </Router>,
   document.getElementById("root")
 );

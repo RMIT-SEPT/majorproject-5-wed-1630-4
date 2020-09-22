@@ -6,7 +6,7 @@ export default class SignupParent extends Component {
   state = {
     user: { username: "", name: "", password: "", phone: "", address: "" },
     role_id: 0,
-    errors: [],
+    errors: "",
     isLoading: false,
   };
 
@@ -27,6 +27,10 @@ export default class SignupParent extends Component {
 
   handleSubmit = () => {
     this.setState({ isLoading: true });
+    
+    if(!this.state.user.name || !this.state.user.username|| !this.state.user.password || !this.state.user.phone || !this.state.user.address){
+      this.setState({errors: "all fields are required*"})
+    }else{
     Api.signup(
       {
         name: this.state.user.name,
@@ -37,8 +41,27 @@ export default class SignupParent extends Component {
       },
       (res) => {
         console.log(res);
+        this.setState({errors: res.errors})
+
+        //retrieve major error message
+        if(res.errors){
+          this.setState({errors: res.errors})
+
+        //display specific validation error one at a time
+        }else if (res.fieldErrors){
+          this.setState({errors: res.fieldErrors[0].defaultMessage})
+
+        //when the id is updated, account registration successful
+        }else if(res.id!==0){
+          this.setState({errors: "Successful Sign in"})
+
+        //else display any remaining message
+        }else{
+          this.setState({errors: res.message})
+        }
       }
     );
+    }
   };
   render() {
     return (
