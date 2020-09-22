@@ -3,20 +3,25 @@ package au.edu.rmit.septagme.models;
 import au.edu.rmit.septagme.models.helpers.BookingStatus;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.apache.catalina.User;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 // TODO add validations
 
 @Entity
-//@Table(name = "booking")
 @EntityListeners(AuditingEntityListener.class)
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 public class Booking {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="employee_id")
@@ -25,6 +30,7 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name="customer_id")
     private UserEntity customer;
+
 
     @ManyToOne
     @JoinColumn(name="service_id")
@@ -87,4 +93,6 @@ public class Booking {
 
     public Long getId() {
         return id; }
+
+
 }
