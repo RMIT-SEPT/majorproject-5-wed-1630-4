@@ -21,107 +21,21 @@ import HomeIcon from '@material-ui/icons/Home';
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-pro-react/components/headerLinksStyle.js";
-import api from "utils/api";
+import API from "utils/api";
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
-  const buttonsForSpecificRole = () => {
-    api.isLoggedIn(res=>{
-      if (res.data.status === "logged in") {
-        if (res.data.role == "ADMIN") {
-          console.log("admin is here");
-          return admin
-        }else if(res.data.role == "CUSTOMER"){
-            return customer
-        }
-      }else{
-        return visitor
-      }
-    })
-  }
+  // const buttonsForSpecificRole = () => 
 
-  const visitor = (
-    <>
-      <ListItem className={classes.listItem}>
-        <Button
-          href="/signup-page"
-          color={window.innerWidth < 960 ? "info" : "white"}
-          //target="_blank"
-          className={classes.navButton}
-          
-          >
-          <PersonAdd className={classes.icons} /> create account
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          href="/login-page"
-          color={window.innerWidth < 960 ? "info" : "white"}
-          //target="_blank"
-          className={classes.navButton}
-          simple
-        >
-          <Fingerprint className={classes.icons} /> login page
-        </Button>
-      </ListItem>
-    </>
-  )
+  const [user, setUser] = React.useState("visitor");
 
-  const customer = (
-    <>
-    <ListItem className={classes.listItem}>
-      <Button
-        href="/booking-history"
-        color={window.innerWidth < 960 ? "info" : "white"}
-        //target="_blank"
-        className={classes.navButton}
-        simple
-        >
-        <HistoryIcon className={classes.icons} /> Booking History
-      </Button>
-    </ListItem>
-    <ListItem className={classes.listItem}>
-     <Button
-       // href="/admin-dashboard"
-       color={window.innerWidth < 960 ? "info" : "white"}
-       //target="_blank"
-       className={classes.navButton}
-       simple
-       >
-       <HistoryIcon className={classes.icons} /> Logout
-     </Button>
-    </ListItem>
-    </>
-  )
+  React.useEffect(() => {
+    setUser(props.user)
 
-  const admin = (
-    <>
-    <ListItem className={classes.listItem}>
-      <Button
-        href="/admin-dashboard"
-        color={window.innerWidth < 960 ? "info" : "white"}
-        //target="_blank"
-        className={classes.navButton}
-        simple
-        >
-        <HistoryIcon className={classes.icons} /> Admin Panel
-      </Button>
-   </ListItem>
-    <ListItem className={classes.listItem}>
-      <Button
-        // href="/admin-dashboard"
-        color={window.innerWidth < 960 ? "info" : "white"}
-        //target="_blank"
-        className={classes.navButton}
-        simple
-        >
-        <HistoryIcon className={classes.icons} /> Logout
-      </Button>
-    </ListItem>
-    </>
-  )
-  
+  }, [props.user]);
+  console.log(user)
+
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
     if (t < 1) return (c / 2) * t * t + b;
@@ -160,6 +74,94 @@ export default function HeaderLinks(props) {
     animateScroll();
   };
 
+  const state = () => {
+      if (user == "admin") {
+        console.log("admin is here");
+        return (
+          <>
+          <ListItem className={classes.listItem}>
+            <Button
+              href="/admin-dashboard"
+              color={window.innerWidth < 960 ? "info" : "white"}
+              //target="_blank"
+              className={classes.navButton}
+              simple
+              >
+              <HistoryIcon className={classes.icons} /> Admin Panel
+            </Button>
+         </ListItem>
+          <ListItem className={classes.listItem}>
+            <Button
+              // href="/admin-dashboard"
+              color={window.innerWidth < 960 ? "info" : "white"}
+              //target="_blank"
+              className={classes.navButton}
+              simple
+              >
+              <HistoryIcon className={classes.icons} /> Logout
+            </Button>
+          </ListItem>
+          </>
+        )
+      }else if(user == "customer"){
+          return (
+            <>
+            <ListItem className={classes.listItem}>
+              <Button
+                href="/booking-history"
+                color={window.innerWidth < 960 ? "info" : "white"}
+                //target="_blank"
+                className={classes.navButton}
+                simple
+                >
+                <HistoryIcon className={classes.icons} /> Booking History
+              </Button>
+            </ListItem>
+            <ListItem className={classes.listItem}>
+             <Button
+               // href="/admin-dashboard"
+               color={window.innerWidth < 960 ? "info" : "white"}
+               //target="_blank"
+               className={classes.navButton}
+               simple
+               >
+               <HistoryIcon className={classes.icons} /> Logout
+             </Button>
+            </ListItem>
+            </>
+          )
+      } else {
+      return (
+        <>
+          <ListItem className={classes.listItem}>
+            <Button
+              href="/signup-page"
+              color={window.innerWidth < 960 ? "info" : "white"}
+              //target="_blank"
+              className={classes.navButton}
+              
+              >
+              <PersonAdd className={classes.icons} /> create account
+            </Button>
+          </ListItem>
+          <ListItem className={classes.listItem}>
+            <Button
+              href="/login-page"
+              color={window.innerWidth < 960 ? "info" : "white"}
+              //target="_blank"
+              className={classes.navButton}
+              simple
+            >
+              <Fingerprint className={classes.icons} /> login page
+            </Button>
+          </ListItem>
+        </>
+      )
+    }
+  }
+
+  
+
   const { dropdownHoverColor } = props;
   const classes = useStyles();
   return (
@@ -186,7 +188,10 @@ export default function HeaderLinks(props) {
           <GroupIcon className={classes.icons} /> about us
         </Button>
       </ListItem>
-      {buttonsForSpecificRole()}
+      {/* {buttonsForSpecificRole()} */}
+      {
+        state()
+      }
     </List>
   );
 }
