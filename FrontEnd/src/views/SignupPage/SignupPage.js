@@ -29,10 +29,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import InfoArea from "components/InfoArea/InfoArea.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-
-//validation
-import { isEmail } from "validator";
-
+import Warning from "components/Typography/Warning.js"
 
 import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.js";
 
@@ -69,11 +66,7 @@ export default function SignUpPage(props, { ...rest }) {
           </h3>
       )
     } else {
-    errorMessgage = ( 
-        <h3 style={{color: 'red'}}>
-        {props.errors}
-        </h3>
-    )
+      errorMessgage = props.errors
     }
   }
   return (
@@ -100,9 +93,9 @@ export default function SignUpPage(props, { ...rest }) {
                 <h2 className={classes.cardTitle}>Create Customer Account</h2>
                 <CardBody>
                   <GridContainer justify="center">
-                  <div id="alert">
+                  <p>
                     {errorMessgage}
-                  </div>
+                  </p>
                       <form className={classes.form}>
                         <CustomInput
                           id="name"

@@ -13,7 +13,7 @@ export default {
       .then((res) => {
         if(res.status===200){
           if(res.data.token!=null){
-            axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
+            axios.defaults.headers.common["Authorization"] = "Bearer ".concat(res.data.token);
             localStorage.setItem("token", res.data.token);
           }
         }else {
@@ -27,7 +27,7 @@ export default {
   },
   isLoggedIn: () => {
     axios
-      .get("/isLoggedIn")
+      .get("/isLoggedIn", { headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
       .then((res) => {
         if (res.status === "logged in") {
           localStorage.setItem("role", res.role);
@@ -44,7 +44,7 @@ export default {
   },
   editProfile: (credintials, callback)=>{
     axios
-    .post("/profileEdit", credintials)
+    .post("/profileEdit", credintials, { headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
     .then((res) => callback(res))
     .catch((err) => callback(err.response.data));
   },

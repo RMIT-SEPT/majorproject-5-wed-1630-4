@@ -72,9 +72,19 @@ export default function HeaderLinks(props) {
 
   const { dropdownHoverColor } = props;
   const classes = useStyles();
+  let profile ='';
+  
+  if(localStorage.getItem("token")!==null){
+  profile='you are logged in'
+  }else{
+    profile='logged out'
+  }
   return (
     <List className={classes.list + " " + classes.mlAuto}>
       <ListItem className={classes.listItem}>
+        <p>
+        {profile}
+        </p>
       <Button
           href="/home"
           color={window.innerWidth < 960 ? "info" : "white"}
