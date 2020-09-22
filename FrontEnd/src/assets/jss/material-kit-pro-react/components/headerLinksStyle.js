@@ -1,7 +1,6 @@
 import {
   grayColor,
   whiteColor,
-  mlAuto,
   hexToRgb
 } from "assets/jss/material-kit-pro-react.js";
 
@@ -199,7 +198,9 @@ const headerLinksStyle = theme => ({
     MsFlexAlign: "center",
     alignItems: "center"
   },
-  mlAuto
+  mlAuto: {
+    marginLeft: "30%",
+  },
 });
 
 export default headerLinksStyle;

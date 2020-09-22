@@ -10,17 +10,6 @@ export default class LoginParent extends Component {
     isLoading: false,
   };
 
-  // handleHome() {
-  //   Api.post("http://localhost:8080/login").then(res => {
-  //     if (res.data.token != null) {
-  //       //if (res.data === "success") {
-  //       this.props.history.push("/home");
-  //     } else {
-  //       alert("Authentication failure");
-  //     }
-  //   })
-  // };
-
   handleChange = (e) => {
     e.preventDefault();
     console.log(e.target.id);

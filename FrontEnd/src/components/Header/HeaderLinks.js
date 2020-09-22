@@ -9,28 +9,33 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
 
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import GroupIcon from '@material-ui/icons/Group';
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import HistoryIcon from '@material-ui/icons/History';
 import PersonAdd from "@material-ui/icons/PersonAdd";
-import Layers from "@material-ui/icons/Layers";
-import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
-import LineStyle from "@material-ui/icons/LineStyle";
-import Error from "@material-ui/icons/Error";
 import HomeIcon from '@material-ui/icons/Home';
 // core components
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-pro-react/components/headerLinksStyle.js";
+import API from "utils/api";
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
+  // const buttonsForSpecificRole = () => 
+
+  const [user, setUser] = React.useState("visitor");
+
+  React.useEffect(() => {
+    setUser(props.user)
+
+  }, [props.user]);
+  console.log(user)
+
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
     if (t < 1) return (c / 2) * t * t + b;
@@ -68,7 +73,94 @@ export default function HeaderLinks(props) {
     };
     animateScroll();
   };
-  var onClickSections = {};
+
+  const state = () => {
+      if (user == "admin") {
+        console.log("admin is here");
+        return (
+          <>
+          <ListItem className={classes.listItem}>
+            <Button
+              href="/admin-dashboard"
+              color={window.innerWidth < 960 ? "info" : "white"}
+              //target="_blank"
+              className={classes.navButton}
+              simple
+              >
+              <HistoryIcon className={classes.icons} /> Admin Panel
+            </Button>
+         </ListItem>
+          <ListItem className={classes.listItem}>
+            <Button
+              // href="/admin-dashboard"
+              color={window.innerWidth < 960 ? "info" : "white"}
+              //target="_blank"
+              className={classes.navButton}
+              simple
+              >
+              <HistoryIcon className={classes.icons} /> Logout
+            </Button>
+          </ListItem>
+          </>
+        )
+      }else if(user == "customer"){
+          return (
+            <>
+            <ListItem className={classes.listItem}>
+              <Button
+                href="/booking-history"
+                color={window.innerWidth < 960 ? "info" : "white"}
+                //target="_blank"
+                className={classes.navButton}
+                simple
+                >
+                <HistoryIcon className={classes.icons} /> Booking History
+              </Button>
+            </ListItem>
+            <ListItem className={classes.listItem}>
+             <Button
+               // href="/admin-dashboard"
+               color={window.innerWidth < 960 ? "info" : "white"}
+               //target="_blank"
+               className={classes.navButton}
+               simple
+               >
+               <HistoryIcon className={classes.icons} /> Logout
+             </Button>
+            </ListItem>
+            </>
+          )
+      } else {
+      return (
+        <>
+          <ListItem className={classes.listItem}>
+            <Button
+              href="/signup-page"
+              color={window.innerWidth < 960 ? "info" : "white"}
+              //target="_blank"
+              className={classes.navButton}
+              
+              >
+              <PersonAdd className={classes.icons} /> create account
+            </Button>
+          </ListItem>
+          <ListItem className={classes.listItem}>
+            <Button
+              href="/login-page"
+              color={window.innerWidth < 960 ? "info" : "white"}
+              //target="_blank"
+              className={classes.navButton}
+              simple
+            >
+              <Fingerprint className={classes.icons} /> login page
+            </Button>
+          </ListItem>
+        </>
+      )
+    }
+  }
+
+  
 
   const { dropdownHoverColor } = props;
   const classes = useStyles();
@@ -82,9 +174,6 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list + " " + classes.mlAuto}>
       <ListItem className={classes.listItem}>
-        <p>
-        {profile}
-        </p>
       <Button
           href="/home"
           color={window.innerWidth < 960 ? "info" : "white"}
@@ -95,33 +184,13 @@ export default function HeaderLinks(props) {
           <HomeIcon className={classes.icons} /> home
         </Button>
         <Button
-          href="/about-us"
-          color={window.innerWidth < 960 ? "info" : "white"}
-          //target="_blank"
-          className={classes.navButton}
-          simple
-        >
-          <GroupIcon className={classes.icons} /> about us
-        </Button>
-        <Button
-          href="/signup-page"
-          color={window.innerWidth < 960 ? "info" : "white"}
-          //target="_blank"
-          className={classes.navButton}
-          simple
+            href="/home"
+            color={window.innerWidth < 960 ? "info" : "white"}
+            //target="_blank"
+            className={classes.navButton}
+            simple
           >
-          <PersonAdd className={classes.icons} /> create account
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          href="/login-page"
-          color={window.innerWidth < 960 ? "info" : "white"}
-          //target="_blank"
-          className={classes.navButton}
-          simple
-        >
-          <Fingerprint className={classes.icons} /> login page
+          <HomeIcon className={classes.icons} /> home
         </Button>
         <Button
         href="/customer-profile-page"
@@ -153,15 +222,19 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="/booking-history-page"
+          href="/about-us"
           color={window.innerWidth < 960 ? "info" : "white"}
           //target="_blank"
           className={classes.navButton}
           simple
         >
-          <Fingerprint className={classes.icons} /> Your Bookings
+          <GroupIcon className={classes.icons} /> about us
         </Button>
       </ListItem>
+      {/* {buttonsForSpecificRole()} */}
+      {
+        state()
+      }
     </List>
   );
 }

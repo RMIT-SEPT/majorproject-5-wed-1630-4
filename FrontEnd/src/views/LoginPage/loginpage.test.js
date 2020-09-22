@@ -1,20 +1,21 @@
 import React from "react";
-import Todo from "./LoginPage";
-import {shallow, mount} from "enzyme";
+import LoginPage from "./LoginPage";
+import {mount, shallow} from "enzyme";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe("<Todo /> component Unit Test", () => {
+describe("<LoginPage /> component Unit Test", () => {
     const mockFn = jest.fn();
     const props = {
-        onClick: mockFn,
-        completed: false,
-        text: "buy milk"
+        handleSubmit: mockFn,
+        username: "test_username",
+        password: "test_password"
     };
-    it("should render 1 <Todo /> component", ()=>{
-        const component = shallow(<Todo {...props} />);
+    it("should render 1 <LoginPage /> component", ()=>{
+        //const component = shallow(<Todo {...props} />);
+        const component = shallow(<LoginPage {...props} />);
         expect(component).toHaveLength(1);
         console.log(component.props());
     });

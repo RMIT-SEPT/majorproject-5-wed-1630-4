@@ -3,7 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // core components
-import Button from "components/CustomButtons/Button.js";
+import Button from "views/AdminPage/Admin/node_modules/components/CustomButtons/Button.js.js";
 
 import defaultImage from "assets/img/image_placeholder.jpg";
 import defaultAvatar from "assets/img/placeholder.jpg";
