@@ -28,41 +28,40 @@ export default class LoginParent extends Component {
   handleSubmit = () => {
     this.setState({ isLoading: true });
     // eslint-disable-next-line no-unused-vars
-    
+
     this.setState({ isLoading: true });
-    if(!this.state.user.username|| !this.state.user.password){
-      this.setState({errors: "all fields are required*"})
-    }else{
-    Api.login(
-      {
-        username: this.state.user.username,
-        password: this.state.user.password
-      },
+    if (!this.state.user.username || !this.state.user.password) {
+      this.setState({ errors: "all fields are required*" });
+    } else {
+      Api.login(
+        {
+          username: this.state.user.username,
+          password: this.state.user.password,
+        },
 
-      (res) => {
-        console.log(res);
-        // handleHome();
+        (res) => {
+          console.log(res);
+          // handleHome();
 
-        //retrieve major error message
-        if(res.errors){
-          this.setState({errors: "incorrect username or password"})
+          //retrieve major error message
+          if (res.errors) {
+            this.setState({ errors: "incorrect username or password" });
 
-        //when the token is given, login successful
-        }else if(res.status === 200){
-          this.setState({errors: "Sucessful Login"})
-          this.props.history.push("/home");
+            //when the token is given, login successful
+          } else if (res.status === 200) {
+            this.setState({ errors: "Sucessful Login" });
+            this.props.history.push("/home");
 
-        //else display any remaining message
-        }else{
-          this.setState({errors: res.message})
+            //else display any remaining message
+          } else {
+            this.setState({ errors: res.message });
+          }
         }
-      }
-    );
+      );
     }
   };
 
-
-/*       config
+  /*       config
     )
       // eslint-disable-next-line no-unused-vars
       .then((r) => {
