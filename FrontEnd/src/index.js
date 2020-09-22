@@ -24,7 +24,7 @@ import "assets/scss/material-kit-pro-react.scss?v=1.9.0";
 // pages for this product
 import AboutUsPage from "views/AboutUsPage/AboutUsPage.js";
 import ContactUsPage from "views/ContactUsPage/ContactUsPage.js";
-import LoginPage from "views/LoginPage/LoginPage.js";
+import LoginPage from "views/LoginPage/LoginParent.js";
 import SignupPage from "views/SignupPage/SignupParent.js";
 import AdminSignupPage from "views/SignupPage/AdminSignupPage.js";
 import CustomerProfilePage from "views/CustomerProfilePage/CustomerProfilePage.js";

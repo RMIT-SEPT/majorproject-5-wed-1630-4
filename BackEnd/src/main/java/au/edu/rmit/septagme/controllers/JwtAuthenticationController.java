@@ -10,6 +10,7 @@ import au.edu.rmit.septagme.models.JwtResponse;
 import au.edu.rmit.septagme.models.UserEntity;
 import au.edu.rmit.septagme.services.UserEntityDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -102,14 +103,14 @@ public class JwtAuthenticationController {
     }
 
     //update user profile
-    @PutMapping(value = "/profileEdit")
-    public Map<String, String> updateProfile(@RequestBody UserEntity userUpdates, @RequestHeader(required = false, value = "Authorization") String jwt) throws Exception {
+    @PostMapping(value = "/profileEdit")
+    public ResponseEntity updateProfile(@RequestBody UserEntity userUpdates, @RequestHeader(required = false, value = "Authorization") String jwt) throws Exception {
         HashMap<String, String> map = new HashMap<>();
 
         // no jwt provided
         if (jwt == null){
             map.put("status", "not logged in");
-            return map;
+            return new ResponseEntity(map, HttpStatus.OK);
         }
         // delete Bearer part
         jwt = jwt.substring(7);
@@ -125,17 +126,16 @@ public class JwtAuthenticationController {
         	user.setPhone(userUpdates.getPhone());
         	user.setAddress(userUpdates.getAddress());
         	
-            map.put("status", "logged in");
+        	this.userDetailsService.updateUserDetails(username, user);
+            map.put("status", "Updated");
             map.put("role", user.getRole().name());
-            map.put("username", user.getUsername());
-            map.put("phone", user.getPhone());
-            map.put("address", user.getAddress());
-            return map;
+
+            return new ResponseEntity(map, HttpStatus.OK);
         }
 
         // expired jwt
         map.put("status", "not logged in");
-        return map;
+        return new ResponseEntity(map, HttpStatus.OK);
     }
 
 

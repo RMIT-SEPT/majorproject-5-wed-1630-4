@@ -58,6 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/bookings").permitAll()
                 .antMatchers("/isLoggedIn").permitAll()
+                .antMatchers("/profileEdit").permitAll()
+                .antMatchers("/profile").permitAll()
 
 
         // all other requests need to be authenticated

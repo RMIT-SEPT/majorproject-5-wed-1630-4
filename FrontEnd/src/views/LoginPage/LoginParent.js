@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import LoginPage from "./LoginPage";
 import Api from "utils/api.js";
-import Axios from "axios";
 
 export default class LoginParent extends Component {
   state = {
@@ -11,15 +10,16 @@ export default class LoginParent extends Component {
     isLoading: false,
   };
 
-  handleHome() {
-    Axios.get("http://localhost:8080/Home").then(res => {
-      if (res.data === "success") {
-        this.props.history.push("/Home");
-      } else {
-        alert("Authentication failure");
-      }
-    })
-  };
+  // handleHome() {
+  //   Api.post("http://localhost:8080/login").then(res => {
+  //     if (res.data.token != null) {
+  //       //if (res.data === "success") {
+  //       this.props.history.push("/home");
+  //     } else {
+  //       alert("Authentication failure");
+  //     }
+  //   })
+  // };
 
   handleChange = (e) => {
     e.preventDefault();
@@ -44,41 +44,30 @@ export default class LoginParent extends Component {
     if(!this.state.user.username|| !this.state.user.password){
       this.setState({errors: "all fields are required*"})
     }else{
-    
-    // var config = {
-    //   headers: { "Access-Control-Allow-Origin": "*" },
-    // };
-    Api.post(
-     `http://localhost:8080/login`,
+    Api.login(
       {
         username: this.state.user.username,
-        password: this.state.user.password,
-        localStorage.setItem("Authorization", res.data.token);
-        return this.handleHome();
+        password: this.state.user.password
       },
 
-/* 
       (res) => {
         console.log(res);
-        this.setState({errors: res.errors})
+        // handleHome();
 
         //retrieve major error message
         if(res.errors){
-          this.setState({errors: res.errors})
+          this.setState({errors: "incorrect username or password"})
 
-        //display specific validation error one at a time
-        }else if (res.fieldErrors){
-          this.setState({errors: res.fieldErrors[0].defaultMessage})
-
-        //when the id is updated, account registration successful
-        }else if(res.id!==0){
-          this.setState({errors: "Successful Sign in"})
+        //when the token is given, login successful
+        }else if(res.status === 200){
+          this.setState({errors: "Sucessful Login"})
+          this.props.history.push("/home");
 
         //else display any remaining message
         }else{
           this.setState({errors: res.message})
         }
-      } */
+      }
     );
     }
   };

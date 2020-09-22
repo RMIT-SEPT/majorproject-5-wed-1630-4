@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CustomerEditProfile from "./CustomerEditProfile";
-import Axios from "axios";
+import Api from "utils/api.js";
 
 export default class CustomerProfileParent extends Component {
   state = {
@@ -27,36 +27,35 @@ export default class CustomerProfileParent extends Component {
 
   handleUpdate = () => {
     this.setState({ isLoading: true });
-    // eslint-disable-next-line no-unused-vars
-    var config = {
-      headers: { "Access-Control-Allow-Origin": "*" },
-    };
-    Axios.put(
-      `http://localhost:8080/profileEdit`,
+    Api.editProfile(
       {
-        // name: this.state.user.name,
         username: this.state.user.username,
         address: this.state.user.address,
         phone: this.state.user.phone,
       },
-      config
-    )
-      // eslint-disable-next-line no-unused-vars
-      .then((r) => {
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 1500);
+      (res) => {
+        console.log(res);
+        this.setState({errors: res.errors})
 
-        console.log(r);
-        // history.push("/");
-      })
-      .catch((e) => {
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 1500);
-        console.log(e);
-      });
-  };
+        //retrieve major error message
+        if(res.errors){
+          this.setState({errors: res.errors})
+
+        //display specific validation error one at a time
+        }else if (res.fieldErrors){
+          this.setState({errors: res.fieldErrors[0].defaultMessage})
+
+        //when the id is updated, account registration successful
+        }else if(res.status==='Updated'){
+          this.props.history.push("/customer-profile-edit");
+
+        //else display any remaining message
+        }else{
+          this.setState({errors: res.message})
+        }
+      },
+      );
+    }
   render() {
     return (
       <div>

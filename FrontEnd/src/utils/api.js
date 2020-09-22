@@ -1,5 +1,4 @@
 import axios from "axios";
-
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
@@ -12,9 +11,16 @@ export default {
     axios
       .post("/login", credintials)
       .then((res) => {
-        if (res.jwt != null) {
-          axios.defaults.headers.common["Authorization"] = res.jwt;
+        if(res.status===200){
+          if(res.data.token!=null){
+            axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
+            localStorage.setItem("token", res.data.token);
+          }
+        }else {
+          if(res.error==="Unauthorized"){
+          axios.defaults.headers.common.Authorization = null;
         }
+      }
         callback(res);
       })
       .catch((err) => callback(err.response.data));
@@ -38,8 +44,14 @@ export default {
   },
   editProfile: (credintials, callback)=>{
     axios
-    .put("/profileEdit", credintials)
+    .post("/profileEdit", credintials)
     .then((res) => callback(res))
     .catch((err) => callback(err.response.data));
-},
+  },
+  getProfile: ()=>{
+    axios
+    .get("/profile")
+    .then((res) => res)
+    .catch((err) => err);
+  },
 };

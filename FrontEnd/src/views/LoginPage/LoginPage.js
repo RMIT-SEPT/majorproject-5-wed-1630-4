@@ -41,6 +41,16 @@ export default function LoginPage(props, { ...rest }) {
     }
     setChecked(newChecked);
   };
+
+  let errorMessgage = '';
+
+  if (props.errors){
+      errorMessgage = ( 
+          <h3 style={{color: 'red'}}>
+          incorrect username or password
+          </h3>
+      )
+  }
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -70,6 +80,9 @@ export default function LoginPage(props, { ...rest }) {
                 <form className={classes.form} onSubmit={props.handleSubmit}>
                 <h2 className={classes.cardTitle}>Login</h2>
                   <CardBody signup>
+                  <div id="alert">
+                    {errorMessgage}
+                  </div>
                     <CustomInput
                       id="username"
                       formControlProps={{
@@ -77,7 +90,7 @@ export default function LoginPage(props, { ...rest }) {
                         className: classes.customFormControlClasses
                       }}
                       inputProps={{
-                        //onChange: e=>props.handleChange(e),
+                        onChange: e=>props.handleChange(e),
                         type: "username",
                         startAdornment: (
                           <InputAdornment position="start">
@@ -94,7 +107,7 @@ export default function LoginPage(props, { ...rest }) {
                         className: classes.customFormControlClasses
                       }}
                       inputProps={{
-                        //onChange: e=>props.handleChange(e),
+                        onChange: e=>props.handleChange(e),
                         type: "password",
                         startAdornment: (
                           <InputAdornment position="start">
@@ -109,10 +122,13 @@ export default function LoginPage(props, { ...rest }) {
                     />
                   </CardBody>
                   <div className={classes.textCenter}>
-                    <Button round color="primary" type="submit" >
+                    <Button round color="primary" size="lg" onClick={props.handleSubmit}>
+                      Login
+                      </Button>
+                    {/* <Button round color="primary" type="submit" >
                       Login
 
-                    </Button>
+                    </Button> */}
                   </div>
                 </form>
               </Card>
