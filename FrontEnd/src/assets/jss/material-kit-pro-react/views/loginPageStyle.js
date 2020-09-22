@@ -48,7 +48,19 @@ const signupPageStyle = theme => ({
     }
   },
   form: {
-    margin: "0"
+    margin: "0",
+    //BELOW FOR THIS FORM{} COPIED FROM SIGNUPPAGESTYLE
+    borderRadius: "6px",
+    boxShadow:
+      "0 16px 24px 2px rgba(" +
+      hexToRgb(blackColor) +
+      ", 0.14), 0 6px 30px 5px rgba(" +
+      hexToRgb(blackColor) +
+      ", 0.12), 0 8px 10px -5px rgba(" +
+      hexToRgb(blackColor) +
+      ", 0.2);",
+    //marginBottom: "100px",
+    padding: "40px 0px"
   },
   cardHeader: {
     width: "auto",
@@ -61,6 +73,13 @@ const signupPageStyle = theme => ({
   },
   inputIconsColor: {
     color: grayColor[13]
+  },
+  //ADDED FROM SIGNUPPAGESTYLE.JS
+  cardTitle: {
+    ...cardTitle,
+    textDecoration: "none",
+    textAlign: "center !important",
+    marginBottom: "0.75rem"
   },
   textCenter: {
     textAlign: "center"
