@@ -110,7 +110,7 @@ public class JwtAuthenticationController {
         // no jwt provided
         if (jwt == null){
             map.put("status", "not logged in");
-            return new ResponseEntity(map, HttpStatus.OK);
+            return new ResponseEntity(map, HttpStatus.BAD_REQUEST);
         }
         // delete Bearer part
         jwt = jwt.substring(7);
@@ -135,7 +135,7 @@ public class JwtAuthenticationController {
 
         // expired jwt
         map.put("status", "not logged in");
-        return new ResponseEntity(map, HttpStatus.OK);
+        return new ResponseEntity(map, HttpStatus.BAD_REQUEST);
     }
 
 
