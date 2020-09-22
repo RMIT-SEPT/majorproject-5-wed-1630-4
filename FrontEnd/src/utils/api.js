@@ -6,6 +6,7 @@ axios.defaults.headers.post["Content-Type"] =
 axios.defaults.headers.get["Accept"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
 
 export default {
   login: (credintials, callback) => {
@@ -23,6 +24,9 @@ export default {
       .catch((err) => callback(err.response.data));
   },
   isLoggedIn: (callback) => {
+    axios.defaults.headers.common["Authorization"] = "Bearer ".concat(
+      localStorage.getItem("token")
+    );
     axios
       .get("/isLoggedIn")
       .then((res) => {
@@ -39,5 +43,45 @@ export default {
       .post("/signup", credintials)
       .then((res) => callback(res))
       .catch((err) => callback(err.response.data));
+  },
+  getEmployees: (callback) => {
+    // axios.defaults.headers.common["Authorization"] =
+    // );
+    let Auth = "Bearer ".concat(localStorage.getItem("token"));
+    axios
+      .get("/employees", {
+        headers: {
+          Authorization: Auth,
+          "Content-Type": "application/json",
+          accept: "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        callback(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        callback(err);
+      });
+  },
+  addWorkTimes: (emp_id, workingTimes, callback) => {
+    axios.defaults.headers.common["Authorization"] = "Bearer ".concat(
+      localStorage.getItem("token")
+    );
+    workingTimes = workingTimes.employeeShifts.map((shift) => {
+      if (shift.fromTime != "0000" && shift.toTime != "0000") {
+        return shift;
+      }
+    });
+    workingTimes = workingTimes.filter((n) => n);
+    console.log(workingTimes);
+    axios
+      .post(`/employees/${emp_id}/work_times`, workingTimes)
+      .then((res) => {
+        console.log(res);
+        callback(res);
+      })
+      .catch((err) => console.log(err));
   },
 };

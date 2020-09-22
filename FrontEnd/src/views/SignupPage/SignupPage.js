@@ -73,7 +73,7 @@ export default function SignUpPage(props, { ...rest }) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={10} md={10}>
               <Card className={classes.cardSignup}>
-                <h2 className={classes.cardTitle}>Create Customer Account</h2>
+                <h2 className={classes.cardTitle}>Create Account</h2>
                 <CardBody>
                   <GridContainer justify="center">
                       <form className={classes.form}>

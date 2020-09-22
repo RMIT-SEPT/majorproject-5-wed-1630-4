@@ -54,20 +54,20 @@ export default function BookingsPage(props, { ...rest }) {
   // };
   return (
     <div>
-      <div
+      {/* <div
         className={classes.pageHeader}
         style={{
           backgroundImage: "url(" + image + ")",
           backgroundSize: "cover",
           backgroundPosition: "top center"
         }}
-      >
-        <div className={classes.container}>
+      > */}
+        <div >
           <GridContainer justify="center">
             <GridItem xs={12} sm={10} md={12}>
-              <Card className={classes.cardSignup}>
+              {/* <Card > */}
                 <h2 className={classes.cardTitle}>Bookings on Your Service</h2>
-                <CardBody>
+                {/* <CardBody> */}
                   <GridContainer justify="center">
                       <Table 
                         tableHead={props.tableHead} 
@@ -88,13 +88,13 @@ export default function BookingsPage(props, { ...rest }) {
                         striped={true} 
                       />
                   </GridContainer>
-                </CardBody>
-              </Card>
+                {/* </CardBody>
+              </Card> */}
             </GridItem>
           </GridContainer>
         </div>
 
-      </div>
+      {/* </div> */}
     </div>
   );
 }
