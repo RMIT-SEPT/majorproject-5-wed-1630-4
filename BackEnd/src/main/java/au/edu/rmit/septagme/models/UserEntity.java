@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 public class UserEntity implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotEmpty(message = "Please provide a name")
@@ -37,17 +37,24 @@ public class UserEntity implements UserDetails {
 
     private String phone;
 
-    private UserRole role;
+    private UserRole role = UserRole.CUSTOMER;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "id")
     private List<Booking> bookings_customers;
 
-    @OneToMany( mappedBy = "employee")
+    @OneToMany( mappedBy = "id")
     private List<Booking> bookings_employees;
+
+    @OneToMany( mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
+    private List<EmployeeShift> employeeShifts;
 
     @ManyToOne
     @JoinColumn(name="service_id")
     private Service service;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "owned_service_id", referencedColumnName = "id")
+    private Service service_owned;
 
     public UserEntity(String name, String username, String password) {
         this.name = name;
@@ -72,8 +79,13 @@ public class UserEntity implements UserDetails {
     public UserEntity() {
     }
 
-//    public UserEntity(UserEntity userEntity) {
-//    }
+    public Service getService_owned() {
+        return service_owned;
+    }
+
+    public void setService_owned(Service service_owned) {
+        this.service_owned = service_owned;
+    }
 
     public Long getId() {
         return id;
@@ -185,5 +197,14 @@ public class UserEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+
+    public List<EmployeeShift> getEmployeeShifts() {
+        return employeeShifts;
+    }
+
+    public void setEmployeeShifts(List<EmployeeShift> employeeShifts) {
+        this.employeeShifts = employeeShifts;
     }
 }
