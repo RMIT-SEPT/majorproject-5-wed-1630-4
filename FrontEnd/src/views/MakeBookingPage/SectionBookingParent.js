@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SectionBookingDatePage from "./Sections/SectionBookingDatePage";
 import SectionBookingEmployeePage from "./Sections/SectionBookingEmployeePage";
+import SectionBookingServicePage from "./Sections/SectionBookingServicePage";
 
 export default class SectionBookingParent extends Component {
   state = {
@@ -33,14 +34,6 @@ export default class SectionBookingParent extends Component {
     });
   }
 
-  handleCancel = (booking_id) => {
-    this.setState({ isLoading: true });
-    console.log(booking_id);
-    // eslint-disable-next-line no-unused-vars
-    // api.cancelBooking();
-    this.setState({ isLoading: false });
-  };
-
   handleDone = (booking_id) => {
     this.setState({ isLoading: true });
     console.log(booking_id);
@@ -52,11 +45,12 @@ export default class SectionBookingParent extends Component {
   render() {
     return (
       <div>
-        <SectionBookingPage
+        <SectionBookingDatePage
           tableHead={this.state.tableHead}
           tableData={this.state.tableData}
-          handleCancel={this.handleCancel}
-          handleDone={this.handleDone}
+          //handleCancel={this.handleCancel}
+          //handleDone={this.handleDone}
+          handleBook={this.handleBook}
         />
       </div>
     );

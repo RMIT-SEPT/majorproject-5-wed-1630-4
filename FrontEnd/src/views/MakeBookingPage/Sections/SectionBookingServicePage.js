@@ -82,7 +82,7 @@ const useStyles = makeStyles(signupPageStyle);
 
 
 
-  <GridItem xs={12} sm={6} md={6} lg={5}>
+
   <FormControl fullWidth className={classes.selectFormControl}>
     <InputLabel
       htmlFor="simple-select"
@@ -140,7 +140,7 @@ const useStyles = makeStyles(signupPageStyle);
       </MenuItem>
     </Select>
   </FormControl>
-</GridItem>
+
 
 
 

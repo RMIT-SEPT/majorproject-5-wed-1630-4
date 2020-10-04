@@ -30,9 +30,21 @@ const useStyles = makeStyles(signupPageStyle);
   const classes = useStyles();
   const[bookings, setBooking] = useState([]);
   
+/*   const simpleButtons = [
+    { color: "info" },
+    { color: "success" },
+    { color: "danger", icon: Close }
+  ].map((prop, key) => {
+    return (
+      <Button simple justIcon size="sm" color={prop.color} key={key}>
+        <prop.icon />
+      </Button>
+    );
+  }); */
 
 
-  const fillButtons = (id, isActive) => ([
+
+   const fillButtons = (id, isActive) => ([
     { color: "success", icon: Check },
     { color: "danger", icon: Close }
   ].map((prop, key) => {
@@ -46,20 +58,37 @@ const useStyles = makeStyles(signupPageStyle);
         <prop.icon />
       </Button>
     );
-  }));
+  })); 
+
+
+
+
+
+  {
+    // {booking.time_slot} {booking.service_id} {booking.employee_id} 
+    bookings.map(booking=> <li key={booking.id}>
+      <label>{booking.id} {booking.time_slot} {booking.service_id} {booking.employee_id}</label>
+      <Button round color="primary" size="sm" onClick={() => handleClick(booking.id)}>
+        BOOK
+      </Button>
+      </li>)
+  }
+
+
+
   const nowTime = new Date();
   const handleClick = id => {
     };
 
 
-  useEffect(()=> {
-    axios.get('https://jsonplaceholder.typicode.com/users/1/posts')
-    // axios.get('http://localhost:8080/bookings')
-        .then(res=>{
-            console.log(res)
-            setBooking(res.data)
-        })
-  },[])
+  // useEffect(()=> {
+  //   axios.get('https://jsonplaceholder.typicode.com/users/1/posts')
+  //   // axios.get('http://localhost:8080/bookings')
+  //       .then(res=>{
+  //           console.log(res)
+  //           setBooking(res.data)
+  //       })
+  // },[])
 
   // 'http://localhost:8080/bookings'
 
@@ -67,35 +96,66 @@ const useStyles = makeStyles(signupPageStyle);
     //<div className={classNames(classes.aboutDescription, classes.textCenter)}>
     <div>  
     
-    <GridContainer>
-      <GridItem xs={12} sm={10} md={12}>
+ 
+
 
   
 
     <FormControl fullWidth>
     <Datetime
       timeFormat={false}
-      inputProps={{ placeholder: "Date Picker Here" }}
+      inputProps={{ placeholder: "Select a Date..." }}
     />
   </FormControl>
 
 
+        <div >
+          <GridContainer justify="center">
+            <GridItem xs={12} sm={10} md={12}>
+                  <GridContainer justify="center">
+          <Table
+            tableHead={[
+              "Booking Number",
+              "Date",
+              "Time",
+              "Employee",
+              "Service",
+              "Actions"
+            ]}
+            tableData={[
+              ["1", "1/11/2020", "9:00", "Adam", "Haircut", fillButtons],
+              ["2", "1/11/2020", "9:30", "Cindy", "Hair Colour", fillButtons],
+              ["3", "1/11/2020", "10:00", "Adam", "Haircut", fillButtons],
+              ["4", "1/11/2020", "10:30", "Cindy", "Hair Colour", fillButtons],
+              ["5", "1/11/2020", "11:00", "Adam", "Haircut", fillButtons]
+            ]}
+            customCellClasses={[
+              classes.textCenter,
+              classes.textRight,
+              classes.textRight
+            ]}
+            customClassesForCells={[0, 4, 5]}
+            customHeadCellClasses={[
+              classes.textCenter,
+              classes.textRight,
+              classes.textRight
+            ]}
+            customHeadClassesForCells={[0, 4, 5]}
+            tableShopping={true} 
+            hover={true} 
+            striped={true} 
+          />
+          </GridContainer>
+      </GridItem>
+    </GridContainer>
+  </div>
 
 
 
-         {
-          // {booking.time_slot} {booking.service_id} {booking.employee_id} 
-          bookings.map(booking=> <li key={booking.id}>
-            <label>{booking.id} {booking.time_slot} {booking.service_id} {booking.employee_id}</label>
-            <Button round color="primary" size="sm" onClick={() => handleClick(booking.id)}>
-              BOOK
-            </Button>
-            </li>)
-        }
-        
 
-        </GridItem>
-      </GridContainer>
+
+
+
     </div>
   );
 }

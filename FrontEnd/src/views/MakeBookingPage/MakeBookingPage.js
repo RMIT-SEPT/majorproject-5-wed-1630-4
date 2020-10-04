@@ -91,7 +91,7 @@ import aboutUsStyle from "assets/jss/material-kit-pro-react/views/signupPageStyl
 //const useStyles = makeStyles(aboutUsStyle);
 const useStyles = makeStyles(style);
 import image from "assets/img/bg9.jpg";
-//import BookingsParent from "./AdminBookings/BookingsParent";
+import SectionBookingParent from "./SectionBookingParent";
 //import EmployeesParent from "./AdminEmployee/EmployeesParent";
 
 
