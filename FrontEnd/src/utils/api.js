@@ -7,22 +7,23 @@ axios.defaults.headers.post["Accept"] = "application/json";
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
 
-
 export default {
   login: (credintials, callback) => {
     axios
       .post("/login", credintials)
       .then((res) => {
-        if(res.status===200){
-          if(res.data.token!=null){
-            axios.defaults.headers.common["Authorization"] = "Bearer ".concat(res.data.token);
+        if (res.status === 200) {
+          if (res.data.token != null) {
+            axios.defaults.headers.common["Authorization"] = "Bearer ".concat(
+              res.data.token
+            );
             localStorage.setItem("token", res.data.token);
           }
-        }else {
-          if(res.error==="Unauthorized"){
-          axios.defaults.headers.common.Authorization = null;
+        } else {
+          if (res.error === "Unauthorized") {
+            axios.defaults.headers.common.Authorization = null;
+          }
         }
-      }
         callback(res);
       })
       .catch((err) => callback(err.response.data));
@@ -32,7 +33,9 @@ export default {
       localStorage.getItem("token")
     );
     axios
-      .get("/isLoggedIn", { headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+      .get("/isLoggedIn", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
       .then((res) => {
         console.log(res.data);
         if (res.data.status === "logged in") {
@@ -48,17 +51,19 @@ export default {
       .then((res) => callback(res))
       .catch((err) => callback(err.response.data));
   },
-  editProfile: (credintials, callback)=>{
+  editProfile: (credintials, callback) => {
     axios
-    .post("/profileEdit", credintials, { headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
-    .then((res) => callback(res))
-    .catch((err) => callback(err.response.data));
+      .post("/profileEdit", credintials, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((res) => callback(res))
+      .catch((err) => callback(err.response.data));
   },
-  getProfile: ()=>{
+  getProfile: () => {
     axios
-    .get("/profile")
-    .then((res) => res)
-    .catch((err) => err);
+      .get("/profile")
+      .then((res) => res)
+      .catch((err) => err);
   },
   getEmployees: (callback) => {
     // axios.defaults.headers.common["Authorization"] =
