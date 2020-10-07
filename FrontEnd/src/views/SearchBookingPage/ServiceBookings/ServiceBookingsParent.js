@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import SectionBookingDatePage from "./Sections/SectionBookingDatePage";
-import SectionBookingEmployeePage from "./Sections/SectionBookingEmployeePage";
-import SectionBookingServicePage from "./Sections/SectionBookingServicePage";
+import ServiceBookingsPage from "./ServiceBookingsPage";
 
-export default class SectionBookingParent extends Component {
+export default class BookingsParent extends Component {
   state = {
     tableHead: ["Booking Number", "Time", "Employee", "Status", "Action"],
     tableData: [],
@@ -22,17 +20,17 @@ export default class SectionBookingParent extends Component {
         ["4355", "1/11/2020", "John", "Active", ""],
         ["1236", "2/20/2010", "Sam", "Active", ""],
         ["4357", "1/11/2021", "John", "Active", ""],
-        ["8948", "2/4/2022", "Mohammed", "Cancelled", ""],
-        ["9479", "4/5/2023", "Sam", "Pending", ""],
-        ["8940", "2/4/2022", "Mohammed", "Cancelled", ""],
-        ["12311", "2/10/2020", "Sam", "Active", ""],
-        ["43522", "1/11/2021", "John", "Active", ""],
-        ["89433", "2/4/2022", "Mohammed", "Cancelled", ""],
-        ["94744", "4/5/2023", "Sam", "Pending", ""],
-        ["94755", "4/5/2023", "Sam", "Pending", ""],
       ],
     });
   }
+
+  handleCancel = (booking_id) => {
+    this.setState({ isLoading: true });
+    console.log(booking_id);
+    // eslint-disable-next-line no-unused-vars
+    // api.cancelBooking();
+    this.setState({ isLoading: false });
+  };
 
   handleDone = (booking_id) => {
     this.setState({ isLoading: true });
@@ -45,12 +43,11 @@ export default class SectionBookingParent extends Component {
   render() {
     return (
       <div>
-        <SectionBookingDatePage
+        <ServiceBookingsPage
           tableHead={this.state.tableHead}
           tableData={this.state.tableData}
-          //handleCancel={this.handleCancel}
-          //handleDone={this.handleDone}
-          handleBook={this.handleBook}
+          handleCancel={this.handleCancel}
+          handleDone={this.handleDone}
         />
       </div>
     );
