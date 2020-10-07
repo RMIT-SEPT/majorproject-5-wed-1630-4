@@ -100,4 +100,16 @@ export default {
       })
       .catch((err) => console.log(err));
   },
+  makeBooking: (credintials, callback)=>{
+    axios
+    .post("/bookings/make", credintials, { headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+    .then((res) => callback(res))
+    .catch((err) => callback(err.response.data));
+  },
+  getAllBookings: ()=>{
+    axios
+    .get("/bookings/index")
+    .then((res) => res)
+    .catch((err) => err);
+  }
 };

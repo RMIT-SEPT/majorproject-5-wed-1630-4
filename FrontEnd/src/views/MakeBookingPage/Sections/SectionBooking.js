@@ -6,10 +6,12 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
 
 import descriptionStyle from "assets/jss/material-kit-pro-react/views/aboutUsSections/descriptionStyle.js";
-import axios from 'axios'
+// import axios from 'axios'
 import Button from "components/CustomButtons/Button.js";
+import Api from "utils/api.js";
 
 const useStyles = makeStyles(descriptionStyle);
 
@@ -18,20 +20,48 @@ export default function SectionBooking() {
   const[bookings, setBooking] = useState([]);
 
   const handleClick = id => {
+    Api.makeBooking(
+      {
+        id: id,
+      },
+      (res) => {
+        console.log(res);
+        //retrieve major error message
+        if(res.errors){
+          this.setState({errors: res.errors})
+        }else{
+          this.setState({errors: res.message})
+        }
+      }
+    );
+  };
 
+  const deleteBooking = id => {
+    Api.makeBooking(
+      {
+        id: id,
+      },
+      (res) => {
+        console.log(res);
+        //retrieve major error message
+        if(res.errors){
+          this.setState({errors: res.errors})
+        }else{
+          this.setState({errors: res.message})
+        }
+      }
+    );
   };
 
   useEffect(()=> {
-    axios.get('https://jsonplaceholder.typicode.com/users/1/posts')
+    axios.get('http://localhost:8080/bookings/index')
     // axios.get('http://localhost:8080/bookings')
         .then(res=>{
             console.log(res)
             setBooking(res.data)
         })
   },[])
-
-  // 'http://localhost:8080/bookings'
-
+  
   return (
     <div className={classNames(classes.aboutDescription, classes.textCenter)}>
       <GridContainer>
@@ -47,7 +77,7 @@ export default function SectionBooking() {
           {
             // {booking.time_slot} {booking.service_id} {booking.employee_id} 
             bookings.map(booking=> <li key={booking.id}>
-              <label>{booking.id} {booking.time_slot} {booking.service_id} {booking.employee_id}</label>
+              <label>{booking.id} {booking.description} {booking.service} {booking.worker} {booking.dateTime}</label>
               <Button round color="primary" size="sm" onClick={() => handleClick(booking.id)}>
                 BOOK
               </Button>
