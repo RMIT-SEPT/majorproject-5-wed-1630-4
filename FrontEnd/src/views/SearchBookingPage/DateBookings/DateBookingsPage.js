@@ -25,12 +25,15 @@ const useStyles = makeStyles(signupPageStyle);
 export default function DateBookingsPage(props, { ...rest }) {
   const classes = useStyles();
 
-  const [selectedInput, setSelectedInput] = React.useState("1/11/2020");
+  //const [selectedInput, setSelectedInput] = React.useState("1/11/2020");
 
-  const [simpleSelect, setSimpleSelect] = React.useState("");
-  const handleSimple = event => {
-   setSelectedInput(event.target.value);
-  };
+  const [value, onChange] = React.useState(new Date());
+
+  //const [simpleSelect, setSimpleSelect] = React.useState("");
+  
+  // const handleSimple = event => {
+  //  setSelectedInput(event.target.value);
+  // };
 
   // const handleSimple(date){
   //   this.setState({date});
@@ -87,7 +90,9 @@ export default function DateBookingsPage(props, { ...rest }) {
       timeFormat={false}
       dateFormat={'D/M/YYYY'}
       //value={simpleSelect}
-      onChange={handleSimple}
+      //onChange={handleSimple}
+      value={value}
+      onChange={onChange}
       closeOnSelect={true}
       inputProps={{ placeholder: "Select a Date...",
       name: "simpleSelect",
