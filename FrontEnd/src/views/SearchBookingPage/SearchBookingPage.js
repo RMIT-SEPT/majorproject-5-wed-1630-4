@@ -67,8 +67,8 @@ export default function SearchBookingPage({ ...rest }) {
       backgroundPosition: "top center"
     }}
   >
-
-          <div className={classes.container} >
+      
+      <div className={classes.container} >
         <GridContainer justify="center">
           <GridItem
             md={12}
@@ -108,13 +108,12 @@ export default function SearchBookingPage({ ...rest }) {
                 ]}
               />
               </CardBody>
-        </Card>
+            </Card>
           </GridItem>
         </GridContainer>
         <br></br><br></br><br></br><br></br>
       </div>
         </div>
-      {/* </div> */}
     </div>
   );
 }

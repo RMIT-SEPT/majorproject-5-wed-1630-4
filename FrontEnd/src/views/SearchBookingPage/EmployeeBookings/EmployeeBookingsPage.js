@@ -27,26 +27,57 @@ const useStyles = makeStyles(signupPageStyle);
 export default function EmployeeBookingsPage(props, { ...rest }) {
   const classes = useStyles();
 
+  const [selectedInput, setSelectedInput] = React.useState("Sam");
+
   const [simpleSelect, setSimpleSelect] = React.useState("");
   const handleSimple = event => {
-    setSimpleSelect(event.target.value);
+    setSelectedInput(event.target.value);
+    
+    //alert('Selected is: ' + simpleSelect);
+    // setSelectedInput(simpleSelect);
+    //event.preventDefault();
   };
 
-  const fillButtons = (id, isActive) => ([
+  const data = () => {
+
+    var arr1 = []
+    props.tableData.forEach((i) => {
+
+         if(i.includes(selectedInput)){
+          arr1.push(i)
+         }
+
+    })
+    console.log(arr1)
+    return arr1
+  }
+
+  const bookButtons = (id, isActive) => ([
     { color: "success", icon: Check },
-    { color: "danger", icon: Close }
+
   ].map((prop, key) => {
     return (
-      <Button disabled={isActive? false:true} 
-              justIcon 
-              id={id}
-              color={(!isActive)?"secondary":(prop.icon == Close)? "danger":"success"} 
-              size="sm"  key={key} 
-              onClick={()=> (prop.icon == Close)? props.handleCancel(key):props.handleDone(key)}>
-        <prop.icon />
+      <Button round color="primary" size="sm">
+        BOOK
       </Button>
     );
   }));
+
+  // const fillButtons = (id, isActive) => ([
+  //   { color: "success", icon: Check },
+  //   { color: "danger", icon: Close }
+  // ].map((prop, key) => {
+  //   return (
+  //     <Button disabled={isActive? false:true} 
+  //             justIcon 
+  //             id={id}
+  //             color={(!isActive)?"secondary":(prop.icon == Close)? "danger":"success"} 
+  //             size="sm"  key={key} 
+  //             onClick={()=> (prop.icon == Close)? props.handleCancel(key):props.handleDone(key)}>
+  //       <prop.icon />
+  //     </Button>
+  //   );
+  // }));
 
   const nowTime = new Date();
 
@@ -90,27 +121,27 @@ export default function EmployeeBookingsPage(props, { ...rest }) {
                   root: classes.selectMenuItem,
                   selected: classes.selectMenuItemSelected
                 }}
-                value="2"
+                value="John"
               >
-                Employee 1
+                John
               </MenuItem>
               <MenuItem
                 classes={{
                   root: classes.selectMenuItem,
                   selected: classes.selectMenuItemSelected
                 }}
-                value="3"
+                value="Mohammed"
               >
-                Employee 2
+                Mohammed
               </MenuItem>
               <MenuItem
                 classes={{
                   root: classes.selectMenuItem,
                   selected: classes.selectMenuItemSelected
                 }}
-                value="4"
+                value="Cindy"
               >
-                Employee 3
+                Cindy
               </MenuItem>
             </Select>
 
@@ -120,23 +151,7 @@ export default function EmployeeBookingsPage(props, { ...rest }) {
                   <GridContainer justify="center">
                       <Table 
                         tableHead={props.tableHead} 
-                        tableData={props.tableData.map((v) => {
-                          arr.forEach(i => {
-                            if(i.includes(simple-select)){
-                            arr1.push(i)
-                            }
-                            })
-                          
-                          // let cellTime = new Date(v[1]);
-                          // if ( cellTime >= nowTime) {
-                          //   v[v.length-1] = fillButtons(v[0], true);
-                          // }
-                          //else if(cellTime.setDate(cellTime.getDate()-7) < nowTime) {
-                            // comment: 7 days ago
-                          //v[v.length-1] = fillButtons(v[0], false);
-                          //} 
-                          return v
-                        })} 
+                        tableData={data()} 
                         tableShopping={true} 
                         hover={true} 
                         striped={true} 

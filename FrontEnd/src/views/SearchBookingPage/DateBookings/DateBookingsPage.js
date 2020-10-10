@@ -24,21 +24,58 @@ const useStyles = makeStyles(signupPageStyle);
 
 export default function DateBookingsPage(props, { ...rest }) {
   const classes = useStyles();
-  const fillButtons = (id, isActive) => ([
+
+  const [selectedInput, setSelectedInput] = React.useState("1/11/2020");
+
+  const [simpleSelect, setSimpleSelect] = React.useState("");
+  const handleSimple = event => {
+   setSelectedInput(event.target.value);
+  };
+
+  // const handleSimple(date){
+  //   this.setState({date});
+  // };
+
+  const data = () => {
+
+    var arr3 = []
+    props.tableData.forEach((i) => {
+
+         if(i.includes(selectedInput)){
+          arr3.push(i)
+         }
+
+    })
+    console.log(arr3)
+    return arr3
+  }
+
+  const bookButtons = (id, isActive) => ([
     { color: "success", icon: Check },
-    { color: "danger", icon: Close }
+
   ].map((prop, key) => {
     return (
-      <Button disabled={isActive? false:true} 
-              justIcon 
-              id={id}
-              color={(!isActive)?"secondary":(prop.icon == Close)? "danger":"success"} 
-              size="sm"  key={key} 
-              onClick={()=> (prop.icon == Close)? props.handleCancel(key):props.handleDone(key)}>
-        <prop.icon />
+      <Button round color="primary" size="sm">
+        BOOK
       </Button>
     );
   }));
+
+  // const fillButtons = (id, isActive) => ([
+  //   { color: "success", icon: Check },
+  //   { color: "danger", icon: Close }
+  // ].map((prop, key) => {
+  //   return (
+  //     <Button disabled={isActive? false:true} 
+  //             justIcon 
+  //             id={id}
+  //             color={(!isActive)?"secondary":(prop.icon == Close)? "danger":"success"} 
+  //             size="sm"  key={key} 
+  //             onClick={()=> (prop.icon == Close)? props.handleCancel(key):props.handleDone(key)}>
+  //       <prop.icon />
+  //     </Button>
+  //   );
+  // }));
 
   const nowTime = new Date();
 
@@ -48,26 +85,27 @@ export default function DateBookingsPage(props, { ...rest }) {
     <FormControl fullWidth>
     <Datetime
       timeFormat={false}
-      inputProps={{ placeholder: "Select a Date..." }}
+      dateFormat={'D/M/YYYY'}
+      //value={simpleSelect}
+      onChange={handleSimple}
+      closeOnSelect={true}
+      inputProps={{ placeholder: "Select a Date...",
+      name: "simpleSelect",
+      id: "simple-select" }}
     />
     </FormControl>
 
-        <div >
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={10} md={12}>
+ 
+            
                   <GridContainer justify="center">
                       <Table 
                         tableHead={props.tableHead} 
                         tableData={props.tableData.map((v) => {
-                          let cellTime = new Date(v[1]);
-                          if ( cellTime >= nowTime) {
-                            v[v.length-1] = fillButtons(v[0], true);
+
+                            v[v.length-1] = bookButtons(v[0], true);
 
 
-                          }else if(cellTime.setDate(cellTime.getDate()-7) < nowTime) {
-                            // 7 days ago
-                            v[v.length-1] = fillButtons(v[0], false);
-                          }
+                          
                           return v
                         })} 
                         tableShopping={true} 
@@ -75,9 +113,8 @@ export default function DateBookingsPage(props, { ...rest }) {
                         striped={true} 
                       />
                   </GridContainer>
-            </GridItem>
-          </GridContainer>
-        </div>
+            
+
     </div>
   );
 }

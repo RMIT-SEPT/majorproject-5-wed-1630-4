@@ -3,7 +3,7 @@ import ServiceBookingsPage from "./ServiceBookingsPage";
 
 export default class BookingsParent extends Component {
   state = {
-    tableHead: ["Booking Number", "Time", "Employee", "Status", "Action"],
+    tableHead: ["Time", "Date", "Employee", "Service", "Action"],
     tableData: [],
     isLoading: false,
   };
@@ -12,14 +12,25 @@ export default class BookingsParent extends Component {
     // pull data from backend
     this.setState({
       tableData: [
-        ["123", "2/2/2020", "Sam", "Active", ""],
-        ["4351", "1/11/2011", "John", "Active", ""],
-        ["8942", "2/4/2022", "Mohammed", "Cancelled", ""],
-        ["9473", "4/5/2023", "Sam", "Pending", ""],
-        ["1234", "2/12/2020", "Sam", "Active", ""],
-        ["4355", "1/11/2020", "John", "Active", ""],
-        ["1236", "2/20/2010", "Sam", "Active", ""],
-        ["4357", "1/11/2021", "John", "Active", ""],
+        ["9:00", "1/11/2020", "Cindy", "Haircut", ""],
+        ["9:30", "4/11/2020", "John", "Hair Colour", ""],
+        ["10:00", "6/11/2020", "Mohammed", "Haircut", ""],
+        ["10:30", "9/11/2020", "Cindy", "Hair Colour", ""],
+        ["11:00", "10/11/2020", "Cindy", "Hair Wash", ""],
+        ["11:30", "12/11/2020", "John", "Haircut", ""],
+        ["12:00", "15/11/2020", "Cindy", "Haircut", ""],
+        ["12:30", "15/11/2020", "Mohammed", "Hair Colour", ""],
+        ["1:00", "16/11/2020", "Cindy", "Hair Wash", ""],
+        ["1:30", "17/11/2020", "John", "Haircut", ""],
+        ["2:00", "17/11/2020", "Mohammed", "Hair Colour", ""],
+        ["2:30", "18/11/2020", "Cindy", "Hair Wash", ""],
+        ["3:00", "19/11/2020", "Cindy", "Haircut", ""],
+        ["3:30", "19/11/2020", "Mohammed", "Hair Wash", ""],
+        ["4:00", "20/11/2020", "John", "Haircut", ""],
+        ["4:30", "21/11/2020", "Cindy", "Haircut", ""],
+        ["5:00", "22/11/2020", "John", "Hair Colour", ""],
+        ["5:30", "23/11/2020", "Mohammed", "Hair Wash", ""],
+        ["6:00", "23/11/2020", "John", "Hair Colour", ""],
       ],
     });
   }

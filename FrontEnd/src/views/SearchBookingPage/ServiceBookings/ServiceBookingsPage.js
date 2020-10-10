@@ -26,26 +26,53 @@ const useStyles = makeStyles(signupPageStyle);
 export default function ServiceBookingsPage(props, { ...rest }) {
   const classes = useStyles();
 
+  const [selectedInput, setSelectedInput] = React.useState("Sam");
+
   const [simpleSelect, setSimpleSelect] = React.useState("");
   const handleSimple = event => {
-    setSimpleSelect(event.target.value);
+    setSelectedInput(event.target.value);
   };
 
-  const fillButtons = (id, isActive) => ([
+  const data = () => {
+
+    var arr2 = []
+    props.tableData.forEach((i) => {
+
+         if(i.includes(selectedInput)){
+          arr2.push(i)
+         }
+
+    })
+    console.log(arr2)
+    return arr2
+  }
+
+  const bookButtons = (id, isActive) => ([
     { color: "success", icon: Check },
-    { color: "danger", icon: Close }
+
   ].map((prop, key) => {
     return (
-      <Button disabled={isActive? false:true} 
-              justIcon 
-              id={id}
-              color={(!isActive)?"secondary":(prop.icon == Close)? "danger":"success"} 
-              size="sm"  key={key} 
-              onClick={()=> (prop.icon == Close)? props.handleCancel(key):props.handleDone(key)}>
-        <prop.icon />
+      <Button round color="primary" size="sm">
+        BOOK
       </Button>
     );
   }));
+
+  // const fillButtons = (id, isActive) => ([
+  //   { color: "success", icon: Check },
+  //   { color: "danger", icon: Close }
+  // ].map((prop, key) => {
+  //   return (
+  //     <Button disabled={isActive? false:true} 
+  //             justIcon 
+  //             id={id}
+  //             color={(!isActive)?"secondary":(prop.icon == Close)? "danger":"success"} 
+  //             size="sm"  key={key} 
+  //             onClick={()=> (prop.icon == Close)? props.handleCancel(key):props.handleDone(key)}>
+  //       <prop.icon />
+  //     </Button>
+  //   );
+  // }));
 
   const nowTime = new Date();
 
@@ -89,27 +116,27 @@ export default function ServiceBookingsPage(props, { ...rest }) {
                   root: classes.selectMenuItem,
                   selected: classes.selectMenuItemSelected
                 }}
-                value="2"
+                value="Haircut"
               >
-                Service 1
+                Haircut
               </MenuItem>
               <MenuItem
                 classes={{
                   root: classes.selectMenuItem,
                   selected: classes.selectMenuItemSelected
                 }}
-                value="3"
+                value="Hair Colour"
               >
-                Service 2
+                Hair Colour
               </MenuItem>
               <MenuItem
                 classes={{
                   root: classes.selectMenuItem,
                   selected: classes.selectMenuItemSelected
                 }}
-                value="4"
+                value="Hair Wash"
               >
-                Service 3
+                Hair Wash
               </MenuItem>
             </Select>
           </FormControl>
@@ -117,18 +144,7 @@ export default function ServiceBookingsPage(props, { ...rest }) {
                   <GridContainer justify="center">
                       <Table 
                         tableHead={props.tableHead} 
-                        tableData={props.tableData.map((v) => {
-                          let cellTime = new Date(v[1]);
-                          if ( cellTime >= nowTime) {
-                            v[v.length-1] = fillButtons(v[0], true);
-
-
-                          }else if(cellTime.setDate(cellTime.getDate()-7) < nowTime) {
-                            // 7 days ago
-                            v[v.length-1] = fillButtons(v[0], false);
-                          }
-                          return v
-                        })} 
+                        tableData={data()} 
                         tableShopping={true} 
                         hover={true} 
                         striped={true} 
