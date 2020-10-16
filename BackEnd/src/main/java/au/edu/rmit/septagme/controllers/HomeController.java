@@ -11,10 +11,6 @@ public class HomeController {
 	public String index() {
 		return "index";
 	}
-//    @GetMapping("/")
-//    public String home(){
-//        return "home";
-//    }
 
     @GetMapping("/customer_dashboard")
     public String customer_dashboard(){
