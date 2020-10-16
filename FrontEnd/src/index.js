@@ -17,7 +17,7 @@ import AdminProfilePage from "views/AdminProfilePage/AdminProfilePage.js";
 import EmployeeProfilePage from "views/EmployeeProfilePage/EmployeeProfilePage.js";
 import HomePage from "views/HomePage/HomePage.js";
 import BookingPage from "views/MakeBookingPage/MakeBookingPage.js";
-import BookingHistoryPage from "views/BookingPages/Customer/BookingHistoryParent";
+import SearchBookingPage from "views/SearchBookingPage/SearchBookingPage.js";
 import CustomerEditProfile from "views/CustomerProfilePage/EditProfileParent.js";
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -32,7 +32,7 @@ ReactDOM.render(
       <Route path="/login-page" component={LoginPage} />
       <Route path="/signup-page" component={SignupPage} />
       <Route path="/booking" component={BookingPage} />
-      <Route path="/booking-history" component={BookingHistoryPage} />
+      <Route path="/search-booking" component={SearchBookingPage} />
       <Route path="/home" component={HomePage} />
       <Route path="/admin-signup-page" component={AdminSignupPage} />
       <Route path="/customer-profile-page" component={CustomerProfilePage} />

@@ -59,8 +59,9 @@ jobs:
               key: buildingTheBackEnd-{{checksum "./BackEnd/pom.xml"}}
               
           - run: cd ./BackEnd && mvn dependency::tree
-          - run: cd ./BackEnd && mvn test
           - run: cd ./BackEnd && mvn package
+          - run: cd ./BackEnd && mvn test
+         
 
 
 workflows:
