@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import SignupPage from "./SignupPage";
-
 import Api from "utils/api.js";
 
 export default class SignupParent extends Component {
@@ -28,39 +27,46 @@ export default class SignupParent extends Component {
 
   handleSubmit = () => {
     this.setState({ isLoading: true });
-    if(!this.state.user.name || !this.state.user.username|| !this.state.user.password || !this.state.user.phone || !this.state.user.address){
-      this.setState({errors: "all fields are required*"})
-    }else{
-    Api.signup(
-      {
-        name: this.state.user.name,
-        username: this.state.user.username,
-        password: this.state.user.password,
-        phone: this.state.user.phone,
-        address: this.state.user.address,
-      },
-      (res) => {
-        console.log(res);
-        this.setState({errors: res.errors})
+    if (
+      !this.state.user.name ||
+      !this.state.user.username ||
+      !this.state.user.password ||
+      !this.state.user.phone ||
+      !this.state.user.address
+    ) {
+      this.setState({ errors: "all fields are required*" });
+    } else {
+      Api.signup(
+        {
+          name: this.state.user.name,
+          username: this.state.user.username,
+          password: this.state.user.password,
+          phone: this.state.user.phone,
+          address: this.state.user.address,
+        },
+        (res) => {
+          console.log(res);
+          this.setState({ errors: res.errors });
 
-        //retrieve major error message
-        if(res.errors){
-          this.setState({errors: res.errors})
+          //retrieve major error message
+          if (res.errors) {
+            this.setState({ errors: res.errors });
 
-        //display specific validation error one at a time
-        }else if (res.fieldErrors){
-          this.setState({errors: res.fieldErrors[0].defaultMessage})
+            //display specific validation error one at a time
+          } else if (res.fieldErrors) {
+            this.setState({ errors: res.fieldErrors[0].defaultMessage });
 
-        //when the id is updated, account registration successful
-        }else if(res.id!==0){
-          this.setState({errors: "Successful Sign in"})
+            //when the id is updated, account registration successful
+          } else if (res.id !== 0) {
+            this.setState({ errors: "Successful Sign in" });
+            this.props.history.push("/home");
 
-        //else display any remaining message
-        }else{
-          this.setState({errors: res.message})
+            //else display any remaining message
+          } else {
+            this.setState({ errors: res.message });
+          }
         }
-      }
-    );
+      );
     }
   };
   render() {

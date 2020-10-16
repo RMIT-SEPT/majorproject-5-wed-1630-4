@@ -56,27 +56,7 @@ export default function AdminPage() {
       backgroundPosition: "top center"
     }}
   >
-      {/* <Parallax image={require("assets/img/admin-bg.jpg")} filter="dark" small>
-        <div className={classes.container}>
-          <GridContainer justify="center">
-            <GridItem
-              md={8}
-              sm={8}
-              className={classNames(
-                classes.mlAuto,
-                classes.mrAuto,
-                classes.textCenter
-              )}
-            >
-              <h1 className={classes.title}>Admin Dashboard</h1>
-            </GridItem>
-          </GridContainer>
-        </div>
-      </Parallax> */}
-      
-      {/* <div className={classNames( classes.main, classes.mainRaised)}> */}
-          <div className={classes.container} >
-          {/* <div className={classNames(classes.aboutDescription, classes.textCenter)}> */}
+      <div className={classes.container} >
         <GridContainer justify="center">
           <GridItem
             md={12}
@@ -111,16 +91,13 @@ export default function AdminPage() {
                     icon: <TouchAppIcon/>,
                     tabContent: (
                       <span>
-                        <p>
-                          Completely synergize resource taxing relationships via
-                          premier niche markets. Professionally cultivate
-                          one-to-one customer service with robust ideas.{" "}
-                        </p>
+                        <h4>
+                          Service name:
+                        </h4>
                         <br />
-                        <p>
-                          Dynamically innovate resource-leveling customer
-                          service for state of the art customer service.
-                        </p>
+                        <h5>
+                          Service Info:
+                        </h5>
                       </span>
                     )
                   }

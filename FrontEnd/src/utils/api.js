@@ -43,7 +43,7 @@ export default {
         }
         callback(res);
       })
-      .catch((err) => err);
+      .catch((err) => callback(err.response.status));
   },
   signup: (credintials, callback) => {
     axios

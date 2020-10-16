@@ -51,14 +51,6 @@ export default function SearchBookingPage({ ...rest }) {
   return (
     <div >
 
-    <Header
-    absolute
-    color="transparent"
-    brand="AGME BOOKING SYSTEM"
-    links={<HeaderLinks dropdownHoverColor="rose" />}
-    {...rest}
-  />
-
     <div
     className={classes.pageHeader}
     style={{
