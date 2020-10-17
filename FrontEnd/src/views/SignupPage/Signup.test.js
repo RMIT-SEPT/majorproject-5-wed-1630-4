@@ -23,7 +23,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("Siginup Page Unit Test", () => {
     let wrapper;
     beforeEach(() => {
-        wrapper = shallow(<Signup />)
+        wrapper = mount(<Signup />)
         jest.resetAllMocks()
     });
 
@@ -34,7 +34,7 @@ describe("Siginup Page Unit Test", () => {
 
     //test empty fields are not accepted
     it("should display all fields are required when submit with blank fields", ()=>{
-        console.log(wrapper.debug());
+        console.log(wrapper.c);
         wrapper.find('form').simulate('handleSubmit')
         const alertText = wrapper.find('p')
         expect(alertText.text()).toBe('all fields are required*');
