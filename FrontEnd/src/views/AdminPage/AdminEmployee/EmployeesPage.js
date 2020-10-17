@@ -47,30 +47,9 @@ export default function EmployeesPage(props, { ...rest }) {
   }));
 
   const nowTime = new Date();
-  // const cancelButton = (key, isActive) => {
-  //   return (
-  //     <Button disabled={isActive} justIcon color={isActive?"secondary":"danger"} size="sm"  key={key} onClick={()=>props.handleCancel(key)}>
-  //       <Close />
-  //     </Button>
-  //   );
-  // };
-  // const doneButton = (key, isActive) => {
-  //   return (
-  //     <Button disabled={isActive} justIcon color={isActive?"secondary":"success"} size="sm"  key={key} onClick={()=>props.handleDone(key)}>
-  //       <Check />
-  //     </Button>
-  //   );
-  // };
+
   return (
     <div>
-      {/* <div
-        className={classes.pageHeader}
-        style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center"
-        }}
-      > */}
         <div >
           <GridContainer justify="center" >
             <GridItem xs={12} sm={10} md={12} >
@@ -126,7 +105,7 @@ export default function EmployeesPage(props, { ...rest }) {
                   </GridContainer>
                   <GridItem xs={12} sm={10} md={12} >
                     <Button round color="success" size="lg" onClick={e=>props.handleSubmit(e)} id={employee.id+"-"+index}>
-                      Submit New Work Times
+                      Service details
                     </Button>
                   </GridItem>
                 </CardBody>

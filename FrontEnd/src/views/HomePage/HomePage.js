@@ -21,23 +21,36 @@ import image from "assets/img/clint-mckoy.jpg";
 const useStyles = makeStyles(errorPageStyle);
 
 export default function HomePage({ ...rest }) {
+
   const [user, setUser] = React.useState("visitor");
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   
     api.isLoggedIn(res=>{ 
+      if (res >= 400) {
+        setUser("visitor");
+      }else{
+      console.log(res.data.role);
       if(res.data.status == "not logged in"){
-        setUser("admin")
+        setUser("visitor")
       }else if (res.data.status == "logged in"){
-        if(res.data.tole == "ADMIN"){
+        if(res.data.role == "ADMIN"){
           setUser("admin")
-        }else if(res.data.role == " CUSTOMER"){
+        }else if(res.data.role == "CUSTOMER"){
           setUser("customer")
+        }else if(res.data.role == "WORKER"){
+          setUser("worker")
         }
+        console.log(user);
       }
+    }
     })
-  });
+  },[user]);
+
+  const header = () => {return user}
+  
+    
   const classes = useStyles();
   return (
     <div>
@@ -45,7 +58,7 @@ export default function HomePage({ ...rest }) {
         absolute
         color="transparent"
         brand="AGME"
-        links={<HeaderLinks user={user} dropdownHoverColor="dark" />}
+        links={<HeaderLinks user={header()} dropdownHoverColor="dark" />}
         {...rest}
       />
       <div

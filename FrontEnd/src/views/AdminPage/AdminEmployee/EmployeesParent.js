@@ -23,6 +23,7 @@ export default class EmployeesParent extends Component {
         this.setState({
           employeesData: employees,
         });
+        console.log(this.employeesData);
       }
     });
   }
@@ -120,11 +121,11 @@ export default class EmployeesParent extends Component {
   render() {
     return (
       <div>
-        <EmployeesPage
+        {this.state.employeesData.length == 0 ? "You don't have employees for your service":(<EmployeesPage
           employees={this.state.employeesData}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-        />
+        />)}
       </div>
     );
   }

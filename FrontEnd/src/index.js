@@ -19,6 +19,7 @@ import HomePage from "views/HomePage/HomePage.js";
 import BookingPage from "views/MakeBookingPage/MakeBookingPage.js";
 import SearchBookingPage from "views/SearchBookingPage/SearchBookingPage.js";
 import CustomerEditProfile from "views/CustomerProfilePage/EditProfileParent.js";
+import BookingHistory from "views/BookingPages/Customer/BookingHistoryParent.js"
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 
@@ -33,6 +34,7 @@ ReactDOM.render(
       <Route path="/signup-page" component={SignupPage} />
       <Route path="/booking" component={BookingPage} />
       <Route path="/search-booking" component={SearchBookingPage} />
+      <Route path="/bookings" component={BookingHistory} />
       <Route path="/home" component={HomePage} />
       <Route path="/admin-signup-page" component={AdminSignupPage} />
       <Route path="/customer-profile-page" component={CustomerProfilePage} />

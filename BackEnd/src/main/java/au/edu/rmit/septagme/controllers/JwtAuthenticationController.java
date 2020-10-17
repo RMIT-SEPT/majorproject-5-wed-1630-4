@@ -55,6 +55,11 @@ public class JwtAuthenticationController {
         // delete Bearer part
         jwt = jwt.substring(7);
 
+        if (jwtTokenUtil.isTokenExpired(jwt)){
+            map.put("status", "not logged in");
+            return map;
+        }
+
         String username = jwtTokenUtil.getUsernameFromToken(jwt);
         UserEntity user = this.userDetailsService.loadUserByUsername(username);
 

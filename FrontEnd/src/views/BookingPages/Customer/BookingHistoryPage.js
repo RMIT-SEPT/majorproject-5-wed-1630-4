@@ -41,7 +41,7 @@ export default function BookingHistoryPage(props, { ...rest }) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={10} md={12}>
               <Card className={classes.cardSignup}>
-                <h2 className={classes.cardTitle}>Your Bookings</h2>
+                <h2 className={classes.cardTitle}>  Bookings</h2>
                 <CardBody>
                   <GridContainer justify="center">
                       <Table 

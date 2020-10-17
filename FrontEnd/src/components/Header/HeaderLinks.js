@@ -26,13 +26,14 @@ import API from "utils/api";
 
 const useStyles = makeStyles(styles);
 
-export default function HeaderLinks(props) {
+export default function HeaderLinks({...props}) {
   // const buttonsForSpecificRole = () => 
 
-  const [user, setUser] = React.useState("visitor");
+  const [user, setUser] = React.useState("");
 
   React.useEffect(() => {
     setUser(props.user)
+    console.log(user + " inside header");
 
   }, [props.user]);
   console.log(user)
@@ -75,91 +76,20 @@ export default function HeaderLinks(props) {
     animateScroll();
   };
 
-  const state = () => {
-      if (user == "admin") {
-        console.log("admin is here");
-        return (
-          <>
-          <ListItem className={classes.listItem}>
-            <Button
-              href="/admin-dashboard"
-              color={window.innerWidth < 960 ? "info" : "white"}
-              //target="_blank"
-              className={classes.navButton}
-              simple
-              >
-              <HistoryIcon className={classes.icons} /> Admin Panel
-            </Button>
-         </ListItem>
-          <ListItem className={classes.listItem}>
-            <Button
-              // href="/admin-dashboard"
-              color={window.innerWidth < 960 ? "info" : "white"}
-              //target="_blank"
-              className={classes.navButton}
-              simple
-              >
-              <HistoryIcon className={classes.icons} /> Logout
-            </Button>
-          </ListItem>
-          </>
-        )
-      }else if(user == "customer"){
-          return (
-            <>
-            <ListItem className={classes.listItem}>
-              <Button
-                href="/booking-history"
-                color={window.innerWidth < 960 ? "info" : "white"}
-                //target="_blank"
-                className={classes.navButton}
-                simple
-                >
-                <HistoryIcon className={classes.icons} /> Booking History
-              </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-             <Button
-               // href="/admin-dashboard"
-               color={window.innerWidth < 960 ? "info" : "white"}
-               //target="_blank"
-               className={classes.navButton}
-               simple
-               >
-               <HistoryIcon className={classes.icons} /> Logout
-             </Button>
-            </ListItem>
-            </>
-          )
-      } else {
-      return (
-        <>
-          <ListItem className={classes.listItem}>
-            <Button
-              href="/signup-page"
-              color={window.innerWidth < 960 ? "info" : "white"}
-              //target="_blank"
-              className={classes.navButton}
-              
-              >
-              <PersonAdd className={classes.icons} /> create account
-            </Button>
-          </ListItem>
-          <ListItem className={classes.listItem}>
-            <Button
-              href="/login-page"
-              color={window.innerWidth < 960 ? "info" : "white"}
-              //target="_blank"
-              className={classes.navButton}
-              simple
-            >
-              <Fingerprint className={classes.icons} /> login page
-            </Button>
-          </ListItem>
-        </>
-      )
-    }
-  }
+
+
+  // const state = () => {
+  //     if (user == "admin") {
+  //       console.log("admin is here");
+  //       return adminMenu
+  //     }else if(user == "customer"){
+  //         return customerMenu
+  //     } else if(user == "worker"){
+  //       return workerMenu
+  //     }else if(user == 'visitor'){
+  //     return vistorMenu
+  //   }
+  // }
 
   
 
@@ -172,6 +102,160 @@ export default function HeaderLinks(props) {
   }else{
     profile='logged out'
   }
+
+  const adminMenu = (
+    <>
+    <ListItem className={classes.listItem}>
+      <Button
+        href="/admin-dashboard"
+        color={window.innerWidth < 960 ? "info" : "white"}
+        //target="_blank"
+        className={classes.navButton}
+        simple
+        >
+        <HistoryIcon className={classes.icons} /> Admin Panel
+      </Button>
+   </ListItem>
+   <ListItem className={classes.listItem}>
+  
+  <Button
+  href="/admin-profile-page"
+  color={window.innerWidth < 960 ? "info" : "white"}
+  //target="_blank"
+  className={classes.navButton}
+  simple
+>
+  <AccountCircle className={classes.icons} /> Profile
+</Button>
+      </ListItem>
+    <ListItem className={classes.listItem}>
+    <Button
+        onClick={() => {
+          localStorage.removeItem("token")
+        window.location.reload(false);
+      }}
+
+       color={window.innerWidth < 960 ? "info" : "white"}
+       className={classes.navButton}
+       simple
+       >
+       <HistoryIcon className={classes.icons} /> Logout
+     </Button>
+    </ListItem>
+    </>
+  );
+
+  const customerMenu = (
+    <>
+    <ListItem className={classes.listItem}>
+      <Button
+        href="/search-booking"
+        color={window.innerWidth < 960 ? "info" : "white"}
+        //target="_blank"
+        className={classes.navButton}
+        simple
+        >
+        <HistoryIcon className={classes.icons} /> Booking History
+      </Button>
+    </ListItem>
+    <ListItem className={classes.listItem}>
+
+<Button
+href="/customer-profile-page"
+color={window.innerWidth < 960 ? "info" : "white"}
+//target="_blank"
+className={classes.navButton}
+simple
+>
+<AccountCircle className={classes.icons} /> Profile
+</Button>
+    </ListItem>
+    <ListItem className={classes.listItem}>
+    <Button
+        onClick={() => {
+          localStorage.removeItem("token")
+        window.location.reload(false);
+      }}
+
+       color={window.innerWidth < 960 ? "info" : "white"}
+       className={classes.navButton}
+       simple
+       >
+       <HistoryIcon className={classes.icons} /> Logout
+     </Button>
+    </ListItem>
+    </>
+  );
+
+  const workerMenu = (
+    <>
+        <ListItem className={classes.listItem}>
+      <Button
+        href="/bookings"
+        color={window.innerWidth < 960 ? "info" : "white"}
+        //target="_blank"
+        className={classes.navButton}
+        simple
+        >
+        <HistoryIcon className={classes.icons} /> Employee Panel
+      </Button>
+    </ListItem>
+               <ListItem className={classes.listItem}>
+  
+  <Button
+  href="/employee-profile-page"
+  color={window.innerWidth < 960 ? "info" : "white"}
+  //target="_blank"
+  className={classes.navButton}
+  simple
+>
+  <AccountCircle className={classes.icons} /> Profile
+</Button>
+
+    </ListItem>
+    <ListItem className={classes.listItem}>
+    <Button
+        onClick={() => {
+          localStorage.removeItem("token")
+        window.location.reload(false);
+      }}
+
+       color={window.innerWidth < 960 ? "info" : "white"}
+       className={classes.navButton}
+       simple
+       >
+       <HistoryIcon className={classes.icons} /> Logout
+     </Button>
+    </ListItem>
+    </>
+  );
+
+  const vistorMenu = (
+    <>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/signup-page"
+          color={window.innerWidth < 960 ? "info" : "white"}
+          //target="_blank"
+          className={classes.navButton}
+          
+          >
+          <PersonAdd className={classes.icons} /> create account
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/login-page"
+          color={window.innerWidth < 960 ? "info" : "white"}
+          //target="_blank"
+          className={classes.navButton}
+          simple
+        >
+          <Fingerprint className={classes.icons} /> login page
+        </Button>
+      </ListItem>
+    </>
+  );
   return (
     <List className={classes.list + " " + classes.mlAuto}>
 
@@ -188,43 +272,6 @@ export default function HeaderLinks(props) {
         </Button>
         </ListItem>
       <ListItem className={classes.listItem}>
-
-        <Button
-        href="/customer-profile-page"
-        color={window.innerWidth < 960 ? "info" : "white"}
-        //target="_blank"
-        className={classes.navButton}
-        simple
-      >
-        <AccountCircle className={classes.icons} /> customer profile
-      </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-
-      <Button
-      href="/admin-profile-page"
-      color={window.innerWidth < 960 ? "info" : "white"}
-      //target="_blank"
-      className={classes.navButton}
-      simple
-    >
-      <AccountCircle className={classes.icons} /> admin profile
-    </Button>
-          </ListItem>
-          <ListItem className={classes.listItem}>
-
-    <Button
-    href="/employee-profile-page"
-    color={window.innerWidth < 960 ? "info" : "white"}
-    //target="_blank"
-    className={classes.navButton}
-    simple
-  >
-    <AccountCircle className={classes.icons} /> employee profile
-  </Button>
-  
-      </ListItem>
-      <ListItem className={classes.listItem}>
         <Button
           href="/about-us"
           color={window.innerWidth < 960 ? "info" : "white"}
@@ -236,7 +283,10 @@ export default function HeaderLinks(props) {
         </Button>
       </ListItem>
       {
-        state()
+        // state()
+        user == "visitor" ? vistorMenu:
+        (user == "admin"? adminMenu:
+        user == "customer"? customerMenu:workerMenu)
       }
     </List>
   );
