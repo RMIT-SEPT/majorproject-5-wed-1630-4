@@ -26,36 +26,61 @@ export default function SectionBooking() {
       },
       (res) => {
         console.log(res);
-        //retrieve major error message
+        if(res.status == 200)
+        alert('successful')
         if(res.errors){
-          this.setState({errors: res.errors})
+          alert('booking unavilable')
         }else{
-          this.setState({errors: res.message})
         }
       }
     );
   };
-
+  
   const deleteBooking = id => {
-    Api.makeBooking(
+    Api.deleteBooking(
       {
         id: id,
       },
       (res) => {
         console.log(res);
         //retrieve major error message
-        if(res.errors){
-          this.setState({errors: res.errors})
+        if(res=='No booking to cancel'){
+          alert('No booking to cancel')
         }else{
-          this.setState({errors: res.message})
+          alert('Delete Unsucessful')
+  
         }
       }
     );
   };
 
+  const BookingButton =(booking)=> {
+    if(booking.status=="open"){
+      return (
+        <Button round color="primary" size="sm" onClick={() => handleClick(booking.id)}>
+        Book
+        </Button>
+      )
+    }else{
+      return (
+        <Button round color="primary" size="sm" onClick={() => deleteBooking(booking.id)}>
+        Booked
+        </Button>
+      )
+    }
+   
+  }
+  const displayBooking =(bookings)=>{
+    return bookings.map(booking=> <li key={booking.id}>
+      <label>{booking.description} {booking.service} {booking.worker} {booking.dateTime} {booking.status}</label>
+          {
+          BookingButton(booking)
+          }
+      </li>)
+  }
+
   useEffect(()=> {
     axios.get('http://localhost:8080/bookings/index')
-    // axios.get('http://localhost:8080/bookings')
         .then(res=>{
             console.log(res)
             setBooking(res.data)
@@ -75,13 +100,7 @@ export default function SectionBooking() {
           </h4>
 
           {
-            // {booking.time_slot} {booking.service_id} {booking.employee_id} 
-            bookings.map(booking=> <li key={booking.id}>
-              <label>{booking.id} {booking.description} {booking.service} {booking.worker} {booking.dateTime}</label>
-              <Button round color="primary" size="sm" onClick={() => handleClick(booking.id)}>
-                BOOK
-              </Button>
-              </li>)
+            displayBooking(bookings)
           }
         </GridItem>
       </GridContainer>

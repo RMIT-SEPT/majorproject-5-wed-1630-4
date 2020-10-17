@@ -111,5 +111,11 @@ export default {
     .get("/bookings/index")
     .then((res) => res)
     .catch((err) => err);
+  },
+  deleteBooking: (credintials, callback)=>{
+    axios
+    .post("/bookings/delete", credintials, { headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+    .then((res) => callback(res))
+    .catch((err) => callback(err.response.data));
   }
 };

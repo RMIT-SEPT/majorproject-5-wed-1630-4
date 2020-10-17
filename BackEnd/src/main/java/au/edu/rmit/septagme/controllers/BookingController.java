@@ -123,10 +123,10 @@ public class BookingController {
             return new ResponseEntity("Booking ID does not exist", HttpStatus.NOT_FOUND);
             
         //check if booking is booked
-        }else if(bookingToCancel.get().getCustomer()==null & bookingToCancel.get().getStatus()!=BookingStatus.BOOKED ) {
+        }else if(bookingToCancel.get().getCustomer()==null) {
             return new ResponseEntity("No booking to cancel", HttpStatus.NOT_FOUND);
         }else if (bookingToCancel.isPresent()){
-        	
+//        	
         	//get time stamps of current time and booking time
         	long timeString = Long.parseLong(bookingToCancel.get().getTime_slot());
             Timestamp bookingTime = new Timestamp(timeString);
@@ -136,12 +136,15 @@ public class BookingController {
     		int differenceInSeconds = (int) differenceInMilliseconds / 1000;
     		int hours = differenceInSeconds / 3600;
     		
-    		//less than 48 hours reject else accept
+//    		less than 48 hours reject else accept
     		if(hours<48) {
-                return new ResponseEntity("Less than 48 hours", HttpStatus.NOT_MODIFIED);
+                return new ResponseEntity("Less than 48 hours: Unable to cancel", HttpStatus.NOT_MODIFIED);
     		}else {
     			bookingToCancel.get().setCustomer(null);
     			bookingToCancel.get().setStatus(BookingStatus.CANCELLED);
+            	bookings.save(bookingToCancel.get());
+    	        return new ResponseEntity("Delete Sucessful.", HttpStatus.OK);
+
     		}
         }
        
