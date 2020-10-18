@@ -20,6 +20,8 @@ import BookingPage from "views/MakeBookingPage/MakeBookingPage.js";
 import SearchBookingPage from "views/SearchBookingPage/SearchBookingPage.js";
 import CustomerEditProfile from "views/CustomerProfilePage/EditProfileParent.js";
 import BookingHistory from "views/BookingPages/Customer/BookingHistoryParent.js"
+import MyBooking from "views/MakeBookingPage/Sections/MyBooking.js"
+
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 
@@ -42,6 +44,8 @@ ReactDOM.render(
       <Route path="/admin-profile-page" component={AdminProfilePage} />
       <Route path="/employee-profile-page" component={EmployeeProfilePage} />
       <Route path="/admin-dashboard" component={AdminPage} />
+      <Route path="/my-booking" component={MyBooking} />
+
       <Route path="/" component={HomePage} />
     </Switch>
   </Router>,

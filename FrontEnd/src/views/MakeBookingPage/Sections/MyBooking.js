@@ -33,13 +33,11 @@ export default function SectionBooking() {
         }
         if(res.errors){
           alert(res.errors)
-
-          // alert('booking unavilable')
         }else{
         }
       }
     );
-    axios.get('http://localhost:8080/bookings/index')
+    axios.get('http://localhost:8080/bookings/User')
     .then(res=>{
         console.log(res)
         setBooking(res.data)
@@ -54,9 +52,6 @@ export default function SectionBooking() {
       (res) => {
         console.log(res);
         //retrieve major error message
-        if(res.status == 200){
-          alert('Delete Sucessful')
-        }
         if(res=='No booking to cancel'){
           alert('No booking to cancel')
         }else{
@@ -64,7 +59,7 @@ export default function SectionBooking() {
         }
       }
     );
-    axios.get('http://localhost:8080/bookings/index')
+    axios.get('http://localhost:8080/bookings/User')
     .then(res=>{
         console.log(res)
         setBooking(res.data)
@@ -97,7 +92,7 @@ export default function SectionBooking() {
   }
 
   useEffect(()=> {
-    axios.get('http://localhost:8080/bookings/index')
+    axios.get('http://localhost:8080/bookings/User')
         .then(res=>{
             console.log(res)
             setBooking(res.data)
@@ -105,6 +100,7 @@ export default function SectionBooking() {
   },[])
   
   return (
+      
     <div className={classNames(classes.aboutDescription, classes.textCenter)}>
       <GridContainer>
         <GridItem
@@ -113,9 +109,8 @@ export default function SectionBooking() {
           className={classNames(classes.mrAuto, classes.mlAuto)}
         >
           <h4 className={classes.description}>
-           Welcome To the Booking Page
+           Welcome To My Booking Page
           </h4>
-
           {
             displayBooking(bookings)
           }

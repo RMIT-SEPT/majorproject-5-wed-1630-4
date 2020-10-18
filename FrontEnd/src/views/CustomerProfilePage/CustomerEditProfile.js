@@ -147,9 +147,6 @@ export default function CustomerEditProfile(props, { ...rest }) {
                           <Button round color="info" onClick={props.handleUpdate}>
                             update
                           </Button>
-                          {/* <Button round color="info">
-                            update
-                          </Button> */}
                           <Button href="/index" round color="info">
                           cancel
                         </Button>
