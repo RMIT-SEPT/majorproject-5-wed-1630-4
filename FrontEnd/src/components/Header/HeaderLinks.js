@@ -18,6 +18,7 @@ import HistoryIcon from '@material-ui/icons/History';
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import EventIcon from '@material-ui/icons/Event';
 // core components
 import Button from "components/CustomButtons/Button.js";
 
@@ -155,7 +156,7 @@ export default function HeaderLinks({...props}) {
         className={classes.navButton}
         simple
         >
-        <HistoryIcon className={classes.icons} /> Booking History
+        <EventIcon className={classes.icons} /> Make Booking
       </Button>
     </ListItem>
     <ListItem className={classes.listItem}>
@@ -272,7 +273,7 @@ simple
         </Button>
         </ListItem>
 
-        <ListItem className={classes.listItem}>
+        {/* <ListItem className={classes.listItem}>
 
           <Button
               href="/booking"
@@ -283,7 +284,7 @@ simple
             >
             <HomeIcon className={classes.icons} /> make booking
           </Button>
-          </ListItem>
+          </ListItem> */}
       <ListItem className={classes.listItem}>
         <Button
           href="/about-us"

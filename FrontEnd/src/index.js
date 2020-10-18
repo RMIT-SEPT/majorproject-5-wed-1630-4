@@ -34,7 +34,7 @@ ReactDOM.render(
       <Route path="/contact-us" component={ContactUsPage} />
       <Route path="/login-page" component={LoginPage} />
       <Route path="/signup-page" component={SignupPage} />
-      <Route path="/booking" component={BookingPage} />
+      {/* <Route path="/booking" component={BookingPage} /> */}
       <Route path="/search-booking" component={SearchBookingPage} />
       <Route path="/bookings" component={BookingHistory} />
       <Route path="/home" component={HomePage} />
