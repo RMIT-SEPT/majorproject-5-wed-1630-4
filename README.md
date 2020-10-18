@@ -29,11 +29,20 @@ A booking system web app aims to ease the booking of services between customers 
 * Terraform
 * Kubernetes
 
-## To Run Docker ⛴
+## To Run the Backend on your local machine 💻
+* Setup the backend configurations as follow.
+Go to `BackEnd/src/main/resources/application.properties`
+Change the line `spring.datasource.url=jdbc:postgresql://db:5432/sept_project` 
+to `spring.datasource.url=jdbc:postgresql://localhost:5432/sept_project`
 
+## To Run Docker ⛴☁
+* Setup the backend configurations as follow.
+Go to `BackEnd/src/main/resources/application.properties`
+Change the line `spring.datasource.url=jdbc:postgresql://localhost:5432/sept_project` 
+to `spring.datasource.url=jdbc:postgresql://db:5432/sept_project`
 `docker-compose up --build`
 
-## Kuebernetes Configuration ⚓️
+## Kubernetes Configuration ⚓️
 
 At `BackEnd/deployment/k8s`
 
