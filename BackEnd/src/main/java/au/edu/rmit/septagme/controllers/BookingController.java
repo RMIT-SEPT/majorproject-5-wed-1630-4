@@ -36,11 +36,11 @@ public class BookingController {
 
     //get selected details of all bookings
     @GetMapping(value = "/bookings/index")
-    public ResponseEntity getBookings() {
+    public ResponseEntity getBookings(@RequestHeader(required = false, value = "Authorization") String jwt) {
 
-        Iterable<Booking> booking = bookings.findAll();
-       
+        Iterable<Booking> booking = bookings.findAll();      
         ArrayList<HashMap> bookingsObject= new ArrayList<HashMap>();
+        
         for(Booking b: booking){
             HashMap<String, String> individualMap = new HashMap<>();
         	 
@@ -57,6 +57,41 @@ public class BookingController {
 
         return new ResponseEntity(bookingsObject, HttpStatus.OK);
     }
+    
+    //Getting booking by id
+    @RequestMapping(value = "/bookings/User", method = RequestMethod.GET)
+    public ResponseEntity<BookingSerializer> getUserBooking(@RequestHeader(required = false, value = "Authorization") String jwt) throws Exception {
+        Iterable<Booking> booking = bookings.findAll();      
+        
+       ArrayList<HashMap> bookingsObject= new ArrayList<HashMap>();
+       if (jwt == null){
+           return new ResponseEntity("not logged in", HttpStatus.BAD_REQUEST);
+       }
+       // delete Bearer part
+       jwt = jwt.substring(7);
+
+       String username = jwtTokenUtil.getUsernameFromToken(jwt);
+       UserEntity user = this.userDetailsService.loadUserByUsername(username);
+       
+        for(Booking b: booking){
+        	if(user.getId()==b.getId()) {
+            HashMap<String, String> individualMap = new HashMap<>();
+        	 
+        	 individualMap.put("id", b.getId().toString());
+             individualMap.put("service", b.getService().getName());
+             individualMap.put("dateTime", b.getTime_slot());
+             individualMap.put("description", b.getService().getDescription());
+             individualMap.put("worker", b.getEmployee().getUsername());
+             individualMap.put("status", b.getStatus().toString());
+             
+             bookingsObject.add(individualMap);
+        	}
+        }
+        return new ResponseEntity(bookingsObject, HttpStatus.OK);
+
+
+ 
+        }
 
     //Getting booking by id
     @RequestMapping(value = "/bookings/{id}", method = RequestMethod.GET)
@@ -98,19 +133,20 @@ public class BookingController {
         
         // validate jwt and make booking if user is valid
         if (jwtTokenUtil.validateToken(jwt, user)){
-        	booking.setCustomer(user);
-        	booking.setStatus(BookingStatus.BOOKED);
-        	bookings.save(booking);
+        	makeBooking.get().setCustomer(user);
+        	makeBooking.get().setStatus(BookingStatus.BOOKED);
+        	bookings.save(makeBooking.get());
         	
             map.put("status", "Successful");
 
             return new ResponseEntity(map, HttpStatus.OK);
 
+        }else {
+            map.put("status", "not logged in");
+
+            return new ResponseEntity(map, HttpStatus.BAD_REQUEST);
         }
 
-        // expired jwt
-        map.put("status", "not logged in");
-        return new ResponseEntity(map, HttpStatus.OK);
     }
     
     //cancel code under 48 hour
@@ -119,44 +155,34 @@ public class BookingController {
         Optional<Booking> bookingToCancel = bookings.findById(booking.getId());
         HashMap<String, String> map = new HashMap<>();
 
-//	     // no jwt provided
-//	        if (jwt == null){
-//	            map.put("status", "not logged in");
-//	            return new ResponseEntity(map, HttpStatus.OK);
-//	        }
-//	        // delete Bearer part
-//	        jwt = jwt.substring(7);
-//	
-//	        String username = jwtTokenUtil.getUsernameFromToken(jwt);
-//	        UserEntity user = this.userDetailsService.loadUserByUsername(username);
-//	        
-//	        // validate jwt and check if booking belongs this user
-//	        if (jwtTokenUtil.validateToken(jwt, user) && bookingToCancel.isPresent()){
-//	        	if(bookingToCancel.get().getCustomer().getId() != user.getId()) {
-//		            map.put("status", "Unsucessful");
-//		            map.put("message", "This booking does not belong to you");
-//
-//		            return new ResponseEntity(map, HttpStatus.OK);
-//	        		
-//	        	}
-//	        }
+	     // no jwt provided
+	        if (jwt == null){
+	            map.put("status", "not logged in");
+
+	            return new ResponseEntity(map, HttpStatus.BAD_REQUEST);
+	        }
+	        // delete Bearer part
+	        jwt = jwt.substring(7);
+	
+	        String username = jwtTokenUtil.getUsernameFromToken(jwt);
+	        UserEntity user = this.userDetailsService.loadUserByUsername(username);
 	        
-        //find booking with id
-        if (!bookingToCancel.isPresent()) {
-        	
-//            map.put("message", "Booking ID does not exist");
-//            map.put("status", "Unsucessful");
+	        // validate jwt and check if booking belongs this user
+	        if (jwtTokenUtil.validateToken(jwt, user) && bookingToCancel.isPresent()){
+	        	if(bookingToCancel.get().getCustomer().getId() != user.getId()) {
+		            map.put("errors", "Cannot cancel booking that does not belong to user");
 
-            return new ResponseEntity("Booking ID does not exist", HttpStatus.OK);
-            
-            
+		            return new ResponseEntity(map, HttpStatus.BAD_REQUEST);
+	        		
+	        	}
+	        }
+       
         //check if booking is booked
-        }else if(bookingToCancel.get().getCustomer()==null) {
-        	
-            map.put("message", "No booking to cancel");
-            map.put("status", "Unsucessful");
+            if(bookingToCancel.get().getCustomer()==null) {
+	           map.put("errors", "No Booking to cancel");
 
-            return new ResponseEntity("No booking to cancel", HttpStatus.OK);
+
+            return new ResponseEntity(map, HttpStatus.BAD_REQUEST);
         }else if (bookingToCancel.isPresent()){
 //        	
         	//get time stamps of current time and booking time
@@ -170,28 +196,26 @@ public class BookingController {
     		
 //    		less than 48 hours reject else accept
     		if(hours<48) {
-    			 map.put("message", "Less than 48 hours so unable to cancel");
-    	         map.put("status", "Unsucessful");
+    			 map.put("errors", "Less than 48 hours so unable to cancel");
 
-                return new ResponseEntity("Less than 48 hours so unable to cancel", HttpStatus.OK);
+                return new ResponseEntity(map, HttpStatus.BAD_REQUEST);
     		}else {
     			bookingToCancel.get().setCustomer(null);
     			bookingToCancel.get().setStatus(BookingStatus.CANCELLED);
             	bookings.save(bookingToCancel.get());
+            	map.put("status", "Delete Successful");
+
             	
-            	map.put("message", "Delete Successful");
-   	         	map.put("status", "Successful");
-   	         	
-    	        return new ResponseEntity("Delete Successful", HttpStatus.OK);
+    	        return new ResponseEntity(map, HttpStatus.OK);
 
     		}
         }
        
         //other errors
-     	map.put("message", "Delete Unsucessful, Please ensure you are logged in");
-        map.put("status", "Unsucessful");
-        	
-        return new ResponseEntity("Delete Unsucessful, Please ensure you are logged in", HttpStatus.BAD_REQUEST);
+            
+            map.put("errors", "Delete Unsucessful, Please ensure you are logged in");
+
+        return new ResponseEntity(map, HttpStatus.BAD_REQUEST);
     }
 
     //deleting booking record

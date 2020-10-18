@@ -271,6 +271,19 @@ simple
           <HomeIcon className={classes.icons} /> home
         </Button>
         </ListItem>
+
+        <ListItem className={classes.listItem}>
+
+          <Button
+              href="/booking"
+              color={window.innerWidth < 960 ? "info" : "white"}
+              //target="_blank"
+              className={classes.navButton}
+              simple
+            >
+            <HomeIcon className={classes.icons} /> make booking
+          </Button>
+          </ListItem>
       <ListItem className={classes.listItem}>
         <Button
           href="/about-us"

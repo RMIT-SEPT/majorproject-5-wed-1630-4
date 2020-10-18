@@ -121,6 +121,12 @@ export default {
     .then((res) => res)
     .catch((err) => err);
   },
+  getCustomerBookings: ()=>{
+    axios
+    .get("/bookings/User", { headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+    .then((res) => res)
+    .catch((err) => err);
+  },
   deleteBooking: (credintials, callback)=>{
     axios
     .post("/bookings/cancel", credintials, { headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})

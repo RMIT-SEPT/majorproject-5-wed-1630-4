@@ -184,13 +184,9 @@ export default function CustomerProfilePage({ ...rest }) {
                       />
 
                         <div className={classes.textCenter}>
-                          <Button round color="info" type="submit">
-                            update
-                          </Button>
-                          <Button href="/index" round color="info">
-                          
-                          cancel
-                        </Button>
+                        <span>
+                              <a href="/customer-profile-edit">Edit Profile</a>.
+                        </span>
                         </div>
                       </form>
                     </GridItem>
